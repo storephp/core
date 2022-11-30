@@ -1,0 +1,33 @@
+{
+    "name": "outmart/laravel-customers-module",
+    "description": "Manage your customers in eCommerce.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "ecommerce",
+        "outmart",
+        "customers",
+        "module"
+    ],
+    "authors": [
+        {
+            "name": "Karim Mohamed (Komtcho)",
+            "email": "komicho1996@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "laravel/framework": ">=8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "OutMart\\Laravel\\Customers\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
