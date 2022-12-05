@@ -14,6 +14,10 @@ class CustomersServiceProvider extends ServiceProvider
     public function register()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        $this->app->singleton('customers', function () {
+            return new CustomersManager();
+        });
     }
 
     /**
