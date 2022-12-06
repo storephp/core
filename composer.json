@@ -1,5 +1,5 @@
 {
-    "name": "outmart/laravel-customers-module",
+    "name": "outmart/laravel-customers",
     "description": "Manage your customers in eCommerce.",
     "type": "library",
     "license": "MIT",
