@@ -37,6 +37,10 @@ class CustomersServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../config/customers.php' => config_path('outmart/customers.php'),
             ], ['outmart-customers-config', 'outmart-customers']);
+
+            $this->publishes([
+                __DIR__ . '/../publishes/models/Customer.php' => app_path('Models/OutMart/Customer.php'),
+            ], ['outmart-customers-model', 'outmart-customers']);
         }
     }
 }
