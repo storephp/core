@@ -6,7 +6,7 @@ Manage your customers in eCommerce.
 
 ## Documentation
 
-You can find the detailed documentation here in [Customers Module Documentation](#).
+You can find the detailed documentation here in [Customers Module Documentation](https://outmart.github.io/packages/laravel/customers/).
 
 ## Contributing
 

@@ -11,9 +11,9 @@ class Customers
         $this->customerModel = config('outmart.customers.model');
     }
 
-    public function listing()
+    public function load()
     {
-        return $this->customerModel::with(['customerable', 'addresses'])->get();
+        return $this->customerModel::with(['customerable', 'addresses']);
     }
 
     public function find($customer_id)
