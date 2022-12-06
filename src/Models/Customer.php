@@ -35,4 +35,9 @@ class Customer extends Model
     {
         return $this->morphTo();
     }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'customer_id', 'id');
+    }
 }
