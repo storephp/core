@@ -9,7 +9,7 @@ trait HasCustomer
         return $this->morphOne(config('outmart.customers.model'), 'customerable');
     }
 
-    public function createCustomer(array $metadata = null)
+    public function signCustomer(array $metadata = null)
     {
         $customer = $this->customer()->where(function ($query) use ($metadata) {
             foreach ($metadata as $key => $value) {
@@ -18,13 +18,11 @@ trait HasCustomer
         })->first();
 
         if (!$customer) {
-            $this->customer()->create([
+            return $this->customer()->create([
                 'metadata' => $metadata,
             ]);
-
-            return true;
         }
 
-        return false;
+        return $customer;
     }
 }
