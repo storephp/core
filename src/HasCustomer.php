@@ -2,13 +2,11 @@
 
 namespace OutMart\Laravel\Customers;
 
-use OutMart\Laravel\Customers\Models\Customer;
-
 trait HasCustomer
 {
     public function customer()
     {
-        return $this->morphOne(Customer::class, 'customerable');
+        return $this->morphOne(config('outmart.customers.model'), 'customerable');
     }
 
     public function createCustomer(array $metadata = null)

@@ -13,6 +13,8 @@ class CustomersServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/customers.php', 'outmart.customers');
+
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $this->app->singleton('customers', function () {
@@ -30,7 +32,11 @@ class CustomersServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../database/migrations/' => database_path('migrations/outmart'),
-            ], ['outmart-migrations', 'outmart-customers']);
+            ], ['outmart-customers-migrations', 'outmart-customers']);
+
+            $this->publishes([
+                __DIR__ . '/../config/customers.php' => config_path('outmart/customers.php'),
+            ], ['outmart-customers-config', 'outmart-customers']);
         }
     }
 }
