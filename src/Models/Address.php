@@ -29,4 +29,18 @@ class Address extends Model
         'telephone_number',
         'is_main',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_main' => 'boolean'
+    ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }
