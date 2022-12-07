@@ -13,6 +13,11 @@ class Customers
         $this->customerModel = config('outmart.customers.model', Customer::class)::with(['customerable', 'addresses']);
     }
 
+    public function query()
+    {
+        return (clone $this->customerModel);
+    }
+
     public function find($id)
     {
         return (clone $this->customerModel)->find($id);
