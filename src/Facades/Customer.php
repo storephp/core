@@ -4,10 +4,10 @@ namespace OutMart\Laravel\Customers\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Customers extends Facade
+class Customer extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'customers';
+        return 'customer';
     }
 }

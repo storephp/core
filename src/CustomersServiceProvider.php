@@ -3,7 +3,7 @@
 namespace OutMart\Laravel\Customers;
 
 use Illuminate\Support\ServiceProvider;
-use OutMart\Laravel\Customers\Manage\Customers;
+use OutMart\Laravel\Customers\Manage\Customer;
 
 class CustomersServiceProvider extends ServiceProvider
 {
@@ -18,8 +18,8 @@ class CustomersServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        $this->app->singleton('customers', function () {
-            return new Customers();
+        $this->app->singleton('customer', function () {
+            return new Customer();
         });
     }
 
