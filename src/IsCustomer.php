@@ -8,7 +8,7 @@ trait IsCustomer
 {
     public function customers()
     {
-        return $this->{config('outmart.customers.multiple', true) ? 'morphMany' : 'morphOne'}(config('outmart.customers.model', Customer::class), 'customerable');
+        return $this->morphMany(config('outmart.customers.model', Customer::class), 'customerable');
     }
 
     public function customer()

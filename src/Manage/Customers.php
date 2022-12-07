@@ -2,7 +2,7 @@
 
 namespace OutMart\Laravel\Customers\Manage;
 
-use App\Models\OutMart\Customer;
+use OutMart\Laravel\Customers\Models\Customer;
 
 class Customers
 {
@@ -10,7 +10,7 @@ class Customers
 
     public function __construct()
     {
-        $this->customerModel = config('outmart.customers.model', Customer::class)->with(['customerable', 'addresses']);
+        $this->customerModel = config('outmart.customers.model', Customer::class)::with(['customerable', 'addresses']);
     }
 
     public function find($id)
