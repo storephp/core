@@ -18,8 +18,18 @@ trait IsCustomer
 
     public function signCustomer(array $metadata = null)
     {
-        return $this->customers()->firstOrCreate([
-            'metadata' => $metadata
-        ]);
+        $customer = $this->customer()->where(function ($query) use ($metadata) {
+            foreach ($metadata as $key => $value) {
+                $query->whereJsonContains('metadata->' . $key, $value);
+            }
+        })->first();
+
+        if (!$customer) {
+            return $this->customer()->create([
+                'metadata' => $metadata,
+            ]);
+        }
+
+        return $customer;
     }
 }
