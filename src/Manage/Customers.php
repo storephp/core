@@ -2,24 +2,20 @@
 
 namespace OutMart\Laravel\Customers\Manage;
 
+use App\Models\OutMart\Customer;
+
 class Customers
 {
     private $customerModel;
 
     public function __construct()
     {
-        $this->customerModel = config('outmart.customers.model');
+        $this->customerModel = config('outmart.customers.model', Customer::class)->with(['customerable', 'addresses']);
     }
 
-    public function load()
+    public function find($id)
     {
-        return $this->customerModel::with(['customerable', 'addresses']);
-    }
-
-    public function find($customer_id)
-    {
-        return $this->customerModel::with(['customerable', 'addresses'])
-            ->find($customer_id);
+        return (clone $this->customerModel)->find($id);
     }
 
     // public function listingCollection($customers)
