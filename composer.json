@@ -31,7 +31,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "OutMart\\Laravel\\Customers\\CustomersServiceProvider"
+                "OutMart\\Laravel\\Customers\\CustomersServiceProvider",
+                "OutMart\\Laravel\\Baskets\\BasketsServiceProvider"
             ]
         }
     },
