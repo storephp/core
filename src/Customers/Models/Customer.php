@@ -3,8 +3,6 @@
 namespace OutMart\Laravel\Customers\Models;
 
 use Illuminate\Database\Eloquent\Model;
-// use OutMart\Laravel\Customers\Traits\WithAddresses;
-// use OutMart\Laravel\Customers\Traits\WithUserData;
 
 class Customer extends Model
 {

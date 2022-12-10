@@ -14,9 +14,7 @@ class CustomersServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/customers.php', 'outmart.customers');
-
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->mergeConfigFrom(__DIR__ . '/config/customers.php', 'outmart.customers');
 
         $this->app->singleton('customer', function () {
             return new Customer();
@@ -31,16 +29,20 @@ class CustomersServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->runningInConsole()) {
+            if (config('outmart.customers.migrations', false)) {
+                $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+            }
+
             $this->publishes([
-                __DIR__ . '/../database/migrations/' => database_path('migrations/outmart'),
+                __DIR__ . '/database/migrations/' => database_path('migrations/outmart'),
             ], ['outmart-customers-migrations', 'outmart-customers']);
 
             $this->publishes([
-                __DIR__ . '/../config/customers.php' => config_path('outmart/customers.php'),
+                __DIR__ . '/config/customers.php' => config_path('outmart/customers.php'),
             ], ['outmart-customers-config', 'outmart-customers']);
 
             $this->publishes([
-                __DIR__ . '/../publishes/models/Customer.php' => app_path('Models/OutMart/Customer.php'),
+                __DIR__ . '/publishes/models/Customer.php' => app_path('Models/OutMart/Customer.php'),
             ], ['outmart-customers-model', 'outmart-customers']);
         }
     }

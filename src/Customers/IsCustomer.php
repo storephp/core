@@ -2,7 +2,7 @@
 
 namespace OutMart\Laravel\Customers;
 
-use App\Models\OutMart\Customer;
+use OutMart\Laravel\Customers\Models\Customer;
 
 trait IsCustomer
 {

@@ -1,5 +1,5 @@
 {
-    "name": "outmart/laravel-customers",
+    "name": "outmart/laravel-core",
     "description": "Manage your customers in eCommerce.",
     "type": "library",
     "license": "MIT",
@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "OutMart\\Laravel\\Customers\\": "src/"
+            "OutMart\\Laravel\\": "src/"
         }
     },
     "config": {
