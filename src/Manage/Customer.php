@@ -10,7 +10,7 @@ class Customer
 
     public function __construct()
     {
-        $this->customerModel = config('outmart.customers.model', ModelsCustomer::class)::with(['customerable', 'addresses']);
+        $this->customerModel = config('outmart.customers.model', ModelsCustomer::class)::query();
     }
 
     public function query()
