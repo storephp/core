@@ -25,4 +25,9 @@ class Basket extends Model
         'currency',
         'status',
     ];
+
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class, 'basket_id', 'id');
+    }
 }

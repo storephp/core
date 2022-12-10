@@ -14,6 +14,8 @@ class BasketsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/config/baskets.php', 'outmart.baskets');
+
         $this->app->singleton('basket', function () {
             return new BasketManager();
         });

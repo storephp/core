@@ -28,6 +28,29 @@ class BasketManager
         return $this;
     }
 
+    public function addQuotes(int $product_id, int $quantity = 1)
+    {
+        $item = $this->basketModel->quotes()->where('product_id', $product_id)->first();
+
+        if (!$item) {
+            $this->basketModel->quotes()->create([
+                'product_id' => $product_id,
+                'quantity' => $quantity,
+            ]);
+        }
+
+        if ($item) {
+            $item->increment('quantity', $quantity);
+        }
+
+        return $this;
+    }
+
+    public function quotes()
+    {
+        return $this->basketModel->quotes;
+    }
+
     public function getBasketUlid(): String
     {
         return $this->basketModel->id;
