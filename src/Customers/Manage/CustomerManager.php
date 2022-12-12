@@ -1,10 +1,10 @@
 <?php
 
-namespace OutMart\Laravel\Customers\Manage;
+namespace Bidaea\OutMart\Customers\Manage;
 
-use OutMart\Laravel\Customers\Models\Customer as ModelsCustomer;
+use Bidaea\OutMart\Customers\Models\Customer as ModelsCustomer;
 
-class Customer
+class CustomerManager
 {
     private $customerModel;
 

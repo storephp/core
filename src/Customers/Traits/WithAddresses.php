@@ -1,8 +1,8 @@
 <?php
 
-namespace OutMart\Laravel\Customers\Traits;
+namespace Bidaea\OutMart\Customers\Traits;
 
-use OutMart\Laravel\Customers\Models\Address;
+use Bidaea\OutMart\Customers\Models\Address;
 
 trait WithAddresses
 {

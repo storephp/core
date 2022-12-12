@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Laravel\Customers\Traits;
+namespace Bidaea\OutMart\Customers\Traits;
 
 trait WithUserData
 {

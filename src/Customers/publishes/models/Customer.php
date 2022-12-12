@@ -2,7 +2,7 @@
 
 namespace App\Models\OutMart;
 
-use OutMart\Laravel\Customers\Models\Customer as ModelCustomer;
+use Bidaea\OutMart\Customers\Models\Customer as ModelCustomer;
 
 final class Customer extends ModelCustomer
 {

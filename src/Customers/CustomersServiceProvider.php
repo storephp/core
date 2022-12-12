@@ -1,9 +1,9 @@
 <?php
 
-namespace OutMart\Laravel\Customers;
+namespace Bidaea\OutMart\Customers;
 
 use Illuminate\Support\ServiceProvider;
-use OutMart\Laravel\Customers\Manage\Customer;
+use Bidaea\OutMart\Customers\Manage\Customer;
 
 class CustomersServiceProvider extends ServiceProvider
 {
@@ -15,10 +15,6 @@ class CustomersServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/config/customers.php', 'outmart.customers');
-
-        $this->app->singleton('customer', function () {
-            return new Customer();
-        });
     }
 
     /**

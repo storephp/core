@@ -1,6 +1,6 @@
 <?php
 
-use OutMart\Laravel\Customers\Models\Customer;
+use Bidaea\OutMart\Customers\Models\Customer;
 
 return [
     'model' => Customer::class,

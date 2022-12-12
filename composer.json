@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "OutMart\\Laravel\\": "src/"
+            "Bidaea\\OutMart\\": "src/"
         }
     },
     "config": {
@@ -32,8 +32,9 @@
     "extra": {
         "laravel": {
             "providers": [
-                "OutMart\\Laravel\\Customers\\CustomersServiceProvider",
-                "OutMart\\Laravel\\Baskets\\BasketsServiceProvider"
+                "Bidaea\\OutMart\\OutMartServiceProvider",
+                "Bidaea\\OutMart\\Customers\\CustomersServiceProvider",
+                "Bidaea\\OutMart\\Baskets\\BasketsServiceProvider"
             ]
         }
     },

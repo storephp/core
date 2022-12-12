@@ -1,9 +1,9 @@
 <?php
 
-namespace OutMart\Laravel\Baskets\Manage;
+namespace Bidaea\OutMart\Baskets\Manage;
 
 use Illuminate\Support\Str;
-use OutMart\Laravel\Baskets\Models\Basket;
+use Bidaea\OutMart\Baskets\Models\Basket;
 
 class BasketManager
 {

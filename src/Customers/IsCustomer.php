@@ -1,8 +1,8 @@
 <?php
 
-namespace OutMart\Laravel\Customers;
+namespace Bidaea\OutMart\Customers;
 
-use OutMart\Laravel\Customers\Models\Customer;
+use Bidaea\OutMart\Customers\Models\Customer;
 
 trait IsCustomer
 {

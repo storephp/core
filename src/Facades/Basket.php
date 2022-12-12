@@ -1,13 +1,13 @@
 <?php
 
-namespace OutMart\Laravel\Customers\Facades;
+namespace Bidaea\OutMart\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Customer extends Facade
+class Basket extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'customer';
+        return 'basket';
     }
 }
