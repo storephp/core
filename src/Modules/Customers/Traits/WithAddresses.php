@@ -1,8 +1,8 @@
 <?php
 
-namespace Bidaea\OutMart\Customers\Traits;
+namespace Bidaea\OutMart\Modules\Customers\Traits;
 
-use Bidaea\OutMart\Customers\Models\Address;
+use Bidaea\OutMart\Modules\Customers\Models\Address;
 
 trait WithAddresses
 {

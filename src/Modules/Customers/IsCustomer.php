@@ -1,6 +1,6 @@
 <?php
 
-namespace Bidaea\OutMart\Customers;
+namespace Bidaea\OutMart\Modules\Customers;
 
 use Bidaea\OutMart\Customers\Models\Customer;
 

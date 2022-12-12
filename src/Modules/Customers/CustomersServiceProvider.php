@@ -1,9 +1,8 @@
 <?php
 
-namespace Bidaea\OutMart\Customers;
+namespace Bidaea\OutMart\Modules\Customers;
 
 use Illuminate\Support\ServiceProvider;
-use Bidaea\OutMart\Customers\Manage\Customer;
 
 class CustomersServiceProvider extends ServiceProvider
 {

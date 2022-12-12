@@ -1,6 +1,6 @@
 <?php
 
-namespace Bidaea\OutMart\Customers\Traits;
+namespace Bidaea\OutMart\Modules\Customers\Traits;
 
 trait WithUserData
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Bidaea\OutMart\Customers\Manage;
+namespace Bidaea\OutMart\Modules\Customers\Manage;
 
-use Bidaea\OutMart\Customers\Models\Customer as ModelsCustomer;
+use Bidaea\OutMart\Customers\Models\Customer;
 
 class CustomerManager
 {
@@ -10,7 +10,7 @@ class CustomerManager
 
     public function __construct()
     {
-        $this->customerModel = config('outmart.customers.model', ModelsCustomer::class)::query();
+        $this->customerModel = config('outmart.customers.model', Customer::class)::query();
     }
 
     public function query()

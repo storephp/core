@@ -1,6 +1,6 @@
 <?php
 
-namespace Bidaea\OutMart\Customers\Models;
+namespace Bidaea\OutMart\Modules\Customers\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

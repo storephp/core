@@ -1,6 +1,6 @@
 <?php
 
-namespace Bidaea\OutMart\Baskets\Models;
+namespace Bidaea\OutMart\Modules\Baskets\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;

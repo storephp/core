@@ -1,6 +1,6 @@
 <?php
 
-namespace Bidaea\OutMart\Baskets;
+namespace Bidaea\OutMart\Modules\Baskets;
 
 use Illuminate\Support\ServiceProvider;
 

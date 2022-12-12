@@ -2,8 +2,8 @@
 
 namespace Bidaea\OutMart;
 
-use Bidaea\OutMart\Baskets\Manage\BasketManager;
-use Bidaea\OutMart\Customers\Manage\CustomerManager;
+use Bidaea\OutMart\Modules\Baskets\Manage\BasketManager;
+use Bidaea\OutMart\Modules\Customers\Manage\CustomerManager;
 use Illuminate\Support\ServiceProvider;
 
 class OutMartServiceProvider extends ServiceProvider
