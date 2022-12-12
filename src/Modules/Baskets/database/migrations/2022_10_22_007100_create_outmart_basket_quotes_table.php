@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('outmart_basket_quotes', function (Blueprint $table) {
             $table->id();
-            $table->foreignUlid('basket_id')->constrained('outmart_baskets')->cascadeOnDelete();
+            $table->foreignId('basket_id')->constrained('outmart_baskets')->cascadeOnDelete();
             $table->foreignId('product_id');
             $table->unsignedInteger('quantity')->default(1);
             $table->timestamps();

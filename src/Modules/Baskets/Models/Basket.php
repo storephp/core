@@ -2,13 +2,10 @@
 
 namespace Bidaea\OutMart\Modules\Baskets\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class Basket extends Model
 {
-    use HasUlids;
-
     /**
      * The table associated with the model.
      *
@@ -22,6 +19,7 @@ class Basket extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'ulid',
         'currency',
         'status',
     ];

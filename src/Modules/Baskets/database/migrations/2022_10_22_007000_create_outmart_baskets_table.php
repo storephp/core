@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('outmart_baskets', function (Blueprint $table) {
-            $table->ulid('id')->index();
+            $table->id();
+            $table->ulid('ulid')->index();
             $table->nullablemorphs('customer');
             $table->string('currency', 3);
-            $table->unsignedTinyInteger('status')->default(0);
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
