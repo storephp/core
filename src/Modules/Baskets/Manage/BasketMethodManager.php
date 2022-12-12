@@ -2,22 +2,38 @@
 
 namespace Bidaea\OutMart\Modules\Baskets\Manage;
 
+use Bidaea\OutMart\Modules\Baskets\Models\Basket;
+use Illuminate\Support\Str;
+
 class BasketMethodManager
 {
     private $basketModel;
 
-    public function __construct($basketModel, $customer = null)
+    public function __construct(string $basket_ulid = null, string $currency = 'USD', $customer = null)
     {
-        $this->basketModel = $basketModel;
+        if (!$basket_ulid) {
+            $basket_ulid = (string) Str::ulid();
+        }
+
+        $basket = Basket::whereUlid($basket_ulid)->first();
+
+        if (!$basket) {
+            $basket = Basket::create([
+                'ulid' => $basket_ulid,
+                'currency' => $currency,
+            ]);
+        }
 
         if (
             $customer && $customer instanceof \App\Models\OutMart\Customer
             || $customer && $customer instanceof \Bidaea\OutMart\Modules\Customers\Models\Customer
         ) {
-            $this->basketModel->customer_type = $customer::class;
-            $this->basketModel->customer_id = $customer->id;
-            $this->basketModel->save();
+            $basket->customer_type = $customer::class;
+            $basket->customer_id = $customer->id;
+            $basket->save();
         }
+
+        $this->basketModel = $basket;
     }
 
     public function addQuotes(int $product_id, int $quantity = 1)

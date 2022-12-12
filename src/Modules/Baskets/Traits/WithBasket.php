@@ -19,18 +19,6 @@ trait WithBasket
 
     public function initBasket(string $basket_ulid = null, string $currency = 'USD'): BasketMethodManager
     {
-        if (!$basket_ulid) {
-            $basket_ulid = (string) Str::ulid();
-        }
-
-        $basket = Basket::find($basket_ulid);
-
-        if (!$basket) {
-            $basket = Basket::create([
-                'currency' => $currency,
-            ]);
-        }
-
-        return new BasketMethodManager($basket, $this);
+        return new BasketMethodManager($basket_ulid, $currency, $this);
     }
 }
