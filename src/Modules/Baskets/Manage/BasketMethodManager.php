@@ -2,6 +2,7 @@
 
 namespace Bidaea\OutMart\Modules\Baskets\Manage;
 
+use Bidaea\OutMart\Modules\Baskets\Enums\Status;
 use Bidaea\OutMart\Modules\Baskets\Models\Basket;
 use Illuminate\Support\Str;
 
@@ -15,12 +16,15 @@ class BasketMethodManager
             $basket_ulid = (string) Str::ulid();
         }
 
-        $basket = Basket::whereUlid($basket_ulid)->first();
+        $basket = Basket::whereUlid($basket_ulid)
+            ->whereIn('status', [Status::opened->value, Status::abandoned->value])
+            ->first();
 
         if (!$basket) {
             $basket = Basket::create([
-                'ulid' => $basket_ulid,
+                'ulid' => (string) Str::ulid(),
                 'currency' => $currency,
+                'status' => Status::opened->value,
             ]);
         }
 
@@ -92,8 +96,15 @@ class BasketMethodManager
         ];
     }
 
+    public function updateStatus(Status $status)
+    {
+        $this->basketModel->status = $status->value;
+        $this->basketModel->save();
+        return $this;
+    }
+
     public function getBasketUlid(): String
     {
-        return $this->basketModel->id;
+        return $this->basketModel->ulid;
     }
 }
