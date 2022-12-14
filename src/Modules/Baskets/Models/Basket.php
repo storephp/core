@@ -2,6 +2,7 @@
 
 namespace Bidaea\OutMart\Modules\Baskets\Models;
 
+use Bidaea\OutMart\Modules\Baskets\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
 
 class Basket extends Model
@@ -27,5 +28,17 @@ class Basket extends Model
     public function quotes()
     {
         return $this->hasMany(Quote::class, 'basket_id', 'id');
+    }
+
+    public function canOrdered()
+    {
+        if (
+            $this->quotes->count() >= 1
+            && $this->whereIn('status', [Status::opened->value, Status::abandoned->value])
+        ) {
+            return true;
+        }
+
+        return false;
     }
 }
