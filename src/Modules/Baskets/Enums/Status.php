@@ -4,7 +4,7 @@ namespace Bidaea\OutMart\Modules\Baskets\Enums;
 
 enum Status: int
 {
-    case opened = 1;
-    case abandoned = 2;
-    case ordered = 3;
+    case OPENED = 1;
+    case ABANDONED = 2;
+    case ORDERED = 3;
 }

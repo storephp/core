@@ -30,15 +30,8 @@ class Basket extends Model
         return $this->hasMany(Quote::class, 'basket_id', 'id');
     }
 
-    public function canOrdered()
+    public function canPlaceOrder()
     {
-        if (
-            $this->quotes->count() >= 1
-            && $this->whereIn('status', [Status::opened->value, Status::abandoned->value])
-        ) {
-            return true;
-        }
-
-        return false;
+        return $this->quotes()->exists() && $this->whereIn('status', [Status::OPENED->value, Status::ABANDONED->value]);
     }
 }
