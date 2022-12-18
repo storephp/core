@@ -33,6 +33,7 @@
         "laravel": {
             "providers": [
                 "Bidaea\\OutMart\\OutMartServiceProvider",
+                "Bidaea\\OutMart\\Modules\\Catalogs\\CatalogsServiceProvider",
                 "Bidaea\\OutMart\\Modules\\Customers\\CustomersServiceProvider",
                 "Bidaea\\OutMart\\Modules\\Baskets\\BasketsServiceProvider"
             ]
