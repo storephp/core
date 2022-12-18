@@ -32,6 +32,6 @@ class Quote extends Model
 
     public function product()
     {
-        return $this->hasOne(config('outmart.baskets.product_relation.model'), config('outmart.baskets.product_relation.foreign_key'), 'product_id');
+        return $this->hasOne(config('outmart.baskets.product_relation.model'), config('outmart.baskets.product_relation.foreign_key'), 'product_sku');
     }
 }
