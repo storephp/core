@@ -17,14 +17,14 @@ class BasketMethodManager
         }
 
         $basket = Basket::whereUlid($basket_ulid)
-            ->whereIn('status', [Status::opened->value, Status::abandoned->value])
+            ->whereIn('status', [Status::OPENED->value, Status::ABANDONED->value])
             ->first();
 
         if (!$basket) {
             $basket = Basket::create([
                 'ulid' => (string) Str::ulid(),
                 'currency' => $currency,
-                'status' => Status::opened->value,
+                'status' => Status::OPENED->value,
             ]);
         }
 
