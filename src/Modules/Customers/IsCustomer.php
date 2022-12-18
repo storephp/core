@@ -2,7 +2,7 @@
 
 namespace Bidaea\OutMart\Modules\Customers;
 
-use Bidaea\OutMart\Customers\Models\Customer;
+use Bidaea\OutMart\Modules\Customers\Models\Customer;
 
 trait IsCustomer
 {

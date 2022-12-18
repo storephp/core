@@ -2,7 +2,7 @@
 
 namespace Bidaea\OutMart\Modules\Customers\Manage;
 
-use Bidaea\OutMart\Customers\Models\Customer;
+use Bidaea\OutMart\Modules\Customers\Models\Customer;
 
 class CustomerManager
 {
