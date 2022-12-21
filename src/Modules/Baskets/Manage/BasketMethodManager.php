@@ -22,7 +22,7 @@ class BasketMethodManager
 
         if (!$basket) {
             $basket = Basket::create([
-                'ulid' => (string) Str::ulid(),
+                'ulid' => $basket_ulid ?? (string) Str::ulid(),
                 'currency' => $currency,
                 'status' => Status::OPENED->value,
             ]);
@@ -40,13 +40,13 @@ class BasketMethodManager
         $this->basketModel = $basket;
     }
 
-    public function addQuotes(int $product_id, int $quantity = 1)
+    public function addQuotes(int $product_sku, int $quantity = 1)
     {
-        $item = $this->basketModel->quotes()->where('product_id', $product_id)->first();
+        $item = $this->basketModel->quotes()->where('product_sku', $product_sku)->first();
 
         if (!$item) {
             $this->basketModel->quotes()->create([
-                'product_id' => $product_id,
+                'product_sku' => $product_sku,
                 'quantity' => $quantity,
             ]);
         }

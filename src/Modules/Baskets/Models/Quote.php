@@ -19,17 +19,15 @@ class Quote extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'product_id',
+        'product_sku',
         'quantity',
     ];
 
     /**
-     * The relationships that should always be loaded.
+     * Return the product relationship.
      *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    protected $with = ['product'];
-
     public function product()
     {
         return $this->hasOne(config('outmart.baskets.product_relation.model'), config('outmart.baskets.product_relation.foreign_key'), 'product_sku');
