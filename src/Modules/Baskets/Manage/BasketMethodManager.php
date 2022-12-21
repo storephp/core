@@ -4,11 +4,13 @@ namespace Bidaea\OutMart\Modules\Baskets\Manage;
 
 use Bidaea\OutMart\Modules\Baskets\Enums\Status;
 use Bidaea\OutMart\Modules\Baskets\Models\Basket;
+use Exception;
 use Illuminate\Support\Str;
 
 class BasketMethodManager
 {
     private $basketModel;
+    private $quote;
 
     public function __construct(string $basket_ulid = null, string $currency = 'USD', $customer = null)
     {
@@ -63,6 +65,12 @@ class BasketMethodManager
         return $this->basketModel->quotes;
     }
 
+    public function quote($quote_id)
+    {
+        $this->quote = $this->quotes()->find($quote_id);
+        return $this;
+    }
+
     public function getBasket()
     {
         $quotes = $this->basketModel->quotes->map(function ($quote) {
@@ -106,5 +114,31 @@ class BasketMethodManager
     public function getBasketUlid(): String
     {
         return $this->basketModel->ulid;
+    }
+
+    public function increase($quantity = 1)
+    {
+        if (!$this->quote) {
+            throw new Exception('This quote is not found');
+        }
+
+        if ($this->quote->quantity >= config('outmart.baskets.max_quote')) {
+            return 'ISMAXQUOTE';
+        }
+
+        return $this->quote->increment('quantity', $quantity);
+    }
+
+    public function decrease($quantity = 1)
+    {
+        if (!$this->quote) {
+            throw new Exception('This quote is not found');
+        }
+
+        if ($this->quote->quantity > 1) {
+            return $this->quote->decrement('quantity', $quantity);
+        }
+
+        return $this->quote->delete();
     }
 }
