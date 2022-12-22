@@ -3,8 +3,9 @@
 namespace Bidaea\OutMart\Modules\Baskets\Manage;
 
 use Bidaea\OutMart\Modules\Baskets\Enums\Status;
+use Bidaea\OutMart\Modules\Baskets\Exceptions\QuoteNotFoundException;
+use Bidaea\OutMart\Modules\Baskets\Exceptions\QuoteTheMaxException;
 use Bidaea\OutMart\Modules\Baskets\Models\Basket;
-use Exception;
 use Illuminate\Support\Str;
 
 class BasketMethodManager
@@ -54,6 +55,10 @@ class BasketMethodManager
         }
 
         if ($item) {
+            if ($item->quantity >= config('outmart.baskets.max_quote')) {
+                throw new QuoteTheMaxException();
+            }
+
             $item->increment('quantity', $quantity);
         }
 
@@ -119,24 +124,27 @@ class BasketMethodManager
     public function increase($quantity = 1)
     {
         if (!$this->quote) {
-            throw new Exception('This quote is not found');
+            throw new QuoteNotFoundException();
         }
 
         if ($this->quote->quantity >= config('outmart.baskets.max_quote')) {
-            return 'ISMAXQUOTE';
+            throw new QuoteTheMaxException();
         }
 
-        return $this->quote->increment('quantity', $quantity);
+        $this->quote->increment('quantity', $quantity);
+
+        return $this->quote;
     }
 
     public function decrease($quantity = 1)
     {
         if (!$this->quote) {
-            throw new Exception('This quote is not found');
+            throw new QuoteNotFoundException();
         }
 
         if ($this->quote->quantity > 1) {
-            return $this->quote->decrement('quantity', $quantity);
+            $this->quote->decrement('quantity', $quantity);
+            return $this->quote;
         }
 
         return $this->quote->delete();
