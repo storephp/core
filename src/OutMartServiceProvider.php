@@ -3,6 +3,7 @@
 namespace Bidaea\OutMart;
 
 use Bidaea\OutMart\Modules\Baskets\Manage\BasketManager;
+use Bidaea\OutMart\Modules\Catalogs\Manage\CategoryManager;
 use Bidaea\OutMart\Modules\Customers\Manage\CustomerManager;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,6 +16,10 @@ class OutMartServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton('category', function () {
+            return new CategoryManager();
+        });
+
         $this->app->singleton('customer', function () {
             return new CustomerManager();
         });
