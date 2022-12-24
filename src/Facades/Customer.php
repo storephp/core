@@ -1,6 +1,6 @@
 <?php
 
-namespace Bidaea\OutMart\Facades;
+namespace OutMart\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
