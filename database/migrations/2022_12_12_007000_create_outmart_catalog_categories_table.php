@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use OutMart\Base\MigrationBase;
 
-return new class extends Migration
+return new class extends MigrationBase
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('outmart_catalog_categories', function (Blueprint $table) {
+        Schema::create($this->prefix . 'catalog_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('parent_id')->nullable()->constrained('outmart_catalog_categories')->cascadeOnDelete();
+            $table->foreignId('parent_id')->nullable()->constrained($this->prefix . 'catalog_categories')->cascadeOnDelete();
             $table->string('name');
             $table->string('slug');
             $table->timestamps();

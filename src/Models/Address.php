@@ -2,16 +2,16 @@
 
 namespace OutMart\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use OutMart\Base\ModelBase;
 
-class Address extends Model
+class Address extends ModelBase
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'outmart_customer_addresses';
+    protected $table = 'customer_addresses';
 
     /**
      * The attributes that are mass assignable.

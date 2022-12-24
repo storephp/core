@@ -3,17 +3,17 @@
 namespace OutMart\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use OutMart\Base\ModelBase;
 
-class Category extends Model
+class Category extends ModelBase
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'outmart_catalog_categories';
+    protected $table = 'catalog_categories';
 
     /**
      * The attributes that are mass assignable.

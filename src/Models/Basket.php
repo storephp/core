@@ -3,16 +3,16 @@
 namespace OutMart\Models;
 
 use OutMart\Baskets\Enums\Status;
-use Illuminate\Database\Eloquent\Model;
+use OutMart\Base\ModelBase;
 
-class Basket extends Model
+class Basket extends ModelBase
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'outmart_baskets';
+    protected $table = 'baskets';
 
     /**
      * The attributes that are mass assignable.

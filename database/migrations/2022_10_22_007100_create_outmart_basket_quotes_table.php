@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use OutMart\Base\MigrationBase;
 
-return new class extends Migration
+return new class extends MigrationBase
+
 {
     /**
      * Run the migrations.
@@ -13,9 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('outmart_basket_quotes', function (Blueprint $table) {
+        Schema::create($this->prefix . 'basket_quotes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('basket_id')->constrained('outmart_baskets')->cascadeOnDelete();
+            $table->foreignId('basket_id')->constrained($this->prefix . 'baskets')->cascadeOnDelete();
             $table->foreignId('product_sku');
             $table->unsignedInteger('quantity')->default(1);
             $table->timestamps();

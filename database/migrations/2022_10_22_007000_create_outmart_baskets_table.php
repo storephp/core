@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use OutMart\Base\MigrationBase;
 
-return new class extends Migration
+return new class extends MigrationBase
+
 {
     /**
      * Run the migrations.
@@ -13,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('outmart_baskets', function (Blueprint $table) {
+        Schema::create($this->prefix . 'baskets', function (Blueprint $table) {
             $table->id();
             $table->ulid('ulid')->index();
             $table->nullablemorphs('customer');

@@ -15,6 +15,8 @@ class OutMartServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/outmart.php', 'outmart');
+
         $this->mergeConfigFrom(__DIR__ . '/../config/baskets.php', 'outmart.baskets');
 
         $this->mergeConfigFrom(__DIR__ . '/../config/customers.php', 'outmart.customers');

@@ -2,16 +2,16 @@
 
 namespace OutMart\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use OutMart\Base\ModelBase;
 
-class Quote extends Model
+class Quote extends ModelBase
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'outmart_basket_quotes';
+    protected $table = 'basket_quotes';
 
     /**
      * The attributes that are mass assignable.
