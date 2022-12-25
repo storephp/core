@@ -2,8 +2,10 @@
 
 namespace OutMart\Models;
 
-use OutMart\Baskets\Enums\Status;
+use Illuminate\Support\Str;
 use OutMart\Base\ModelBase;
+use OutMart\DataType\ProductSku;
+use OutMart\Enums\Baskets\Status;
 
 class Basket extends ModelBase
 {
@@ -24,6 +26,38 @@ class Basket extends ModelBase
         'currency',
         'status',
     ];
+
+    public function initBasket(string $basket_ulid = null, string $currency = 'USD')
+    {
+        $basket = parent::whereUlid($basket_ulid)
+            ->whereIn('status', [Status::OPENED->value, Status::ABANDONED->value])
+            ->first();
+
+        if (!$basket) {
+            $basket = static::create([
+                'ulid' => $basket_ulid ?? (string) Str::ulid(),
+                'currency' => $currency,
+            ]);
+        }
+
+        return $basket;
+    }
+
+    public function addQuotes(ProductSku $productSku, int $quantity = 1)
+    {
+        $quote = $this->quotes()->where('basket_id', $this->id)
+            ->where('product_sku', $productSku)
+            ->first();
+
+        if ($quote) {
+            return $quote->increase($quantity);
+        }
+
+        return $this->quotes()->create([
+            'product_sku' => $productSku,
+            'quantity' => $quantity,
+        ]);
+    }
 
     public function quotes()
     {
