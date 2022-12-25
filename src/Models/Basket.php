@@ -42,7 +42,7 @@ class Basket extends ModelBase
     public function initBasket(string $basket_ulid = null, string $currency = 'USD')
     {
         $basket = parent::whereUlid($basket_ulid)
-            ->whereIn('status', [Status::OPENED->value, Status::ABANDONED->value])
+            ->whereIn('status', [Status::OPENED(), Status::ABANDONED()])
             ->first();
 
         if (!$basket) {
@@ -78,6 +78,6 @@ class Basket extends ModelBase
 
     public function canPlaceOrder()
     {
-        return $this->quotes()->exists() && $this->whereIn('status', [Status::OPENED->value, Status::ABANDONED->value]);
+        return $this->quotes()->exists() && in_array($this->status, [Status::OPENED(), Status::ABANDONED()]);
     }
 }

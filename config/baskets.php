@@ -9,4 +9,8 @@ return [
         'foreign_key' => 'sku',
         'model' => Product::class,
     ],
+
+    'statuses' => [
+        //
+    ],
 ];

@@ -22,7 +22,7 @@ trait WithBasket
     {
         $basket = $this->basket()
             ->whereUlid($basket_ulid)
-            ->whereIn('status', [Status::OPENED->value, Status::ABANDONED->value])
+            ->whereIn('status', [Status::OPENED(), Status::ABANDONED()])
             ->first();
 
         if ($basket) {
