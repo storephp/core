@@ -2,6 +2,7 @@
 
 namespace OutMart\Models;
 
+use Exception;
 use Illuminate\Support\Str;
 use OutMart\Base\ModelBase;
 use OutMart\DataType\ProductSku;
@@ -26,6 +27,17 @@ class Basket extends ModelBase
         'currency',
         'status',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::updating(function (Basket $basket) {
+            if (!$basket->status instanceof Status) {
+                throw new Exception("You must use `\OutMart\Enums\Baskets\Status` for select status");
+            }
+        });
+    }
 
     public function initBasket(string $basket_ulid = null, string $currency = 'USD')
     {
