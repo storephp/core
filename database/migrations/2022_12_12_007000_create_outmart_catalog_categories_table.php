@@ -29,6 +29,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists('outmart_catalog_categories');
+        Schema::dropIfExists($this->prefix . 'catalog_categories');
     }
 };

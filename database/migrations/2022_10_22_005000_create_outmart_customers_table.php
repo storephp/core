@@ -28,6 +28,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists('outmart_customers');
+        Schema::dropIfExists($this->prefix . 'customers');
     }
 };

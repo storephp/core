@@ -30,6 +30,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists('outmart_basket_quotes');
+        Schema::dropIfExists($this->prefix . 'basket_quotes');
     }
 };

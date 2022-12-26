@@ -31,6 +31,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists('outmart_baskets');
+        Schema::dropIfExists($this->prefix . 'baskets');
     }
 };
