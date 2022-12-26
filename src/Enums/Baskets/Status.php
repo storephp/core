@@ -4,6 +4,17 @@ namespace OutMart\Enums\Baskets;
 
 use Exception;
 
+/**
+ * This statuses list for baskets
+ * 
+ * You can add more statuses from config file at path `config/outmart/baskets.php`
+ * 
+ * 'statuses' => [
+ *    'DONE' => 7,
+ * ],
+ * 
+ * And you can overwrite on exists case from `statuses` array.
+ */
 enum Status: int
 {
     case OPENED = 1;
@@ -12,37 +23,28 @@ enum Status: int
 
     public static function __callStatic($name, $args)
     {
-        $cases = static::cases();
+        $name = strtoupper($name);
 
-        // Check has statuses
         if ($statuses = config('outmart.baskets.statuses')) {
-            // Make custom cases
-            $customCases = array_change_key_case(
-                array_unique($statuses),
-                CASE_UPPER
-            );
-
-            // Append to custom cases
-            $appendToCustomCases = [];
-            foreach ($customCases as $key => $value) {
-                if (!in_array($key, array_column($cases, "name"))) {
-                    $appendToCustomCases[] = (object) [
-                        'name' => $key,
-                        'value' => $value,
-                    ];
+            // DETECT DUPLICATE STATUSES ON CONFIG
+            $detectDuplicate = array_count_values($statuses);
+            $detectDuplicate = array_walk($detectDuplicate, function ($key, $value) {
+                if ($key != 1) {
+                    throw new Exception('Duplicate value ' . $value);
                 }
-            }
+            });
 
-            // Merge cases
-            $cases = array_merge($cases, $appendToCustomCases);
-        }
-
-        foreach ($cases as $case) {
-            if ($case->name === strtoupper($name)) {
-                return $case->value;
+            // SEARCH IN CONFIG
+            if ($status = array_change_key_case($statuses, CASE_UPPER)[$name] ?? false) {
+                return $status;
             }
         }
 
-        throw new Exception('This status does not exist');
+        // CHECK CASE EXISTS
+        if ($exists = array_filter(static::cases(), fn ($item) => $item->name == $name)) {
+            return $exists[0]->value;
+        }
+
+        throw new Exception('This status does not exists');
     }
 }
