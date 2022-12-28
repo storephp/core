@@ -14,10 +14,6 @@ class OutMartServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/outmart.php', 'outmart');
-
-        $this->mergeConfigFrom(__DIR__ . '/../config/baskets.php', 'outmart.baskets');
-
-        $this->mergeConfigFrom(__DIR__ . '/../config/customers.php', 'outmart.customers');
     }
 
     /**
@@ -29,6 +25,10 @@ class OutMartServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+            $this->publishes([
+                __DIR__ . '/../config/outmart.php' => config_path('outmart.php'),
+            ], ['outmart', 'outmart-config']);
         }
     }
 }

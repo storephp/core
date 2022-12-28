@@ -2,7 +2,7 @@
 
 namespace OutMart\Traits\User;
 
-use OutMart\Customers\Models\Customer;
+use OutMart\Models\Customer;
 
 trait IsCustomer
 {
