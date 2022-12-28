@@ -26,6 +26,11 @@ class Category extends ModelBase
         'slug',
     ];
 
+    public function hasChildren()
+    {
+        return $this->children()->exists();
+    }
+
     /**
      * Interact with the category slug.
      *
