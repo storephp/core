@@ -19,8 +19,10 @@ trait IsCustomer
     public function signCustomer(array $metadata = null)
     {
         $customer = $this->customer()->where(function ($query) use ($metadata) {
-            foreach ($metadata as $key => $value) {
-                $query->whereJsonContains('metadata->' . $key, $value);
+            if ($metadata) {
+                foreach ($metadata as $key => $value) {
+                    $query->whereJsonContains('metadata->' . $key, $value);
+                }
             }
         })->first();
 
