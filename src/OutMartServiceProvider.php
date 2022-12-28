@@ -39,10 +39,6 @@ class OutMartServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-            $this->publishes([
-                __DIR__ . '/../publishes/models/Customer.php' => app_path('Models/OutMart/Customer.php'),
-            ], ['outmart-customers-model', 'outmart-customers']);
         }
     }
 }
