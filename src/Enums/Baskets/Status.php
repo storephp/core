@@ -41,8 +41,8 @@ enum Status: int
         }
 
         // CHECK CASE EXISTS
-        if ($exists = array_filter(static::cases(), fn ($item) => $item->name == $name)) {
-            return $exists[0]->value;
+        if ($case = array_filter(static::cases(), fn ($item) => $item->name == $name)) {
+            return current($case)->value;
         }
 
         throw new Exception('This status does not exists');
