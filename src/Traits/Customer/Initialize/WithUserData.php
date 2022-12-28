@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Traits\Customers;
+namespace OutMart\Traits\Customer\Initialize;
 
 trait WithUserData
 {
