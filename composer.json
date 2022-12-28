@@ -21,9 +21,18 @@
         "php": ">=8.0",
         "laravel/framework": ">=9.0"
     },
+    "require-dev": {
+        "orchestra/testbench": "^7.17",
+        "phpunit/phpunit": "^9.5"
+    },
     "autoload": {
         "psr-4": {
             "OutMart\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OutMart\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -35,6 +44,9 @@
                 "OutMart\\OutMartServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit tests"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
