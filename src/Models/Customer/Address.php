@@ -1,8 +1,9 @@
 <?php
 
-namespace OutMart\Models;
+namespace OutMart\Models\Customer;
 
 use OutMart\Base\ModelBase;
+use OutMart\Models\Customer;
 
 class Address extends ModelBase
 {

@@ -2,7 +2,7 @@
 
 namespace OutMart\Traits\Customer\Initialize;
 
-use OutMart\Customers\Models\Address;
+use OutMart\Models\Customer\Address;
 
 trait WithAddresses
 {

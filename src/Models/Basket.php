@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use OutMart\Base\ModelBase;
 use OutMart\DataType\ProductSku;
 use OutMart\Enums\Baskets\Status;
+use OutMart\Models\Basket\Quote;
 
 class Basket extends ModelBase
 {

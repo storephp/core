@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Models;
+namespace OutMart\Models\Basket;
 
 use Exception;
 use OutMart\Base\ModelBase;

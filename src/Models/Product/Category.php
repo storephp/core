@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Models;
+namespace OutMart\Models\Product;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
