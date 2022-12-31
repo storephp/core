@@ -21,7 +21,7 @@ class BasketsTest extends TestCase
     public function testBasketsProductRelationModelValue(): void
     {
         $config = config('outmart.baskets.product_relation.model');
-        $this->assertEquals($config, App\Models\Product::class);
+        $this->assertEquals($config, OutMart\Models\Product::class);
     }
 
     public function testBasketsStatusesValue(): void
