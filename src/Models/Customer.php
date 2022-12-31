@@ -3,6 +3,7 @@
 namespace OutMart\Models;
 
 use OutMart\Base\ModelBase;
+use OutMart\Models\Customer\CustomerChannel;
 
 class Customer extends ModelBase
 {
@@ -30,4 +31,9 @@ class Customer extends ModelBase
     protected $casts = [
         'metadata' => 'array',
     ];
+
+    public function channels()
+    {
+        return $this->hasMany(CustomerChannel::class, 'customer_id', 'id');
+    }
 }
