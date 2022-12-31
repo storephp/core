@@ -2,11 +2,14 @@
 
 namespace OutMart\Models;
 
-use Exception;
 use Illuminate\Support\Str;
 use OutMart\Base\ModelBase;
 use OutMart\DataType\ProductSku;
 use OutMart\Enums\Baskets\Status;
+use OutMart\Events\Basket\BasketCreated;
+use OutMart\Events\Basket\BasketCreating;
+use OutMart\Events\Basket\BasketUpdated;
+use OutMart\Events\Basket\BasketUpdating;
 use OutMart\Models\Basket\Quote;
 
 class Basket extends ModelBase
@@ -29,18 +32,19 @@ class Basket extends ModelBase
         'status',
     ];
 
-    public static function boot()
-    {
-        parent::boot();
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'creating' => BasketCreating::class,
+        'created' => BasketCreated::class,
+        'updating' => BasketUpdating::class,
+        'updated' => BasketUpdated::class,
+    ];
 
-        static::updating(function (Basket $basket) {
-            if (!$basket->status instanceof Status) {
-                throw new Exception("You must use `\OutMart\Enums\Baskets\Status` for select status");
-            }
-        });
-    }
-
-    public function initBasket(string $basket_ulid = null, string $currency = 'USD')
+    public static function initBasket(string $basket_ulid = null, string $currency = 'USD')
     {
         $basket = parent::whereUlid($basket_ulid)
             ->whereIn('status', [Status::OPENED(), Status::ABANDONED()])
@@ -75,6 +79,11 @@ class Basket extends ModelBase
     public function quotes()
     {
         return $this->hasMany(Quote::class, 'basket_id', 'id');
+    }
+
+    public function canUpdateStatus()
+    {
+        return in_array($this->status, [Status::OPENED(), Status::ABANDONED()]);
     }
 
     public function canPlaceOrder()
