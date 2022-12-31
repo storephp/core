@@ -5,6 +5,7 @@ namespace OutMart\Traits\Customer;
 use Illuminate\Support\Str;
 use OutMart\Models\Basket;
 use OutMart\Enums\Baskets\Status;
+use OutMart\Models\Customer;
 
 trait WithBasket
 {
@@ -20,6 +21,17 @@ trait WithBasket
 
     public function currentBasket(string $basket_ulid = null, string $currency = 'USD')
     {
+        $assignBasket = Basket::whereUlid($basket_ulid)
+            ->whereIn('status', [Status::OPENED(), Status::ABANDONED()])
+            ->first();
+
+        if ($assignBasket) {
+            $assignBasket->customer_type = config('outmart.customers.model', Customer::class);
+            $assignBasket->customer_id = $this->id;
+            $assignBasket->save();
+            return $assignBasket;
+        }
+
         $basket = $this->basket()
             ->whereUlid($basket_ulid)
             ->whereIn('status', [Status::OPENED(), Status::ABANDONED()])
