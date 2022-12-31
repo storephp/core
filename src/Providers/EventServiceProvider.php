@@ -2,9 +2,8 @@
 
 namespace OutMart\Providers;
 
+use OutMart\Models\Basket;
 use OutMart\Models\Customer;
-use OutMart\Observers\CustomerObserver;
-
 class EventServiceProvider extends \Illuminate\Foundation\Support\Providers\EventServiceProvider
 {
     /**
@@ -26,7 +25,14 @@ class EventServiceProvider extends \Illuminate\Foundation\Support\Providers\Even
     public function boot()
     {
         // Customer observer
-        $customer = config('outmart.customers.model', Customer::class);
-        $customer::observe([CustomerObserver::class]);
+        if ($observerCustomer = config('outmart.customers.observers')) {
+            $customer = config('outmart.customers.model', Customer::class);
+            $customer::observe($observerCustomer);
+        }
+
+        // Customer observer
+        if ($observerBasket = config('outmart.baskets.observers')) {
+            Basket::observe($observerBasket);
+        }
     }
 }

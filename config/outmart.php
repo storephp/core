@@ -20,8 +20,10 @@ return [
 
         'product_relation' => [
             'foreign_key' => 'sku',
-            'model' => \App\Models\Product::class,
+            'model' => \OutMart\Models\Product::class,
         ],
+
+        'observers' => null,
 
         'statuses' => [
             //
@@ -35,5 +37,6 @@ return [
     */
     'customers' => [
         'model' => \OutMart\Models\Customer::class,
+        'observers' => null,
     ],
 ];
