@@ -5,6 +5,7 @@ namespace OutMart\Models\Basket;
 use Exception;
 use OutMart\Base\ModelBase;
 use OutMart\DataType\ProductSku;
+use OutMart\Events\Basket\Quote\QuoteIncrease;
 use OutMart\Exceptions\Baskets\QuoteExceedingLimitException;
 use OutMart\Exceptions\Baskets\QuoteTheMaxException;
 
@@ -53,6 +54,8 @@ class Quote extends ModelBase
 
         $this->increment('quantity', $quantity);
 
+        QuoteIncrease::dispatch($this);
+
         return $this;
     }
 
@@ -72,6 +75,11 @@ class Quote extends ModelBase
         $this->decrement('quantity', $quantity);
 
         return $this;
+    }
+
+    public function basket()
+    {
+        return $this->hasOne(basket::class, 'id', 'basket_id');
     }
 
     /**
