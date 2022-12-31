@@ -10,10 +10,16 @@ use OutMart\Events\Basket\BasketCreated;
 use OutMart\Events\Basket\BasketCreating;
 use OutMart\Events\Basket\BasketUpdated;
 use OutMart\Events\Basket\BasketUpdating;
+use OutMart\Models\Basket\Coupon;
 use OutMart\Models\Basket\Quote;
+use OutMart\PricingRules\Lay;
 
 class Basket extends ModelBase
 {
+    public $coupon = null;
+    public $shippingMethod = null;
+    public $paymentMethod = null;
+
     /**
      * The table associated with the model.
      *
@@ -96,29 +102,99 @@ class Basket extends ModelBase
         return $this->quotes()->exists() && in_array($this->status, [Status::OPENED(), Status::ABANDONED()]);
     }
 
-    public function placeOrder()
+    public function getCoupon()
     {
-        if (!$this->canPlaceOrder()) {
-            throw new Exception("Count't place order from this basket");
-        }
+        return $this->coupon;
+    }
 
-        // $sub_total = $this->quotes()->with('product')->get()->map(function ($quote) {
-        //     return ($quote->quantity * $quote->product?->final_price) ?? 0;
-        // });
+    public function setCoupon($coupon)
+    {
+        $this->coupon = $coupon;
 
-        // return $sub_total;
+        return $this;
+    }
 
-        // return array_sum($sub_total);
+    public function getShippingMethod()
+    {
+        return $this->shippingMethod;
+    }
 
+    public function setShippingMethod($shippingMethod)
+    {
+        $this->shippingMethod = $shippingMethod;
+
+        return $this;
+    }
+
+    public function getPaymentMethod()
+    {
+        return $this->paymentMethod;
+    }
+
+    public function setPaymentMethod($paymentMethod)
+    {
+        $this->paymentMethod = $paymentMethod;
+
+        return $this;
+    }
+
+    public function getSubTotal(): float
+    {
         $quotes = $this->quotes()->with('product')->get();
-
 
         $total = 0;
 
-        foreach ($quotes as $quote) {
-            $total += $quote->quantity * $quote->product?->final_price;
+        if ($quotes) {
+            foreach ($quotes as $quote) {
+                $total += $quote->quantity * $quote->product?->final_price;
+            }
         }
 
         return $total;
+    }
+
+    public function getTotal(): float
+    {
+        if (!$getSubTotal = $this->getSubTotal())
+            return 0;
+
+        $lay = new Lay;
+
+        $lay->setTotal($getSubTotal);
+
+        if ($getShippingMethod = $this->getShippingMethod())
+            $lay->setShippingMethod($getShippingMethod);
+
+        if ($getPaymentMethod = $this->getPaymentMethod())
+            $lay->setPaymentMethod($getPaymentMethod);
+
+        // Handle coupon
+        if ($coupon = Coupon::where('coupon_code', $this->getCoupon())->first())
+            $lay->rule(function ($attributes) use ($coupon) {
+                return ($coupon) ? true : false;
+            }, function ($operations) use ($coupon) {
+                $total = $operations->getTotal();
+
+                if ($coupon->discount_type == 'percentage') {
+                    $discount = ($total * $coupon->discount_value) / 100;
+                    $total = $total - $discount;
+                }
+
+                if ($coupon->discount_type == 'fixed')
+                    $total = $total - $coupon->discount_value;
+
+                $operations->setTotal($total);
+            });
+
+        return $lay->getTotal();
+    }
+
+    public function placeOrder()
+    {
+        if (!$this->canPlaceOrder()) {
+            throw new Exception("You cannot place an order from this basket");
+        }
+
+        return $this->getTotal();
     }
 }
