@@ -41,7 +41,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "OutMart\\OutMartServiceProvider"
+                "OutMart\\OutMartServiceProvider",
+                "OutMart\\Providers\\EventServiceProvider"
             ]
         }
     },
