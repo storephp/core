@@ -81,6 +81,11 @@ class Basket extends ModelBase
         return $this->hasMany(Quote::class, 'basket_id', 'id');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'basket_id', 'id');
+    }
+
     public function canUpdateStatus()
     {
         return in_array($this->status, [Status::OPENED(), Status::ABANDONED()]);
@@ -89,5 +94,31 @@ class Basket extends ModelBase
     public function canPlaceOrder()
     {
         return $this->quotes()->exists() && in_array($this->status, [Status::OPENED(), Status::ABANDONED()]);
+    }
+
+    public function placeOrder()
+    {
+        if (!$this->canPlaceOrder()) {
+            throw new Exception("Count't place order from this basket");
+        }
+
+        // $sub_total = $this->quotes()->with('product')->get()->map(function ($quote) {
+        //     return ($quote->quantity * $quote->product?->final_price) ?? 0;
+        // });
+
+        // return $sub_total;
+
+        // return array_sum($sub_total);
+
+        $quotes = $this->quotes()->with('product')->get();
+
+
+        $total = 0;
+
+        foreach ($quotes as $quote) {
+            $total += $quote->quantity * $quote->product?->final_price;
+        }
+
+        return $total;
     }
 }
