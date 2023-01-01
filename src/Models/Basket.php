@@ -16,7 +16,6 @@ use OutMart\PricingRules\Lay;
 
 class Basket extends ModelBase
 {
-    public $coupon = null;
     public $shippingMethod = null;
     public $paymentMethod = null;
 
@@ -82,6 +81,21 @@ class Basket extends ModelBase
         ]);
     }
 
+    public function applyCoupon($coupon)
+    {
+        if ($coupon = Coupon::where('coupon_code', $coupon)->first()) {
+            $this->coupon_code = $coupon->coupon_code;
+            $this->save();
+        }
+
+        return $this;
+    }
+
+    public function coupon()
+    {
+        return $this->hasOne(Coupon::class, 'coupon_code', 'coupon_code');
+    }
+
     public function quotes()
     {
         return $this->hasMany(Quote::class, 'basket_id', 'id');
@@ -100,18 +114,6 @@ class Basket extends ModelBase
     public function canPlaceOrder()
     {
         return $this->quotes()->exists() && in_array($this->status, [Status::OPENED(), Status::ABANDONED()]);
-    }
-
-    public function getCoupon()
-    {
-        return $this->coupon;
-    }
-
-    public function setCoupon($coupon)
-    {
-        $this->coupon = $coupon;
-
-        return $this;
     }
 
     public function getShippingMethod()
@@ -169,7 +171,7 @@ class Basket extends ModelBase
             $lay->setPaymentMethod($getPaymentMethod);
 
         // Handle coupon
-        if ($coupon = Coupon::where('coupon_code', $this->getCoupon())->first())
+        if ($coupon = $this->coupon)
             $lay->rule(function ($attributes) use ($coupon) {
                 return ($coupon) ? true : false;
             }, function ($operations) use ($coupon) {

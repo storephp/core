@@ -17,9 +17,11 @@ return new class extends MigrationBase
         Schema::create($this->prefix . 'basket_coupon', function (Blueprint $table) {
             $table->id();
             $table->string('coupon_name');
-            $table->string('coupon_code');
-            $table->enum('discount_type', ['percentage', 'fixed'])->nullable();
-            $table->integer('discount_value')->nullable();
+            $table->string('coupon_code')->unique();
+            $table->enum('discount_type', ['percentage', 'fixed']);
+            $table->integer('discount_value');
+            $table->date('start_at')->nullable();
+            $table->date('ends_at')->nullable();
             $table->timestamps();
         });
     }
