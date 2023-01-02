@@ -22,8 +22,14 @@ class Coupon extends ModelBase
         'coupon_name',
         'coupon_code',
         'discount_value',
+        'condition',
+        'condition_data',
         'start_at',
         'ends_at',
+    ];
+
+    protected $casts = [
+        'condition_data' => 'json',
     ];
 
     // expired

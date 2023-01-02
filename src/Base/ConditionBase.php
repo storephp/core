@@ -19,8 +19,11 @@ abstract class ConditionBase
     /**
      * Get the value of condition_data
      */
-    public function getConditionData()
+    public function getConditionData($key = null)
     {
+        if ($key)
+            return $this->condition_data[$key];
+
         return $this->condition_data;
     }
 }

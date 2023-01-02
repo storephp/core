@@ -4,7 +4,6 @@ namespace OutMart\Models;
 
 use Exception;
 use Illuminate\Support\Str;
-use OutMart\Base\Condition\LimitCondition;
 use OutMart\Base\ModelBase;
 use OutMart\Contracts\ICondition;
 use OutMart\DataType\ProductSku;
@@ -178,13 +177,13 @@ class Basket extends ModelBase
             $lay->rule(function ($attributes) use ($coupon) {
 
                 // 
-                if (!$coupon->condition) {
+                if ($coupon->condition) {
                     $conditionObj = config('outmart.coupons.conditions.' . $coupon->condition, null);
                     if ($conditionObj) {
                         $condition = new $conditionObj(
                             $attributes['total'],
                             $this->quotes()->pluck('product_sku')->toArray(),
-                            $this->condition_data,
+                            $coupon->condition_data,
                         );
 
                         if (!$condition instanceof ICondition) {
@@ -193,6 +192,7 @@ class Basket extends ModelBase
 
                         return $condition->handle();
                     }
+                    return false;
                 }
 
                 return true;
