@@ -93,6 +93,16 @@ class Basket extends ModelBase
         return $this;
     }
 
+    public function resetCoupon()
+    {
+        if ($this->coupon_code) {
+            $this->coupon_code = null;
+            $this->save();
+        }
+
+        return $this;
+    }
+
     public function coupon()
     {
         return $this->hasOne(Coupon::class, 'coupon_code', 'coupon_code');
