@@ -2,8 +2,11 @@
 
 namespace OutMart\Models;
 
+use Exception;
 use Illuminate\Support\Str;
+use OutMart\Base\Condition\LimitCondition;
 use OutMart\Base\ModelBase;
+use OutMart\Contracts\ICondition;
 use OutMart\DataType\ProductSku;
 use OutMart\Enums\Baskets\Status;
 use OutMart\Events\Basket\BasketCreated;
@@ -173,7 +176,26 @@ class Basket extends ModelBase
         // Handle coupon
         if (($coupon = $this->coupon) && (!$this->coupon->expired))
             $lay->rule(function ($attributes) use ($coupon) {
-                return ($coupon) ? true : false;
+
+                // 
+                if (!$coupon->condition) {
+                    $conditionObj = config('outmart.coupons.conditions.' . $coupon->condition, null);
+                    if ($conditionObj) {
+                        $condition = new $conditionObj(
+                            $attributes['total'],
+                            $this->quotes()->pluck('product_sku')->toArray(),
+                            $this->condition_data,
+                        );
+
+                        if (!$condition instanceof ICondition) {
+                            throw new Exception('You need to implement `ICondition` in condition class');
+                        }
+
+                        return $condition->handle();
+                    }
+                }
+
+                return true;
             }, function ($operations) use ($coupon) {
                 $total = $operations->getTotal();
 

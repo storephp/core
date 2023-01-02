@@ -20,6 +20,8 @@ return new class extends MigrationBase
             $table->string('coupon_code')->unique();
             $table->enum('discount_type', ['percentage', 'fixed']);
             $table->integer('discount_value');
+            $table->string('condition')->nullable();
+            $table->json('condition_data')->nullable();
             $table->date('start_at')->nullable();
             $table->date('ends_at')->nullable();
             $table->timestamps();
