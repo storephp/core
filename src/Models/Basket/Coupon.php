@@ -29,7 +29,7 @@ class Coupon extends ModelBase
     // expired
     public function getExpiredAttribute()
     {
-        return (!$this->start_at && !$this->ends_at) ? true : $this->active()->exists();
+        return (!$this->start_at && !$this->ends_at) ? false : !$this->active()->exists();
     }
 
     /**
@@ -40,8 +40,8 @@ class Coupon extends ModelBase
      */
     public function scopeActive($query)
     {
-        $now = now();
-        return $query->where('start_at', '>=', $now)
-            ->orWhere('ends_at', '<=', $now);
+        $today = now()->format('Y-m-d');
+        return $query->where('start_at', '<=', $today)
+            ->where('ends_at', '>=', $today);
     }
 }

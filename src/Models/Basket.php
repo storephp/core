@@ -171,7 +171,7 @@ class Basket extends ModelBase
             $lay->setPaymentMethod($getPaymentMethod);
 
         // Handle coupon
-        if ($coupon = $this->coupon)
+        if (($coupon = $this->coupon) && (!$this->coupon->expired))
             $lay->rule(function ($attributes) use ($coupon) {
                 return ($coupon) ? true : false;
             }, function ($operations) use ($coupon) {
