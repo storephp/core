@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Support\Str;
 use OutMart\Base\ModelBase;
 use OutMart\Contracts\ICondition;
+use OutMart\Contracts\Model\IFinalPrice;
 use OutMart\DataType\ProductSku;
 use OutMart\Enums\Baskets\Status;
 use OutMart\Events\Basket\BasketCreated;
@@ -14,6 +15,7 @@ use OutMart\Events\Basket\BasketUpdated;
 use OutMart\Events\Basket\BasketUpdating;
 use OutMart\Models\Basket\Coupon;
 use OutMart\Models\Basket\Quote;
+use OutMart\Models\Order\Address;
 use OutMart\PricingRules\Lay;
 
 class Basket extends ModelBase
@@ -53,6 +55,10 @@ class Basket extends ModelBase
 
     public static function initBasket(string $basket_ulid = null, string $currency = 'USD')
     {
+        if (parent::whereUlid($basket_ulid)->where('status', Status::ORDERED())->exists()) {
+            throw new Exception("The ULID for this basket already exists");
+        }
+
         $basket = parent::whereUlid($basket_ulid)
             ->whereIn('status', [Status::OPENED(), Status::ABANDONED()])
             ->first();
@@ -113,9 +119,14 @@ class Basket extends ModelBase
         return $this->hasMany(Quote::class, 'basket_id', 'id');
     }
 
-    public function orders()
+    public function order()
     {
-        return $this->hasMany(Order::class, 'basket_id', 'id');
+        return $this->hasOne(Order::class, 'basket_id', 'id');
+    }
+
+    public function customer()
+    {
+        return $this->morphTo();
     }
 
     public function canUpdateStatus()
@@ -152,6 +163,11 @@ class Basket extends ModelBase
         return $this;
     }
 
+    public function getDiscountTotal(): float
+    {
+        return $this->getTotal() - $this->getSubTotal();
+    }
+
     public function getSubTotal(): float
     {
         $quotes = $this->quotes()->with('product')->get();
@@ -160,6 +176,10 @@ class Basket extends ModelBase
 
         if ($quotes) {
             foreach ($quotes as $quote) {
+                if (!$quote->product instanceof IFinalPrice) {
+                    throw new Exception("You must implement `\OutMart\Contracts\Model\IFinalPrice`");
+                }
+
                 $total += $quote->quantity * $quote->product?->final_price;
             }
         }
@@ -223,12 +243,70 @@ class Basket extends ModelBase
         return $lay->getTotal();
     }
 
-    public function placeOrder()
+    public function placeOrder($address_id)
     {
         if (!$this->canPlaceOrder()) {
             throw new Exception("You cannot place an order from this basket");
         }
 
-        return $this->getTotal();
+        $orderData = [];
+
+        $orderData['customer_id'] = $this->customer->id;
+
+        if (($coupon = $this->coupon) && (!$this->coupon->expired)) {
+            $orderData['discount_details'] = [
+                'discount_type' => 'coupon',
+                'coupon' => [
+                    'coupon_code' => $coupon->coupon_code,
+                    'discount_value' => $coupon->discount_value,
+                    'discount_value' => $coupon->discount_value,
+                    'condition' => $coupon->condition,
+                    'condition_data' => $coupon->condition_data,
+                    'start_at' => $coupon->start_at,
+                    'ends_at' => $coupon->ends_at,
+                ],
+            ];
+
+            $orderData['discount_total'] = $this->getDiscountTotal();
+        }
+
+        $orderData['sub_total'] = $this->getSubTotal();
+        $orderData['shipping_total'] = 0;
+        $orderData['tax_total'] = 0;
+        $orderData['grand_total'] = $this->getTotal();
+
+        if ($this->order()->exists()) {
+            throw new Exception("Already there is an order for this basket");
+        }
+
+        $address = $this->customer->addresses()->find($address_id);
+
+        if (!$address) {
+            throw new Exception("Error Processing Request");
+        }
+
+        $order = $this->order()->create($orderData);
+
+        if ($this->canUpdateStatus()) {
+            $this->status = Status::ORDERED();
+            $this->save();
+        }
+
+        Address::create([
+            'order_id' => $order->id,
+            'title' => null,
+            'first_name' => $this->customer->first_name,
+            'last_name' => $this->customer->last_name,
+            'street_line_1' => $address->street_line_1,
+            'street_line_2' => $address->street_line_2,
+            'country' => null,
+            'city' => null,
+            'state' => null,
+            'postcode' => $address->postcode,
+            'contact_email' => $this->customer->email,
+            'contact_phone' => $address->telephone_number,
+        ]);
+
+        return $order;
     }
 }

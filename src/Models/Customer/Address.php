@@ -24,7 +24,7 @@ class Address extends ModelBase
         'label',
         'country_id',
         'city_id',
-        'zip_code',
+        'postcode',
         'street_line_1',
         'street_line_2',
         'telephone_number',

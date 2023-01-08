@@ -3,9 +3,10 @@
 namespace OutMart\Models;
 
 use OutMart\Base\ModelBase;
+use OutMart\Contracts\Model\IFinalPrice;
 use OutMart\Enums\Catalog\ProductType;
 
-class Product extends ModelBase
+class Product extends ModelBase implements IFinalPrice
 {
     /**
      * The table associated with the model.
@@ -31,6 +32,11 @@ class Product extends ModelBase
         'product_type',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
     protected $casts = [
         'price' => 'float',
         'discount_price' => 'float',
@@ -49,7 +55,7 @@ class Product extends ModelBase
         };
     }
 
-    public function getFinalPriceAttribute()
+    public function getFinalPriceAttribute(): float
     {
         return (float) ($this->discount_price ?? $this->price);
     }

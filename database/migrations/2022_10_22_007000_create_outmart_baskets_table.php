@@ -16,7 +16,7 @@ return new class extends MigrationBase
     {
         Schema::create($this->prefix . 'baskets', function (Blueprint $table) {
             $table->id();
-            $table->ulid('ulid')->index();
+            $table->ulid('ulid')->unique()->index();
             $table->nullablemorphs('customer');
             $table->string('currency', 3);
             $table->unsignedTinyInteger('status')->default(1);

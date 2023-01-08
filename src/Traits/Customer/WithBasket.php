@@ -2,6 +2,7 @@
 
 namespace OutMart\Traits\Customer;
 
+use Exception;
 use Illuminate\Support\Str;
 use OutMart\Models\Basket;
 use OutMart\Enums\Baskets\Status;
@@ -21,6 +22,10 @@ trait WithBasket
 
     public function currentBasket(string $basket_ulid = null, string $currency = 'USD')
     {
+        if (Basket::whereUlid($basket_ulid)->where('status', Status::ORDERED())->exists()) {
+            throw new Exception("The ULID for this basket already exists");
+        }
+
         $assignBasket = Basket::whereUlid($basket_ulid)
             ->whereIn('status', [Status::OPENED(), Status::ABANDONED()])
             ->first();

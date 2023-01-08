@@ -3,6 +3,7 @@
 namespace OutMart\Models;
 
 use OutMart\Base\ModelBase;
+use OutMart\Models\Customer\Address;
 use OutMart\Models\Customer\CustomerChannel;
 
 class Customer extends ModelBase
@@ -20,6 +21,9 @@ class Customer extends ModelBase
      * @var array<int, string>
      */
     protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
         'metadata',
     ];
 
@@ -40,6 +44,11 @@ class Customer extends ModelBase
     // protected $dispatchesEvents = [
     //     'created' => CustomerCreated::class,
     // ];
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'customer_id', 'id');
+    }
 
     public function channels()
     {

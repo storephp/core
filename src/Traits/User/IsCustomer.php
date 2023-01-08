@@ -28,10 +28,19 @@ trait IsCustomer
 
         if (!$customer) {
             return $this->customer()->create([
+                'first_name' => $this->splitName($this->name)[0],
+                'last_name' => $this->splitName($this->name)[1],
+                'email' => $this->email,
                 'metadata' => $metadata,
             ]);
         }
 
         return $customer;
+    }
+
+    private function splitName($name)
+    {
+        $name = trim($name);
+        return explode(' ', $name);
     }
 }

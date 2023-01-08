@@ -15,6 +15,7 @@ return new class extends MigrationBase
     {
         Schema::create($this->prefix . 'orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('customer_id')->nullable()->constrained($this->prefix . 'customers')->cascadeOnDelete();
             $table->foreignId('basket_id')->nullable()->constrained($this->prefix . 'baskets')->cascadeOnDelete();
             $table->json('discount_details')->nullable();
             $table->decimal('sub_total', 10, 2);

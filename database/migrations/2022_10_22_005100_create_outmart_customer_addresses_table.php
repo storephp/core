@@ -19,7 +19,7 @@ return new class extends MigrationBase
             $table->string('label');
             $table->integer('country_id')->index()->nullable();
             $table->integer('city_id')->index()->nullable();
-            $table->integer('zip_code')->nullable();
+            $table->integer('postcode')->nullable();
             $table->string('street_line_1');
             $table->string('street_line_2')->nullable();
             $table->string('telephone_number')->index();

@@ -19,6 +19,7 @@ class Order extends ModelBase
      * @var array<int, string>
      */
     protected $fillable = [
+        'customer_id',
         'basket_id',
         'discount_details',
         'sub_total',
@@ -26,5 +27,14 @@ class Order extends ModelBase
         'shipping_total',
         'tax_total',
         'grand_total',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'discount_details' => 'array',
     ];
 }
