@@ -22,7 +22,7 @@ class Address extends ModelBase
     protected $fillable = [
         'customer_id',
         'label',
-        'country_id',
+        'country_code',
         'city_id',
         'postcode',
         'street_line_1',
@@ -37,7 +37,7 @@ class Address extends ModelBase
      * @var array
      */
     protected $casts = [
-        'is_main' => 'boolean'
+        'is_main' => 'boolean',
     ];
 
     public function customer()

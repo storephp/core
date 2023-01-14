@@ -17,7 +17,7 @@ return new class extends MigrationBase
             $table->id();
             $table->foreignId('customer_id')->constrained($this->prefix . 'customers')->cascadeOnDelete();
             $table->string('label');
-            $table->integer('country_id')->index()->nullable();
+            $table->string('country_code', 2)->index()->nullable();
             $table->integer('city_id')->index()->nullable();
             $table->integer('postcode')->nullable();
             $table->string('street_line_1');
