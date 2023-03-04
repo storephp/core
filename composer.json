@@ -24,6 +24,7 @@
     },
     "require-dev": {
         "orchestra/testbench": "^7.17",
+        "pestphp/pest-plugin-laravel": "^1.4",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
@@ -37,7 +38,10 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "extra": {
         "laravel": {
@@ -48,7 +52,7 @@
         }
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit tests"
+        "test": "./vendor/bin/pest"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

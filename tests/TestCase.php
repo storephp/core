@@ -6,9 +6,9 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 use OutMart\OutMartServiceProvider;
 use OutMart\Tests\Core\TestOutMartServiceProvider;
 
-abstract class TestCase extends BaseTestCase
+class TestCase extends BaseTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->artisan('migrate:fresh', ['--database' => 'testing']);
