@@ -17,6 +17,7 @@ return new class extends MigrationBase
             $table->id();
             $table->foreignId('customer_id')->nullable()->constrained($this->prefix . 'customers')->cascadeOnDelete();
             $table->foreignId('basket_id')->nullable()->constrained($this->prefix . 'baskets')->cascadeOnDelete();
+            $table->foreignId('status_id')->nullable()->constrained($this->prefix . 'order_statuses')->nullOnDelete();
             $table->json('discount_details')->nullable();
             $table->decimal('sub_total', 10, 2);
             $table->decimal('discount_total', 10, 2)->nullable();

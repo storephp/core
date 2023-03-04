@@ -2,7 +2,11 @@
 
 namespace OutMart\Models;
 
+use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use OutMart\Base\ModelBase;
+use OutMart\Models\Order\State;
+use OutMart\Models\Order\Status;
 
 class Order extends ModelBase
 {
@@ -21,6 +25,7 @@ class Order extends ModelBase
     protected $fillable = [
         'customer_id',
         'basket_id',
+        'status_id',
         'discount_details',
         'sub_total',
         'discount_total',
@@ -37,4 +42,45 @@ class Order extends ModelBase
     protected $casts = [
         'discount_details' => 'array',
     ];
+
+    /**
+     * Scope a query to only include popular users.
+     */
+    public function scopeHasState(Builder $query, string | array $state): void
+    {
+        if (is_string($state)) {
+            $state = State::where('state_key', $state)->first('id');
+
+            if (!$state) {
+                throw new Exception("State not found");
+            }
+
+            $statuses_id = Status::where('state_id', $state->id)->pluck('id');
+            $query->whereIn('status_id', $statuses_id);
+        }
+
+        if (is_array($state)) {
+            $statesIds = State::whereIn('state_key', $state)->pluck('id');
+            $statuses_id = Status::whereIn('state_id', $statesIds)->pluck('id');
+            $query->whereIn('status_id', $statuses_id);
+        }
+    }
+
+    /**
+     * Scope a query to only include popular users.
+     */
+    public function scopeHasStatus(Builder $query, string | array $status): void
+    {
+        $typeState = gettype($state);
+
+        if ($typeState == 'string') {
+            $statuses_id = Status::where('status_key', $status)->pluck('id');
+            $query->whereIn('status_id', $statuses_id);
+        }
+
+        if ($typeState == 'array') {
+            $statuses_id = Status::whereIn('status_key', $status)->pluck('id');
+            $query->whereIn('status_id', $statuses_id);
+        }
+    }
 }
