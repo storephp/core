@@ -5,9 +5,12 @@ namespace OutMart\Models\Product;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 use OutMart\Base\ModelBase;
+use OutMart\Models\Traits\HasEntry;
 
 class Category extends ModelBase
 {
+    use HasEntry;
+
     /**
      * The table associated with the model.
      *
@@ -22,7 +25,6 @@ class Category extends ModelBase
      */
     protected $fillable = [
         'parent_id',
-        'name',
         'slug',
     ];
 
@@ -39,7 +41,7 @@ class Category extends ModelBase
     protected function slug(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => Str::slug($value, '-'),
+            set:fn($value) => Str::slug($value, '-'),
         );
     }
 
@@ -61,5 +63,10 @@ class Category extends ModelBase
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
+    }
+
+    public function entries()
+    {
+        return $this->hasMany(CategoryEntry::class, 'category_id', 'id');
     }
 }

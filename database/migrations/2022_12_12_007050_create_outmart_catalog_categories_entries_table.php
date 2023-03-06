@@ -13,10 +13,12 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'catalog_categories', function (Blueprint $table) {
+        Schema::create($this->prefix . 'catalog_category_entries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('parent_id')->nullable()->constrained($this->prefix . 'catalog_categories')->cascadeOnDelete();
-            $table->string('slug')->index();
+            $table->foreignId('store_view_id')->nullable()->constrained($this->prefix . 'store_views')->cascadeOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained($this->prefix . 'catalog_categories')->cascadeOnDelete();
+            $table->string('entry_key')->index();
+            $table->string('entry_value');
             $table->timestamps();
         });
     }

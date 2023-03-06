@@ -4,10 +4,12 @@ namespace OutMart\Models;
 
 use OutMart\Base\ModelBase;
 use OutMart\Contracts\Model\IFinalPrice;
-use OutMart\Enums\Catalog\ProductType;
+use OutMart\Models\Product\Entry;
+use OutMart\Models\Traits\HasEntry;
 
 class Product extends ModelBase implements IFinalPrice
 {
+    use HasEntry;
     /**
      * The table associated with the model.
      *
@@ -21,15 +23,7 @@ class Product extends ModelBase implements IFinalPrice
      * @var array<int, string>
      */
     protected $fillable = [
-        'configurable_id',
-        'categories',
-        'name',
-        'slug',
         'sku',
-        'description',
-        'price',
-        'discount_price',
-        'product_type',
     ];
 
     /**
@@ -47,13 +41,13 @@ class Product extends ModelBase implements IFinalPrice
         'discount_value',
     ];
 
-    public function getProductTypeAttribute($value)
-    {
-        return match ($value) {
-            ProductType::CONFIGURABLE() => 'configurable',
-            ProductType::SIMPLE() => 'simple',
-        };
-    }
+    // public function getProductTypeAttribute($value)
+    // {
+    //     return match($value) {
+    //         ProductType::CONFIGURABLE() => 'configurable',
+    //         ProductType::SIMPLE() => 'simple',
+    //     };
+    // }
 
     public function getFinalPriceAttribute(): float
     {
@@ -79,5 +73,10 @@ class Product extends ModelBase implements IFinalPrice
     public function simples()
     {
         return $this->hasMany(Product::class, 'configurable_id', 'id');
+    }
+
+    public function entries()
+    {
+        return $this->hasMany(Entry::class, 'product_id', 'id');
     }
 }
