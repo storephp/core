@@ -15,8 +15,10 @@ return new class extends MigrationBase
     {
         Schema::create($this->prefix . 'core_configs', function (Blueprint $table) {
             $table->id();
-            $table->string('path')->unique()->index();
+            $table->foreignId('store_view_id')->nullable()->constrained($this->prefix . 'store_views')->cascadeOnDelete();
+            $table->string('path')->index();
             $table->string('value');
+            $table->unique(['store_view_id', 'path']);
             $table->timestamps();
         });
     }

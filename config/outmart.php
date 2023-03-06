@@ -59,6 +59,7 @@ return [
     'core' => [
         'config' => [
             //
+            'currency' => 'USD'
         ],
     ],
 ];

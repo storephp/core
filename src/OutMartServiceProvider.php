@@ -3,6 +3,7 @@
 namespace OutMart;
 
 use Illuminate\Support\ServiceProvider;
+use OutMart\Core\ConfigtManager;
 
 class OutMartServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,10 @@ class OutMartServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/outmart.php', 'outmart');
+
+        $this->app->singleton('configuration', function () {
+            return new ConfigtManager();
+        });
     }
 
     /**

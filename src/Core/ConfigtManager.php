@@ -4,8 +4,30 @@ namespace OutMart\Core;
 
 use OutMart\Models\Config as ModelConfig;
 
-class Config
+class ConfigtManager
 {
+    private $storeViewId = null;
+
+    /**
+     * Get the value of storeViewId
+     */
+    public function getStoreViewId()
+    {
+        return $this->storeViewId;
+    }
+
+    /**
+     * Set the value of storeViewId
+     *
+     * @return  self
+     */
+    public function setStoreViewId($storeViewId)
+    {
+        $this->storeViewId = $storeViewId;
+
+        return $this;
+    }
+
     /**
      * Add new config
      *
@@ -15,13 +37,16 @@ class Config
      */
     public function set($path, $value)
     {
-        $config = ModelConfig::where('path', $path)->first();
+        if ($config = ModelConfig::where('store_view_id', $this->getStoreViewId())->where('path', $path)->first()) {
+            return $config->value;
+        }
 
-        if ($config) {
+        if ($config = ModelConfig::whereNull('store_view_id')->where('path', $path)->first()) {
             return $config->value;
         }
 
         $config = ModelConfig::create([
+            'store_view_id' => $this->getStoreViewId(),
             'path' => $path,
             'value' => $value,
         ]);
@@ -32,9 +57,13 @@ class Config
     /**
      * Get exist config
      */
-    public function get($path, $deflut)
+    public function get($path, $deflut = null)
     {
-        if ($config = ModelConfig::where('path', $path)->first()) {
+        if ($config = ModelConfig::where('store_view_id', $this->getStoreViewId())->where('path', $path)->first()) {
+            return $config->value;
+        }
+
+        if ($config = ModelConfig::whereNull('store_view_id')->where('path', $path)->first()) {
             return $config->value;
         }
 

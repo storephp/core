@@ -19,6 +19,7 @@ class Config extends ModelBase
      * @var array<int, string>
      */
     protected $fillable = [
+        'store_view_id',
         'path',
         'value',
     ];
