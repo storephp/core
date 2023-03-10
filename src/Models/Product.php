@@ -10,6 +10,7 @@ use OutMart\Models\Traits\HasEntry;
 class Product extends ModelBase implements IFinalPrice
 {
     use HasEntry;
+
     /**
      * The table associated with the model.
      *
@@ -24,6 +25,16 @@ class Product extends ModelBase implements IFinalPrice
      */
     protected $fillable = [
         'sku',
+    ];
+
+    protected $fillableEntry = [
+        'categories',
+        'name',
+        'slug',
+        'description',
+        'price',
+        'discount_price',
+        'thumbnail_path',
     ];
 
     /**

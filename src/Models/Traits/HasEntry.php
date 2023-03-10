@@ -2,46 +2,37 @@
 
 namespace OutMart\Models\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Str;
+use Pharaonic\Laravel\Helpers\Traits\HasCustomAttributes;
 
 trait HasEntry
 {
+    use HasCustomAttributes;
+
     private $storeViewId = null;
+    private $entriesList = null;
 
-    public function __get($key)
+    public function initializeHasEntry()
     {
-        $withOutFillable = array_merge([$this->getKeyName(), 'parent'], $this->getDates(), $this->fillable);
+        $fillableEntry = (method_exists($this, 'fillableEntry')) ? $this->fillableEntry() : $this->fillableEntry;
 
-        if (in_array($key, $withOutFillable)) {
-            return $this->getAttribute($key);
-        }
-
-        if ($entry = $this->getEntry($key, $this->getStoreViewId())) {
-            $entryMethodName = 'get' . Str::studly($key) . 'Entry';
-            if (method_exists($this, $entryMethodName)) {
-                $entry = call_user_func_array([$this, $entryMethodName], [$entry]);
-            }
-            return $entry;
+        foreach ($fillableEntry as $key) {
+            $this->addGetterAttribute($key, 'getEntries');
+            $this->addSetterAttribute($key, 'setEntries');
         }
     }
 
-    /**
-     * Dynamically set attributes on the model.
-     *
-     * @param  string  $key
-     * @param  mixed   $value
-     * @return void
-     */
-    public function __set($key, $value)
+    private function getEntries($key)
     {
-        $withOutFillable = array_merge($this->getDates(), $this->fillable);
-
-        if (in_array($key, $withOutFillable)) {
-            return $this->setAttribute($key, $value);
+        if (!$this->entriesList) {
+            $this->entriesList = $this->entries()->where(fn($q) => $q->where('store_view_id', null)->orWhere('store_view_id', $this->storeViewId))->get()->groupBy('store_view_id');
         }
 
-        return $this->setEntry($key, $value, $this->getStoreViewId());
+        return $this->entriesList[$this->storeViewId]->where('entry_key', $key)->first()?->entry_value ?? $this->entriesList[""]->where('entry_key', $key)->first()?->entry_value ?? null;
+    }
+
+    private function setEntries($key, $value)
+    {
+        $this->setEntry($key, $value, $this->storeViewId);
     }
 
     public function getEntry($key, $storeViewId = null)

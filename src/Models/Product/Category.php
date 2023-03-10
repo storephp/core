@@ -28,6 +28,10 @@ class Category extends ModelBase
         'slug',
     ];
 
+    protected $fillableEntry = [
+        'name',
+    ];
+
     public function hasChildren()
     {
         return $this->children()->exists();
