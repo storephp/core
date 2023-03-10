@@ -41,9 +41,9 @@ class Quote extends ModelBase
 
     /**
      * Increase quantity
-     * 
+     *
      * @param int $quantity
-     * 
+     *
      * @return \OutMart\Models\Quote
      */
     public function increase(int $quantity)
@@ -61,13 +61,18 @@ class Quote extends ModelBase
 
     /**
      * Decrease quantity
-     * 
+     *
      * @param int $quantity
-     * 
+     *
      * @return \OutMart\Models\Quote
      */
     public function decrease(int $quantity)
     {
+        if ($this->quantity <= $quantity) {
+            $this->delete();
+            return false;
+        }
+
         if ($this->quantity < $quantity) {
             throw new QuoteExceedingLimitException();
         }
