@@ -83,4 +83,19 @@ class Order extends ModelBase
             $query->whereIn('status_id', $statuses_id);
         }
     }
+
+    public function customer()
+    {
+        return $this->hasOne(config('outmart.customers.model'), 'id', 'customer_id');
+    }
+
+    public function basket()
+    {
+        return $this->hasOne(Basket::class, 'id', 'basket_id');
+    }
+
+    public function status()
+    {
+        return $this->hasOne(Status::class, 'id', 'status_id');
+    }
 }

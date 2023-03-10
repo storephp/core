@@ -119,6 +119,11 @@ class Basket extends ModelBase
         return $this->hasMany(Quote::class, 'basket_id', 'id');
     }
 
+    public function quote()
+    {
+        return $this->hasOne(Quote::class, 'basket_id', 'id');
+    }
+
     public function order()
     {
         return $this->hasOne(Order::class, 'basket_id', 'id');
@@ -250,8 +255,9 @@ class Basket extends ModelBase
         }
 
         $orderData = [];
-
+        
         $orderData['customer_id'] = $this->customer->id;
+        $orderData['status_id'] = 1;
 
         if (($coupon = $this->coupon) && (!$this->coupon->expired)) {
             $orderData['discount_details'] = [
@@ -294,7 +300,7 @@ class Basket extends ModelBase
 
         Address::create([
             'order_id' => $order->id,
-            'title' => null,
+            'title' => $address->label,
             'first_name' => $this->customer->first_name,
             'last_name' => $this->customer->last_name,
             'street_line_1' => $address->street_line_1,
