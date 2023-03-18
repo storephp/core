@@ -2,6 +2,7 @@
 
 namespace OutMart\Models\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
 use Pharaonic\Laravel\Helpers\Traits\HasCustomAttributes;
 
 trait HasEntry
