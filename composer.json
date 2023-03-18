@@ -1,5 +1,5 @@
 {
-    "name": "outmart/laravel-core",
+    "name": "outmart/core",
     "description": "eCommerce Core to help you build your eCommerce based on laravel.",
     "type": "library",
     "license": "MIT",
