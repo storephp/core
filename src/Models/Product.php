@@ -60,6 +60,11 @@ class Product extends ModelBase implements IFinalPrice
     //     };
     // }
 
+    protected function fillableEntry()
+    {
+        return array_merge($this->fillableEntry, config('outmart.catalog.products.external_fillable_entry'));
+    }
+
     public function getFinalPriceAttribute(): float
     {
         return (float) ($this->discount_price ?? $this->price);

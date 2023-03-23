@@ -4,6 +4,7 @@ namespace OutMart;
 
 use Illuminate\Support\ServiceProvider;
 use OutMart\Core\ConfigtManager;
+use OutMart\Repositories\ProductRepositorie;
 
 class OutMartServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,10 @@ class OutMartServiceProvider extends ServiceProvider
 
         $this->app->singleton('configuration', function () {
             return new ConfigtManager();
+        });
+
+        $this->app->singleton('product', function() {
+            return new ProductRepositorie();
         });
     }
 
