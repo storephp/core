@@ -24,6 +24,7 @@ return new class extends MigrationBase
             $table->json('condition_data')->nullable();
             $table->date('start_at')->nullable();
             $table->date('ends_at')->nullable();
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

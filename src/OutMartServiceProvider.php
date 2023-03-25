@@ -4,7 +4,9 @@ namespace OutMart;
 
 use Illuminate\Support\ServiceProvider;
 use OutMart\Core\ConfigtManager;
+use OutMart\Repositories\CouponRepository;
 use OutMart\Repositories\ProductRepositorie;
+use OutMart\Services\CouponService;
 
 class OutMartServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,12 @@ class OutMartServiceProvider extends ServiceProvider
 
         $this->app->singleton('product', function() {
             return new ProductRepositorie();
+        });
+
+        $this->app->singleton('coupon', function() {
+            return new CouponService(
+                new CouponRepository
+            );
         });
     }
 

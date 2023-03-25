@@ -26,6 +26,7 @@ class Coupon extends ModelBase
         'condition_data',
         'start_at',
         'ends_at',
+        'is_active',
     ];
 
     protected $casts = [
