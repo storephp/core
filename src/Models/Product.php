@@ -4,6 +4,7 @@ namespace OutMart\Models;
 
 use OutMart\Base\ModelBase;
 use OutMart\Contracts\Model\IFinalPrice;
+use OutMart\Models\Product\Category;
 use OutMart\Models\Product\Entry;
 use OutMart\Models\Traits\HasEntry;
 
@@ -94,5 +95,22 @@ class Product extends ModelBase implements IFinalPrice
     public function entries()
     {
         return $this->hasMany(Entry::class, 'product_id', 'id');
+    }
+    public function getCategories()
+    {
+        if (!$this->categories) {
+            return [];
+        }
+
+        $categories = array_map(function ($categoryId) {
+            return Category::find($categoryId);
+        }, $this->categories);
+
+        return array_filter($categories, function ($category) {
+            if ($category) {
+                return $category;
+            }
+
+        });
     }
 }
