@@ -28,60 +28,11 @@ class Quote extends ModelBase
         'quantity',
     ];
 
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function (Quote $quote) {
-            if (!$quote->product_sku instanceof ProductSku) {
-                throw new Exception("You must use `\OutMart\DataType\ProductSku` for add SKU");
-            }
-        });
-    }
-
     /**
-     * Increase quantity
+     * Return the product relationship.
      *
-     * @param int $quantity
-     *
-     * @return \OutMart\Models\Quote
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function increase(int $quantity)
-    {
-        if ($this->quantity >= config('outmart.baskets.max_quote')) {
-            throw new QuoteTheMaxException();
-        }
-
-        $this->increment('quantity', $quantity);
-
-        QuoteIncrease::dispatch($this);
-
-        return $this;
-    }
-
-    /**
-     * Decrease quantity
-     *
-     * @param int $quantity
-     *
-     * @return \OutMart\Models\Quote
-     */
-    public function decrease(int $quantity)
-    {
-        if ($this->quantity <= $quantity) {
-            $this->delete();
-            return false;
-        }
-
-        if ($this->quantity < $quantity) {
-            throw new QuoteExceedingLimitException();
-        }
-
-        $this->decrement('quantity', $quantity);
-
-        return $this;
-    }
-
     public function basket()
     {
         return $this->hasOne(basket::class, 'id', 'basket_id');

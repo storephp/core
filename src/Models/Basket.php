@@ -53,41 +53,43 @@ class Basket extends ModelBase
         'updated' => BasketUpdated::class,
     ];
 
-    public static function initBasket(string $basket_ulid = null, string $currency = 'USD')
-    {
-        if (parent::whereUlid($basket_ulid)->where('status', Status::ORDERED())->exists()) {
-            throw new Exception("The ULID for this basket already exists");
-        }
+    // public static function initBasket(string $basket_ulid = null, string $currency = 'USD')
+    // {
+    //     if (parent::whereUlid($basket_ulid)->where('status', Status::ORDERED())->exists()) {
+    //         throw new Exception("The ULID for this basket already exists");
+    //     }
 
-        $basket = parent::whereUlid($basket_ulid)
-            ->whereIn('status', [Status::OPENED(), Status::ABANDONED()])
-            ->first();
+    //     $basket = parent::whereUlid($basket_ulid)
+    //         ->whereIn('status', [Status::OPENED(), Status::ABANDONED()])
+    //         ->first();
 
-        if (!$basket) {
-            $basket = static::create([
-                'ulid' => $basket_ulid ?? (string) Str::ulid(),
-                'currency' => $currency,
-            ]);
-        }
+    //     if (!$basket) {
+    //         $basket = static::create([
+    //             'ulid' => $basket_ulid ?? (string) Str::ulid(),
+    //             'currency' => $currency,
+    //         ]);
+    //     }
 
-        return $basket;
-    }
+    //     return $basket;
+    // }
 
-    public function addQuotes(ProductSku $productSku, int $quantity = 1)
-    {
-        $quote = $this->quotes()->where('basket_id', $this->id)
-            ->where('product_sku', $productSku)
-            ->first();
+    // public function addQuotes(ProductSku $productSku, int $quantity = 1)
+    // {
+    //     $quote = $this->quotes()->where('basket_id', $this->id)
+    //         ->where('product_sku', $productSku)
+    //         ->first();
 
-        if ($quote) {
-            return $quote->increase($quantity);
-        }
+    //     if ($quote) {
+    //         return $quote->increase($quantity);
+    //     }
 
-        return $this->quotes()->create([
-            'product_sku' => $productSku,
-            'quantity' => $quantity,
-        ]);
-    }
+    //     $quote = $this->quotes()->create([
+    //         'product_sku' => $productSku,
+    //         'quantity' => $quantity,
+    //     ]);
+
+    //     return $quote;
+    // }
 
     public function applyCoupon($coupon)
     {
