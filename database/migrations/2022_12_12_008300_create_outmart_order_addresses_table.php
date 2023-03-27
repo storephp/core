@@ -16,11 +16,11 @@ return new class extends MigrationBase
         Schema::create($this->prefix . 'order_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained($this->prefix . 'orders')->cascadeOnDelete();
-            $table->string('title')->nullable();
+            $table->string('label')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('street_line_1')->nullable();
-            $table->string('street_line_2');
+            $table->string('street_line_1');
+            $table->string('street_line_2')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

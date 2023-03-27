@@ -20,7 +20,7 @@ class Address extends ModelBase
      */
     protected $fillable = [
         'order_id',
-        'title',
+        'label',
         'first_name',
         'last_name',
         'street_line_1',
