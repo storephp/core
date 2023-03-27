@@ -3,12 +3,14 @@
 namespace OutMart\Services;
 
 use Exception;
+use OutMart\Contracts\ICondition;
 use OutMart\Contracts\Model\IFinalPrice;
 use OutMart\Enums\Baskets\Status;
 use OutMart\Exceptions\Baskets\QuoteExceedingLimitException;
 use OutMart\Exceptions\Baskets\QuoteTheMaxException;
 use OutMart\Models\Basket\Coupon;
 use OutMart\Models\Basket\Quote;
+use OutMart\PricingRules\Lay;
 use OutMart\Repositories\BasketRepository;
 use OutMart\Repositories\QuoteRepository;
 
@@ -250,7 +252,7 @@ class BasketService
     {
         $quotes = $this->currentBasket->quotes()->with('product')->get();
 
-        $total = 0;
+        $subTotal = 0;
 
         if ($quotes) {
             foreach ($quotes as $quote) {
@@ -258,11 +260,55 @@ class BasketService
                     throw new Exception("You must implement `\OutMart\Contracts\Model\IFinalPrice`");
                 }
 
-                $total += $quote->quantity * $quote->product?->final_price;
+                $subTotal += $quote->quantity * $quote->product?->final_price;
             }
         }
 
-        return $total;
+        $lay = new Lay;
+        $lay->setTotal($subTotal);
+
+        if (($coupon = $this->getCoupon()) && (!$this->getCoupon()->expired)) {
+            
+            $lay->rule(function ($attributes) use ($coupon) {
+
+                if ($coupon->condition) {
+                    $conditionObj = config('outmart.coupons.conditions.' . $coupon->condition, null);
+                    if ($conditionObj) {
+                        $condition = new $conditionObj(
+                            $attributes['total'],
+                            $this->quotes()->pluck('product_sku')->toArray(),
+                            $coupon->condition_data,
+                        );
+
+                        if (!$condition instanceof ICondition) {
+                            throw new Exception('You need to implement `ICondition` in condition class');
+                        }
+
+                        return $condition->handle();
+                    }
+                    return false;
+                }
+
+                return true;
+            }, function ($operations) use ($coupon) {
+                $total = $operations->getTotal();
+
+                if ($coupon->discount_type == 'percentage') {
+                    $discount = ($total * $coupon->discount_value) / 100;
+                    $total = $total - $discount;
+                }
+
+                if ($coupon->discount_type == 'fixed') {
+                    $total = $total - $coupon->discount_value;
+                }
+
+                $operations->setTotal($total);
+            });
+        }
+
+        $this->setDiscountTotal($subTotal - $lay->getTotal());
+
+        return $subTotal;
     }
 
     public function getTotal(): float

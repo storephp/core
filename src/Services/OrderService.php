@@ -24,6 +24,23 @@ class OrderService
 
         $orderData = $basket->prefaceOrder();
 
+        if (($coupon = $basket->getCoupon()) && (!$basket->getCoupon()->expired)) {
+            $orderData['discount_details'] = [
+                'discount_type' => 'coupon',
+                'coupon' => [
+                    'coupon_code' => $coupon->coupon_code,
+                    'discount_value' => $coupon->discount_value,
+                    'discount_value' => $coupon->discount_value,
+                    'condition' => $coupon->condition,
+                    'condition_data' => $coupon->condition_data,
+                    'start_at' => $coupon->start_at,
+                    'ends_at' => $coupon->ends_at,
+                ],
+            ];
+
+            $orderData['discount_total'] = $basket->getDiscountTotal();
+        }
+
         $orderData['customer_id'] = $customer->getData('id');
         $orderData['basket_id'] = $basket->prefaceOrder('basket')->id;
 
