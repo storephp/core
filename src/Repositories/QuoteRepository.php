@@ -32,6 +32,16 @@ class QuoteRepository
     }
 
     /**
+     * Get quotes list
+     * 
+     * @return \OutMart\Models\Basket\Quote
+     */
+    public function getList()
+    {
+        return $this->basket->quotes;
+    }
+
+    /**
      * Get quote by product sku
      *
      * @param mixed $productSku
@@ -85,5 +95,10 @@ class QuoteRepository
         if ($quote) {
             $quote->delete();
         }
+    }
+
+    public function basketHasQuote()
+    {
+        return $this->basket->quotes()->exists();
     }
 }
