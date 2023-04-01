@@ -10,13 +10,14 @@ use OutMart\Repositories\OrderRepository;
 class OrderService
 {
     private $order;
+    private $orderData;
 
     public function __construct(
         private OrderRepository $orderRepository,
         private OrderAddressRepository $orderAddressRepository,
     ) {}
 
-    public function placeOrder(BasketService $basket, CustomerService $customer)
+    public function initOrder(BasketService $basket, CustomerService $customer)
     {
         if (!$basket->canPlaceOrder()) {
             throw new Exception("can't place this order");
@@ -44,10 +45,8 @@ class OrderService
         $orderData['customer_id'] = $customer->getData('id');
         $orderData['basket_id'] = $basket->prefaceOrder('basket')->id;
 
-        $order = $this->orderRepository->create($orderData);
-        $basket->prefaceOrder('basket')->status = Status::ORDERED();
-        $basket->prefaceOrder('basket')->save();
-        $this->order = $order;
+        $this->basket = $basket;
+        $this->orderData = $orderData;
 
         return $this;
     }
@@ -81,6 +80,14 @@ class OrderService
         ];
 
         return $this->orderAddressRepository->create($address);
+    }
+
+    public function placeOrder()
+    {
+        $order = $this->orderRepository->create($this->orderData);
+        $this->basket->prefaceOrder('basket')->status = Status::ORDERED();
+        $this->basket->prefaceOrder('basket')->save();
+        return $order;
     }
 
     /**
