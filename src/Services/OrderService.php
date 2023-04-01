@@ -4,13 +4,14 @@ namespace OutMart\Services;
 
 use Exception;
 use OutMart\Enums\Baskets\Status;
+use OutMart\Models\Order\Status as OrderStatus;
 use OutMart\Repositories\OrderAddressRepository;
 use OutMart\Repositories\OrderRepository;
 
 class OrderService
 {
-    private $order;
     private $orderData;
+    private $orderDataCreated;
 
     public function __construct(
         private OrderRepository $orderRepository,
@@ -65,7 +66,7 @@ class OrderService
         string $street_line_2 = null,
     ) {
         $address = [
-            'order_id' => $this->order->id,
+            'order_id' => $this->orderData->id,
             'label' => $label,
             'first_name' => $first_name,
             'last_name' => $last_name,
@@ -84,10 +85,11 @@ class OrderService
 
     public function placeOrder()
     {
-        $order = $this->orderRepository->create($this->orderData);
+        $this->orderDataCreated = $this->orderRepository->create($this->orderData);
         $this->basket->prefaceOrder('basket')->status = Status::ORDERED();
         $this->basket->prefaceOrder('basket')->save();
-        return $order;
+
+        return $this;
     }
 
     /**
@@ -95,7 +97,7 @@ class OrderService
      */
     public function getOrder()
     {
-        return $this->order;
+        return $this->orderDataCreated;
     }
 
     public function revert($id)
@@ -105,6 +107,16 @@ class OrderService
         if ($order) {
             $order->basket->status = Status::OPENED();
             $order->basket->save();
+        }
+    }
+
+    public function updateStatus($statusKey)
+    {
+        $status = OrderStatus::where('status_key', $statusKey)->first();
+
+        if ($status) {
+            $this->orderDataCreated->status_id = $status->id;
+            $this->orderDataCreated->save();
         }
     }
 }
