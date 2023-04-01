@@ -36,6 +36,7 @@ class Product extends ModelBase implements IFinalPrice
         'price',
         'discount_price',
         'thumbnail_path',
+        'status',
     ];
 
     /**
