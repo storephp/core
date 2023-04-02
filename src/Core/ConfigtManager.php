@@ -38,12 +38,16 @@ class ConfigtManager
     public function set($path, $value)
     {
         if ($config = ModelConfig::where('store_view_id', $this->getStoreViewId())->where('path', $path)->first()) {
+            $config->value = $value;
+            $config->save();
             return $config->value;
         }
 
-        if ($config = ModelConfig::whereNull('store_view_id')->where('path', $path)->first()) {
-            return $config->value;
-        }
+        // if ($config = ModelConfig::whereNull('store_view_id')->where('path', $path)->first()) {
+        //     $config->value = $value;
+        //     $config->save();
+        //     return $config->value;
+        // }
 
         $config = ModelConfig::create([
             'store_view_id' => $this->getStoreViewId(),
