@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Exceptions\Baskets;
+namespace Basketin\Exceptions\Baskets;
 
 use Exception;
 

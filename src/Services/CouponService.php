@@ -1,9 +1,9 @@
 <?php
 
-namespace OutMart\Services;
+namespace Basketin\Services;
 
-use OutMart\Repositories\CouponRepository;
-use OutMart\Services\Exceptions\Coupon\CouponAlreadyExists;
+use Basketin\Repositories\CouponRepository;
+use Basketin\Services\Exceptions\Coupon\CouponAlreadyExists;
 
 class CouponService
 {

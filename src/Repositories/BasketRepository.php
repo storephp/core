@@ -1,10 +1,10 @@
 <?php
 
-namespace OutMart\Repositories;
+namespace Basketin\Repositories;
 
 use Illuminate\Support\Str;
-use OutMart\Enums\Baskets\Status;
-use OutMart\Models\Basket;
+use Basketin\Enums\Baskets\Status;
+use Basketin\Models\Basket;
 
 class BasketRepository
 {
@@ -25,7 +25,7 @@ class BasketRepository
      * 
      * @param string $currency
      * 
-     * @return \OutMart\Models\Basket
+     * @return \Basketin\Models\Basket
      */
     public function createNewBasket(string $currency)
     {
@@ -40,7 +40,7 @@ class BasketRepository
      * 
      * @param string $ulid
      * 
-     * @return \OutMart\Models\Basket
+     * @return \Basketin\Models\Basket
      */
     public function getAvailableBasket($ulid = null)
     {

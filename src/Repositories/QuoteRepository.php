@@ -1,9 +1,9 @@
 <?php
 
-namespace OutMart\Repositories;
+namespace Basketin\Repositories;
 
-use OutMart\Models\Basket;
-use OutMart\Models\Basket\Quote;
+use Basketin\Models\Basket;
+use Basketin\Models\Basket\Quote;
 
 class QuoteRepository
 {
@@ -24,7 +24,7 @@ class QuoteRepository
      *
      * @param array $data
      *
-     * @return \OutMart\Models\Basket\Quote
+     * @return \Basketin\Models\Basket\Quote
      */
     public function create(array $data)
     {
@@ -34,7 +34,7 @@ class QuoteRepository
     /**
      * Get quotes list
      * 
-     * @return \OutMart\Models\Basket\Quote
+     * @return \Basketin\Models\Basket\Quote
      */
     public function getList()
     {
@@ -46,7 +46,7 @@ class QuoteRepository
      *
      * @param mixed $productSku
      *
-     * @return \OutMart\Models\Basket\Quote
+     * @return \Basketin\Models\Basket\Quote
      */
     public function getQuoteByProductSku(mixed $productSku)
     {
@@ -63,7 +63,7 @@ class QuoteRepository
      * @param Quote $quote
      * @param int $quantity
      *
-     * @return \OutMart\Models\Basket\Quote
+     * @return \Basketin\Models\Basket\Quote
      */
     public function increase(Quote $quote, int $quantity): Quote
     {
@@ -77,7 +77,7 @@ class QuoteRepository
      * @param Quote $quote
      * @param int $quantity
      *
-     * @return \OutMart\Models\Basket\Quote
+     * @return \Basketin\Models\Basket\Quote
      */
     public function decrease(Quote $quote, int $quantity): bool | Quote
     {

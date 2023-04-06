@@ -1,11 +1,11 @@
 <?php
 
-namespace OutMart\Models\Product;
+namespace Basketin\Models\Product;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
-use OutMart\Base\ModelBase;
-use OutMart\Models\Traits\HasEntry;
+use Basketin\Base\ModelBase;
+use Basketin\Models\Traits\HasEntry;
 
 class Category extends ModelBase
 {

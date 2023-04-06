@@ -1,10 +1,10 @@
 <?php
 
-namespace OutMart\Tests;
+namespace Basketin\Tests;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use OutMart\OutMartServiceProvider;
-use OutMart\Tests\Core\TestOutMartServiceProvider;
+use Basketin\BasketinServiceProvider;
+use Basketin\Tests\Core\TestBasketinServiceProvider;
 
 class TestCase extends BaseTestCase
 {
@@ -19,8 +19,8 @@ class TestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            TestOutMartServiceProvider::class,
-            OutMartServiceProvider::class,
+            TestBasketinServiceProvider::class,
+            BasketinServiceProvider::class,
         ];
     }
 

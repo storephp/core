@@ -1,8 +1,8 @@
 <?php
 
-namespace OutMart\Models\Product;
+namespace Basketin\Models\Product;
 
-use OutMart\Base\ModelBase;
+use Basketin\Base\ModelBase;
 
 class CategoryEntry extends ModelBase
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace OutMart\Traits\Customer;
+namespace Basketin\Traits\Customer;
 
 use Exception;
 use Illuminate\Support\Str;
-use OutMart\Models\Basket;
-use OutMart\Enums\Baskets\Status;
-use OutMart\Models\Customer;
+use Basketin\Models\Basket;
+use Basketin\Enums\Baskets\Status;
+use Basketin\Models\Customer;
 
 trait WithBasket
 {
@@ -31,7 +31,7 @@ trait WithBasket
             ->first();
 
         if ($assignBasket) {
-            $assignBasket->customer_type = config('outmart.customers.model', Customer::class);
+            $assignBasket->customer_type = config('basketin.customers.model', Customer::class);
             $assignBasket->customer_id = $this->id;
             $assignBasket->save();
             return $assignBasket;

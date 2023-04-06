@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use OutMart\Base\MigrationBase;
+use Basketin\Base\MigrationBase;
 
 return new class extends MigrationBase
-
 {
     /**
      * Run the migrations.
@@ -14,11 +13,10 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'basket_quotes', function (Blueprint $table) {
+        Schema::create($this->prefix . 'catalog_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('basket_id')->constrained($this->prefix . 'baskets')->cascadeOnDelete();
-            $table->foreignId('product_sku');
-            $table->unsignedInteger('quantity')->default(1);
+            $table->foreignId('parent_id')->nullable()->constrained($this->prefix . 'catalog_categories')->cascadeOnDelete();
+            $table->string('slug')->index();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'basket_quotes');
+        Schema::dropIfExists($this->prefix . 'catalog_categories');
     }
 };

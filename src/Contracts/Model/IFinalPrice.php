@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Contracts\Model;
+namespace Basketin\Contracts\Model;
 
 interface IFinalPrice
 {

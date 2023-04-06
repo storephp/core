@@ -1,8 +1,8 @@
 <?php
 
-namespace OutMart\Models\Store;
+namespace Basketin\Models\Store;
 
-use OutMart\Base\ModelBase;
+use Basketin\Base\ModelBase;
 
 class View extends ModelBase
 {

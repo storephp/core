@@ -1,8 +1,8 @@
 <?php
 
-namespace OutMart\Traits\Customer\Initialize;
+namespace Basketin\Traits\Customer\Initialize;
 
-use OutMart\Models\Customer\Address;
+use Basketin\Models\Customer\Address;
 
 trait WithAddresses
 {

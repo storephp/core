@@ -1,9 +1,9 @@
 <?php
 
-namespace OutMart\Models;
+namespace Basketin\Models;
 
-use OutMart\Base\ModelBase;
-use OutMart\Models\Store\View;
+use Basketin\Base\ModelBase;
+use Basketin\Models\Store\View;
 
 class Store extends ModelBase
 {

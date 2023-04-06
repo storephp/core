@@ -1,12 +1,11 @@
 {
-    "name": "outmart/core",
+    "name": "basketin/core",
     "description": "eCommerce Core to help you build your eCommerce based on laravel.",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "laravel",
         "ecommerce",
-        "outmart",
         "customers",
         "baskets",
         "modules"
@@ -30,12 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "OutMart\\": "src/"
+            "Basketin\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "OutMart\\Tests\\": "tests/"
+            "Basketin\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -47,8 +46,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "OutMart\\OutMartServiceProvider",
-                "OutMart\\Providers\\EventServiceProvider"
+                "Basketin\\BasketinServiceProvider",
+                "Basketin\\Providers\\EventServiceProvider"
             ]
         }
     },

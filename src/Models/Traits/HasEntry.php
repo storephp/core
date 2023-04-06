@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Models\Traits;
+namespace Basketin\Models\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Pharaonic\Laravel\Helpers\Traits\HasCustomAttributes;

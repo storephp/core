@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Base;
+namespace Basketin\Base;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +15,6 @@ abstract class ModelBase extends Model
     {
         parent::__construct($attributes);
 
-        $this->setTable(config('outmart.database.table_prefix') . $this->getTable());
+        $this->setTable(config('basketin.database.table_prefix') . $this->getTable());
     }
 }

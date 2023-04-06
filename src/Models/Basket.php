@@ -1,15 +1,15 @@
 <?php
 
-namespace OutMart\Models;
+namespace Basketin\Models;
 
 use Illuminate\Support\Str;
-use OutMart\Base\ModelBase;
-use OutMart\Events\Basket\BasketCreated;
-use OutMart\Events\Basket\BasketCreating;
-use OutMart\Events\Basket\BasketUpdated;
-use OutMart\Events\Basket\BasketUpdating;
-use OutMart\Models\Basket\Coupon;
-use OutMart\Models\Basket\Quote;
+use Basketin\Base\ModelBase;
+use Basketin\Events\Basket\BasketCreated;
+use Basketin\Events\Basket\BasketCreating;
+use Basketin\Events\Basket\BasketUpdated;
+use Basketin\Events\Basket\BasketUpdating;
+use Basketin\Models\Basket\Coupon;
+use Basketin\Models\Basket\Quote;
 
 class Basket extends ModelBase
 {
@@ -177,7 +177,7 @@ class Basket extends ModelBase
     //     if ($quotes) {
     //         foreach ($quotes as $quote) {
     //             if (!$quote->product instanceof IFinalPrice) {
-    //                 throw new Exception("You must implement `\OutMart\Contracts\Model\IFinalPrice`");
+    //                 throw new Exception("You must implement `\Basketin\Contracts\Model\IFinalPrice`");
     //             }
 
     //             $total += $quote->quantity * $quote->product?->final_price;
@@ -208,7 +208,7 @@ class Basket extends ModelBase
 
     //             //
     //             if ($coupon->condition) {
-    //                 $conditionObj = config('outmart.coupons.conditions.' . $coupon->condition, null);
+    //                 $conditionObj = config('basketin.coupons.conditions.' . $coupon->condition, null);
     //                 if ($conditionObj) {
     //                     $condition = new $conditionObj(
     //                         $attributes['total'],

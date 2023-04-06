@@ -1,19 +1,19 @@
 <?php
 
-namespace OutMart\Traits\User;
+namespace Basketin\Traits\User;
 
-use OutMart\Models\Customer;
+use Basketin\Models\Customer;
 
 trait IsCustomer
 {
     public function customers()
     {
-        return $this->morphMany(config('outmart.customers.model', Customer::class), 'customerable');
+        return $this->morphMany(config('basketin.customers.model', Customer::class), 'customerable');
     }
 
     public function customer()
     {
-        return $this->morphOne(config('outmart.customers.model', Customer::class), 'customerable');
+        return $this->morphOne(config('basketin.customers.model', Customer::class), 'customerable');
     }
 
     public function signCustomer(array $metadata = null)

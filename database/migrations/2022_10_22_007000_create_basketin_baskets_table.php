@@ -1,11 +1,10 @@
 <?php
 
+use Basketin\Base\MigrationBase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use OutMart\Base\MigrationBase;
 
 return new class extends MigrationBase
-
 {
     /**
      * Run the migrations.
@@ -19,6 +18,7 @@ return new class extends MigrationBase
             $table->ulid('ulid')->unique()->index();
             $table->nullablemorphs('customer');
             $table->string('currency', 3);
+            $table->string('coupon_code')->nullable();
             $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });

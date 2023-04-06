@@ -1,8 +1,8 @@
 <?php
 
-namespace OutMart\Models\Order;
+namespace Basketin\Models\Order;
 
-use OutMart\Base\ModelBase;
+use Basketin\Base\ModelBase;
 
 class Address extends ModelBase
 {

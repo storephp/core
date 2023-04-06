@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use OutMart\Base\MigrationBase;
+use Basketin\Base\MigrationBase;
 
 return new class extends MigrationBase
 {
@@ -13,11 +13,12 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'order_states', function (Blueprint $table) {
+        Schema::create($this->prefix . 'customer_channels', function (Blueprint $table) {
             $table->id();
-            $table->string('state_key')->unique()->index();
-            $table->string('state_label')->unique();
+            $table->string('name');
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'order_states');
+        Schema::dropIfExists($this->prefix . 'customer_channels');
     }
 };

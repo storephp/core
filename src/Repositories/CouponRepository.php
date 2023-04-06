@@ -1,8 +1,8 @@
 <?php
 
-namespace OutMart\Repositories;
+namespace Basketin\Repositories;
 
-use OutMart\Models\Basket\Coupon;
+use Basketin\Models\Basket\Coupon;
 
 class CouponRepository
 {

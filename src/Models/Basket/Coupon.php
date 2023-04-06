@@ -1,8 +1,8 @@
 <?php
 
-namespace OutMart\Models\Basket;
+namespace Basketin\Models\Basket;
 
-use OutMart\Base\ModelBase;
+use Basketin\Base\ModelBase;
 
 class Coupon extends ModelBase
 {

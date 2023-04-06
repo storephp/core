@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use OutMart\Base\MigrationBase;
+use Basketin\Base\MigrationBase;
 
 return new class extends MigrationBase
 {
@@ -13,11 +13,10 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'order_statuses', function (Blueprint $table) {
+        Schema::create($this->prefix . 'order_states', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('state_id')->nullable()->constrained($this->prefix . 'order_states')->nullOnDelete();
-            $table->string('status_key')->unique()->index();
-            $table->string('status_label')->unique();
+            $table->string('state_key')->unique()->index();
+            $table->string('state_label')->unique();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'order_statuses');
+        Schema::dropIfExists($this->prefix . 'order_states');
     }
 };

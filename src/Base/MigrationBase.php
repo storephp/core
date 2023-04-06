@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Base;
+namespace Basketin\Base;
 
 use Illuminate\Database\Migrations\Migration;
 
@@ -18,6 +18,6 @@ abstract class MigrationBase extends Migration
      */
     public function __construct()
     {
-        $this->prefix = config('outmart.database.table_prefix');
+        $this->prefix = config('basketin.database.table_prefix');
     }
 }

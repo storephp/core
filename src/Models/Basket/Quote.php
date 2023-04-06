@@ -1,13 +1,13 @@
 <?php
 
-namespace OutMart\Models\Basket;
+namespace Basketin\Models\Basket;
 
 use Exception;
-use OutMart\Base\ModelBase;
-use OutMart\DataType\ProductSku;
-use OutMart\Events\Basket\Quote\QuoteIncrease;
-use OutMart\Exceptions\Baskets\QuoteExceedingLimitException;
-use OutMart\Exceptions\Baskets\QuoteTheMaxException;
+use Basketin\Base\ModelBase;
+use Basketin\DataType\ProductSku;
+use Basketin\Events\Basket\Quote\QuoteIncrease;
+use Basketin\Exceptions\Baskets\QuoteExceedingLimitException;
+use Basketin\Exceptions\Baskets\QuoteTheMaxException;
 
 class Quote extends ModelBase
 {
@@ -45,6 +45,6 @@ class Quote extends ModelBase
      */
     public function product()
     {
-        return $this->hasOne(config('outmart.baskets.product_relation.model'), config('outmart.baskets.product_relation.foreign_key'), 'product_sku');
+        return $this->hasOne(config('basketin.baskets.product_relation.model'), config('basketin.baskets.product_relation.foreign_key'), 'product_sku');
     }
 }

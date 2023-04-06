@@ -1,9 +1,9 @@
 <?php
 
-namespace OutMart\Events\Basket;
+namespace Basketin\Events\Basket;
 
 use Illuminate\Foundation\Events\Dispatchable;
-use OutMart\Models\Basket;
+use Basketin\Models\Basket;
 
 class BasketUpdating
 {

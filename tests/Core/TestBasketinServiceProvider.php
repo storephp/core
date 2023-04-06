@@ -1,10 +1,10 @@
 <?php
 
-namespace OutMart\Tests\Core;
+namespace Basketin\Tests\Core;
 
 use Illuminate\Support\ServiceProvider;
 
-class TestOutMartServiceProvider extends ServiceProvider
+class TestBasketinServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

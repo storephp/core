@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use OutMart\Base\MigrationBase;
+use Basketin\Base\MigrationBase;
 
 return new class extends MigrationBase
 {
@@ -13,12 +13,12 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'core_configs', function (Blueprint $table) {
+        Schema::create($this->prefix . 'catalog_product_entries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_view_id')->nullable()->constrained($this->prefix . 'store_views')->cascadeOnDelete();
-            $table->string('path')->index();
-            $table->string('value');
-            $table->unique(['store_view_id', 'path']);
+            $table->foreignId('product_id')->nullable()->constrained($this->prefix . 'catalog_products')->cascadeOnDelete();
+            $table->string('entry_key')->index();
+            $table->json('entry_value');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'core_configs');
+        Schema::dropIfExists($this->prefix . 'catalog_product_entries');
     }
 };

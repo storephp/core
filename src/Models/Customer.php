@@ -1,10 +1,10 @@
 <?php
 
-namespace OutMart\Models;
+namespace Basketin\Models;
 
-use OutMart\Base\ModelBase;
-use OutMart\Models\Customer\Address;
-use OutMart\Models\Customer\CustomerChannel;
+use Basketin\Base\ModelBase;
+use Basketin\Models\Customer\Address;
+use Basketin\Models\Customer\CustomerChannel;
 
 class Customer extends ModelBase
 {

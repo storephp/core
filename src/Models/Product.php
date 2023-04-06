@@ -1,12 +1,12 @@
 <?php
 
-namespace OutMart\Models;
+namespace Basketin\Models;
 
-use OutMart\Base\ModelBase;
-use OutMart\Contracts\Model\IFinalPrice;
-use OutMart\Models\Product\Category;
-use OutMart\Models\Product\Entry;
-use OutMart\Models\Traits\HasEntry;
+use Basketin\Base\ModelBase;
+use Basketin\Contracts\Model\IFinalPrice;
+use Basketin\Models\Product\Category;
+use Basketin\Models\Product\Entry;
+use Basketin\Models\Traits\HasEntry;
 
 class Product extends ModelBase implements IFinalPrice
 {
@@ -64,7 +64,7 @@ class Product extends ModelBase implements IFinalPrice
 
     protected function fillableEntry()
     {
-        return array_merge($this->fillableEntry, config('outmart.catalog.products.external_fillable_entry'));
+        return array_merge($this->fillableEntry, config('basketin.catalog.products.external_fillable_entry'));
     }
 
     public function getFinalPriceAttribute(): float

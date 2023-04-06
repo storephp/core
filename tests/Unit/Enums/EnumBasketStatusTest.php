@@ -2,7 +2,7 @@
 
 declare (strict_types = 1);
 
-use OutMart\Enums\Baskets\Status;
+use Basketin\Enums\Baskets\Status;
 
 test('test status opened', function () {
     $this->assertEquals(Status::OPENED(), 1);

@@ -1,10 +1,10 @@
 <?php
 
-namespace OutMart\Models\Product;
+namespace Basketin\Models\Product;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
-use OutMart\Base\ModelBase;
+use Basketin\Base\ModelBase;
 
 class Entry extends ModelBase
 {

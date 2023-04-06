@@ -1,25 +1,25 @@
 <?php
 
-namespace OutMart;
+namespace Basketin;
 
+use Basketin\Core\ConfigtManager;
+use Basketin\Models\Customer;
+use Basketin\Models\Order;
+use Basketin\Models\Order\Address;
+use Basketin\Repositories\BasketRepository;
+use Basketin\Repositories\CouponRepository;
+use Basketin\Repositories\CustomerRepository;
+use Basketin\Repositories\OrderAddressRepository;
+use Basketin\Repositories\OrderRepository;
+use Basketin\Repositories\ProductRepositorie;
+use Basketin\Repositories\QuoteRepository;
+use Basketin\Services\BasketService;
+use Basketin\Services\CouponService;
+use Basketin\Services\CustomerService;
+use Basketin\Services\OrderService;
 use Illuminate\Support\ServiceProvider;
-use OutMart\Core\ConfigtManager;
-use OutMart\Models\Customer;
-use OutMart\Models\Order;
-use OutMart\Models\Order\Address;
-use OutMart\Repositories\BasketRepository;
-use OutMart\Repositories\CouponRepository;
-use OutMart\Repositories\CustomerRepository;
-use OutMart\Repositories\OrderAddressRepository;
-use OutMart\Repositories\OrderRepository;
-use OutMart\Repositories\ProductRepositorie;
-use OutMart\Repositories\QuoteRepository;
-use OutMart\Services\BasketService;
-use OutMart\Services\CouponService;
-use OutMart\Services\CustomerService;
-use OutMart\Services\OrderService;
 
-class OutMartServiceProvider extends ServiceProvider
+class BasketinServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -28,7 +28,7 @@ class OutMartServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/outmart.php', 'outmart');
+        $this->mergeConfigFrom(__DIR__ . '/../config/basketin.php', 'basketin');
 
         $this->app->singleton('configuration', function () {
             return new ConfigtManager();
@@ -82,8 +82,8 @@ class OutMartServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
             $this->publishes([
-                __DIR__ . '/../config/outmart.php' => config_path('outmart.php'),
-            ], ['outmart', 'outmart-config']);
+                __DIR__ . '/../config/basketin.php' => config_path('basketin.php'),
+            ], ['basketin', 'basketin-config']);
         }
     }
 }

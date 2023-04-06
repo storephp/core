@@ -1,8 +1,8 @@
 <?php
 
-namespace OutMart\Repositories;
+namespace Basketin\Repositories;
 
-use OutMart\Models\Order\Address;
+use Basketin\Models\Order\Address;
 
 class OrderAddressRepository
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Traits\Customer;
+namespace Basketin\Traits\Customer;
 
 trait FormatCustomerData
 {

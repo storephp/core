@@ -1,8 +1,8 @@
 <?php
 
-namespace OutMart\Repositories;
+namespace Basketin\Repositories;
 
-use OutMart\Models\Customer;
+use Basketin\Models\Customer;
 
 class CustomerRepository
 {

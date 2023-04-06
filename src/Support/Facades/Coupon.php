@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Support\Facades;
+namespace Basketin\Support\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

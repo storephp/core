@@ -3,11 +3,11 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | OutMart configs
+    | Basketin configs
     |--------------------------------------------------------------------------
      */
     'database' => [
-        'table_prefix' => 'outmart_',
+        'table_prefix' => 'basketin_',
     ],
 
     /*
@@ -20,7 +20,7 @@ return [
 
         'product_relation' => [
             'foreign_key' => 'sku',
-            'model' => \OutMart\Models\Product::class,
+            'model' => \Basketin\Models\Product::class,
         ],
 
         'observers' => null,
@@ -36,7 +36,7 @@ return [
     |--------------------------------------------------------------------------
      */
     'customers' => [
-        'model' => \OutMart\Models\Customer::class,
+        'model' => \Basketin\Models\Customer::class,
         'observers' => null,
     ],
 
@@ -58,7 +58,7 @@ return [
      */
     'catalog' => [
         'products' => [
-            'model' => \OutMart\Models\Product::class,
+            'model' => \Basketin\Models\Product::class,
             'external_fillable_entry' => [],
         ],
     ],

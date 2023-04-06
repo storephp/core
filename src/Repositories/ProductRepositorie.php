@@ -1,6 +1,6 @@
 <?php
 
-namespace OutMart\Repositories;
+namespace Basketin\Repositories;
 
 class ProductRepositorie
 {
@@ -8,7 +8,7 @@ class ProductRepositorie
 
     public function __construct()
     {
-        $this->model = config('outmart.catalog.products.model');
+        $this->model = config('basketin.catalog.products.model');
     }
 
     public function all()
