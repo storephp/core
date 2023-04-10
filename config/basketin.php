@@ -71,7 +71,11 @@ return [
     'core' => [
         'config' => [
             //
-            'currency' => 'USD'
+            'currency' => 'USD',
+        ],
+
+        'commands' => [
+            'installing' => [],
         ],
     ],
 ];
