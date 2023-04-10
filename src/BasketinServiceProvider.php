@@ -2,6 +2,8 @@
 
 namespace Basketin;
 
+use Basketin\Console\FillStateStatusOrders;
+use Basketin\Console\SetupBasketin;
 use Basketin\Core\ConfigtManager;
 use Basketin\Models\Customer;
 use Basketin\Models\Order;
@@ -17,10 +19,13 @@ use Basketin\Services\BasketService;
 use Basketin\Services\CouponService;
 use Basketin\Services\CustomerService;
 use Basketin\Services\OrderService;
+use Basketin\Support\Traits\HasSetupBasketin;
 use Illuminate\Support\ServiceProvider;
 
 class BasketinServiceProvider extends ServiceProvider
 {
+    use HasSetupBasketin;
+
     /**
      * Register services.
      *
@@ -79,11 +84,18 @@ class BasketinServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->runningInConsole()) {
+
+            $this->appendCommandToSetup(FillStateStatusOrders::class);
+
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
             $this->publishes([
                 __DIR__ . '/../config/basketin.php' => config_path('basketin.php'),
             ], ['basketin', 'basketin-config']);
+
+            $this->commands([
+                SetupBasketin::class,
+            ]);
         }
     }
 }
