@@ -37,4 +37,9 @@ class Attribute extends ModelBase
     {
         return $this->hasOne(Value::class, 'attribute_id', 'id');
     }
+
+    public function values()
+    {
+        return $this->hasMany(Value::class, 'attribute_id', 'id');
+    }
 }

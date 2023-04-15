@@ -2,6 +2,7 @@
 
 namespace Basketin\EAV\Traits;
 
+use Basketin\EAV\Contracts\IStoreView;
 use Basketin\Models\EAV\Entity;
 use Basketin\Models\EAV\Model;
 
@@ -48,12 +49,24 @@ trait HasEAV
     public function getEntities($key)
     {
         if (!$this->outAttributes) {
-            $model = $this->eavModel()->with(['attributes', 'attributes.entity', 'attributes.value'])->first()->toArray();
+            $model = $this->eavModel()->with([
+                'attributes',
+                'attributes.entity',
+                'attributes.values' => function ($q) {
+                    if ($this instanceof IStoreView) {
+                        $q->where('store_view_id', '=', $this->getStoreViewId())
+                            ->orWhereNull('store_view_id')
+                            ->orderBy('store_view_id', 'DESC');
+                    } else {
+                        $q->whereNull('store_view_id');
+                    }
+                },
+            ])->first()->toArray();
 
             $outAttributes = [];
 
             foreach ($model['attributes'] as $attribute) {
-                $outAttributes[$attribute['entity']['entity_key']] = $attribute['value']['attribute_value'] ?? null;
+                $outAttributes[$attribute['entity']['entity_key']] = $attribute['values'][0]['attribute_value'] ?? null;
             }
 
             $this->outAttributes = $outAttributes;
@@ -91,13 +104,27 @@ trait HasEAV
             ]);
         }
 
-        if ($_value = $attribute->value()->where('attribute_id', $attribute->id)->first()) {
+        if (
+            !$_value = $attribute->value()
+            ->whereNull('store_view_id')
+            ->where('attribute_id', $attribute->id)
+            ->where('attribute_value', $value)
+            ->first()
+        ) {
+            $_value = $attribute->value()
+                ->where('attribute_id', $attribute->id)
+                ->where('store_view_id', '=', $this->getStoreViewId())
+                ->first();
+        }
+
+        if ($_value) {
             if ($_value->attribute_value != $value) {
                 $_value->attribute_value = $value;
                 $_value->save();
             }
         } else {
             $attribute->value()->create([
+                'store_view_id' => ($this instanceof IStoreView) ? $this->getStoreViewId() : null,
                 'attribute_value' => $value,
             ]);
         }
