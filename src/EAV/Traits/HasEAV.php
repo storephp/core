@@ -61,12 +61,14 @@ trait HasEAV
                         $q->whereNull('store_view_id');
                     }
                 },
-            ])->first()->toArray();
+            ])->first()?->toArray();
 
             $outAttributes = [];
 
-            foreach ($model['attributes'] as $attribute) {
-                $outAttributes[$attribute['entity']['entity_key']] = $attribute['values'][0]['attribute_value'] ?? null;
+            if (!empty($model['attributes'])) {
+                foreach ($model['attributes'] as $attribute) {
+                    $outAttributes[$attribute['entity']['entity_key']] = $attribute['values'][0]['attribute_value'] ?? null;
+                }
             }
 
             $this->outAttributes = $outAttributes;

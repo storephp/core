@@ -11,6 +11,11 @@ class ProductRepositorie
         $this->model = config('basketin.catalog.products.model');
     }
 
+    public function configurableOnly()
+    {
+        return $this->model::configurableOnly(); 
+    }
+
     public function all()
     {
         return $this->model::all();

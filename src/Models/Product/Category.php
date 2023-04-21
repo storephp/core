@@ -2,14 +2,16 @@
 
 namespace Basketin\Models\Product;
 
+use Basketin\Base\ModelBase;
+use Basketin\EAV\Traits\HasEAV;
+use Basketin\EAV\Traits\HasStoreView;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
-use Basketin\Base\ModelBase;
-use Basketin\Models\Traits\HasEntry;
 
 class Category extends ModelBase
 {
-    use HasEntry;
+    // use HasEntry;
+    use HasEAV, HasStoreView;
 
     /**
      * The table associated with the model.
@@ -28,7 +30,7 @@ class Category extends ModelBase
         'slug',
     ];
 
-    protected $fillableEntry = [
+    protected $fillableEntities = [
         'name',
     ];
 
@@ -67,10 +69,5 @@ class Category extends ModelBase
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
-    }
-
-    public function entries()
-    {
-        return $this->hasMany(CategoryEntry::class, 'category_id', 'id');
     }
 }
