@@ -4,12 +4,12 @@ namespace Basketin\Models;
 
 use Basketin\Base\ModelBase;
 use Basketin\Contracts\Model\IFinalPrice;
-use Basketin\EAV\Contracts\IStoreView;
+use Basketin\EAV\Contracts\MultipleStoreViews;
 use Basketin\EAV\Traits\HasEAV;
 use Basketin\EAV\Traits\HasStoreView;
 use Basketin\Models\Product\Category;
 
-class Product extends ModelBase implements IFinalPrice, IStoreView
+class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
 {
     // use HasEntry;
     use HasEAV, HasStoreView;

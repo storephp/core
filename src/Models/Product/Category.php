@@ -3,14 +3,14 @@
 namespace Basketin\Models\Product;
 
 use Basketin\Base\ModelBase;
+use Basketin\EAV\Contracts\MultipleStoreViews;
 use Basketin\EAV\Traits\HasEAV;
 use Basketin\EAV\Traits\HasStoreView;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 
-class Category extends ModelBase
+class Category extends ModelBase implements MultipleStoreViews
 {
-    // use HasEntry;
     use HasEAV, HasStoreView;
 
     /**

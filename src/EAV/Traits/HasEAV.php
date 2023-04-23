@@ -3,6 +3,7 @@
 namespace Basketin\EAV\Traits;
 
 use Basketin\EAV\Contracts\IStoreView;
+use Basketin\EAV\Contracts\MultipleStoreViews;
 use Basketin\Models\EAV\Entity;
 use Basketin\Models\EAV\Model;
 
@@ -50,10 +51,9 @@ trait HasEAV
     {
         if (!$this->outAttributes) {
             $model = $this->eavModel()->with([
-                'attributes',
                 'attributes.entity',
                 'attributes.values' => function ($q) {
-                    if ($this instanceof IStoreView) {
+                    if ($this instanceof MultipleStoreViews) {
                         $q->where('store_view_id', '=', $this->getStoreViewId())
                             ->orWhereNull('store_view_id')
                             ->orderBy('store_view_id', 'DESC');
@@ -126,7 +126,7 @@ trait HasEAV
             }
         } else {
             $attribute->value()->create([
-                'store_view_id' => ($this instanceof IStoreView) ? $this->getStoreViewId() : null,
+                'store_view_id' => ($this instanceof MultipleStoreViews) ? $this->getStoreViewId() : null,
                 'attribute_value' => $value,
             ]);
         }

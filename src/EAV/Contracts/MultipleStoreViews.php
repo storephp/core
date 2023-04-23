@@ -2,7 +2,7 @@
 
 namespace Basketin\EAV\Contracts;
 
-interface IStoreView
+interface MultipleStoreViews
 {
     /**
      * Get the value of storeViewId
