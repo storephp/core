@@ -2,7 +2,6 @@
 
 namespace Basketin\EAV\Traits;
 
-use Basketin\EAV\Contracts\IStoreView;
 use Basketin\EAV\Contracts\MultipleStoreViews;
 use Basketin\Models\EAV\Entity;
 use Basketin\Models\EAV\Model;
@@ -154,6 +153,20 @@ trait HasEAV
         }
 
         return parent::setAttribute($key, $value);
+    }
+
+    /**
+     * Set attributes by object
+     *
+     * @param array $attributes
+     */
+    public function setAttributes(array $attributes = [])
+    {
+        foreach ($attributes as $key => $value) {
+            $this->{$key} = $value;
+        }
+
+        $this->save();
     }
 
     public function eavModel()
