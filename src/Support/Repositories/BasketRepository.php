@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Repositories;
+namespace Basketin\Support\Repositories;
 
 use Illuminate\Support\Str;
 use Basketin\Enums\Baskets\Status;

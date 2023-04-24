@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Repositories;
+namespace Basketin\Support\Repositories;
 
 use Basketin\Models\Basket;
 use Basketin\Models\Basket\Quote;
@@ -33,7 +33,7 @@ class QuoteRepository
 
     /**
      * Get quotes list
-     * 
+     *
      * @return \Basketin\Models\Basket\Quote
      */
     public function getList()
@@ -87,14 +87,17 @@ class QuoteRepository
 
     /**
      * Delete quote
-     * 
+     *
      * @param Quote $quote
      */
     public function delete(Quote $quote)
     {
         if ($quote) {
             $quote->delete();
+            return true;
         }
+
+        return false;
     }
 
     public function basketHasQuote()

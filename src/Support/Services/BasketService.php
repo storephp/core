@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Services;
+namespace Basketin\Support\Services;
 
 use Basketin\Contracts\ICondition;
 use Basketin\Contracts\Model\IFinalPrice;
@@ -9,8 +9,8 @@ use Basketin\Exceptions\Baskets\QuoteExceedingLimitException;
 use Basketin\Exceptions\Baskets\QuoteTheMaxException;
 use Basketin\Models\Basket\Coupon;
 use Basketin\Models\Basket\Quote;
-use Basketin\Repositories\BasketRepository;
-use Basketin\Repositories\QuoteRepository;
+use Basketin\Support\Repositories\BasketRepository;
+use Basketin\Support\Repositories\QuoteRepository;
 use Exception;
 use OutMart\PricingRules\Lay;
 
@@ -35,7 +35,7 @@ class BasketService
      * @param ulid $ulid
      * @param string $currency
      *
-     * @return \Basketin\Services\BasketService
+     * @return \Basketin\Support\Services\BasketService
      */
     public function initBasket($ulid = null, string $currency = 'EGP')
     {
