@@ -13,10 +13,9 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'catalog_products', function (Blueprint $table) {
+        Schema::create($this->prefix . 'eav_models', function (Blueprint $table) {
             $table->id();
-            $table->string('sku')->unique();
-            $table->unsignedTinyInteger('product_type')->default(1); // Configurable product = 1
+            $table->morphs('model');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'catalog_products');
+        Schema::dropIfExists($this->prefix . 'eav_models');
     }
 };

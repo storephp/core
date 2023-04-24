@@ -4,13 +4,15 @@ namespace Basketin\Models;
 
 use Basketin\Base\ModelBase;
 use Basketin\Contracts\Model\IFinalPrice;
+use Basketin\EAV\Contracts\MultipleStoreViews;
+use Basketin\EAV\Traits\HasEAV;
+use Basketin\EAV\Traits\HasStoreView;
 use Basketin\Models\Product\Category;
-use Basketin\Models\Product\Entry;
-use Basketin\Models\Traits\HasEntry;
 
-class Product extends ModelBase implements IFinalPrice
+class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
 {
-    use HasEntry;
+    // use HasEntry;
+    use HasEAV, HasStoreView;
 
     /**
      * The table associated with the model.
@@ -28,7 +30,7 @@ class Product extends ModelBase implements IFinalPrice
         'sku',
     ];
 
-    protected $fillableEntry = [
+    protected $fillableEntities = [
         'categories',
         'name',
         'slug',
@@ -93,10 +95,6 @@ class Product extends ModelBase implements IFinalPrice
         return $this->hasMany(Product::class, 'configurable_id', 'id');
     }
 
-    public function entries()
-    {
-        return $this->hasMany(Entry::class, 'product_id', 'id');
-    }
     public function getCategories()
     {
         if (!$this->categories) {

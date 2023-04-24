@@ -1,19 +1,17 @@
 <?php
 
-namespace Basketin\Models\Product;
+namespace Basketin\Models\EAV;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Support\Str;
 use Basketin\Base\ModelBase;
 
-class Entry extends ModelBase
+class Value extends ModelBase
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'catalog_product_entries';
+    protected $table = 'eav_values';
 
     /**
      * The attributes that are mass assignable.
@@ -22,12 +20,11 @@ class Entry extends ModelBase
      */
     protected $fillable = [
         'store_view_id',
-        'product_id',
-        'entry_key',
-        'entry_value',
+        'attribute_id',
+        'attribute_value'
     ];
 
     protected $casts = [
-        'entry_value' => 'json',
+        'attribute_value' => 'json',
     ];
 }

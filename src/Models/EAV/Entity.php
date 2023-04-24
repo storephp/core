@@ -1,17 +1,17 @@
 <?php
 
-namespace Basketin\Models\Product;
+namespace Basketin\Models\EAV;
 
 use Basketin\Base\ModelBase;
 
-class CategoryEntry extends ModelBase
+class Entity extends ModelBase
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'catalog_category_entries';
+    protected $table = 'eav_entities';
 
     /**
      * The attributes that are mass assignable.
@@ -19,9 +19,12 @@ class CategoryEntry extends ModelBase
      * @var array<int, string>
      */
     protected $fillable = [
-        'store_view_id',
-        'category_id',
-        'entry_key',
-        'entry_value',
+        'model_type',
+        'entity_key',
     ];
+
+    public function attribute()
+    {
+        return $this->hasOne(Attribute::class, 'entity_id', 'id');
+    }
 }
