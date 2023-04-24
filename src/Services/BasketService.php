@@ -2,7 +2,6 @@
 
 namespace Basketin\Services;
 
-use Exception;
 use Basketin\Contracts\ICondition;
 use Basketin\Contracts\Model\IFinalPrice;
 use Basketin\Enums\Baskets\Status;
@@ -10,9 +9,10 @@ use Basketin\Exceptions\Baskets\QuoteExceedingLimitException;
 use Basketin\Exceptions\Baskets\QuoteTheMaxException;
 use Basketin\Models\Basket\Coupon;
 use Basketin\Models\Basket\Quote;
-use Basketin\PricingRules\Lay;
 use Basketin\Repositories\BasketRepository;
 use Basketin\Repositories\QuoteRepository;
+use Exception;
+use OutMart\PricingRules\Lay;
 
 class BasketService
 {
@@ -245,7 +245,7 @@ class BasketService
 
     public function getCoupon()
     {
-        return $this->currentBasket->coupon;
+        return $this->currentBasket->coupon ?? null;
     }
 
     public function getSubTotal()
@@ -268,7 +268,7 @@ class BasketService
         $lay->setTotal($subTotal);
 
         if (($coupon = $this->getCoupon()) && (!$this->getCoupon()->expired)) {
-            
+
             $lay->rule(function ($attributes) use ($coupon) {
 
                 if ($coupon->condition) {
@@ -314,7 +314,7 @@ class BasketService
     public function getTotal(): float
     {
         $discountTotal = ($this->getSubTotal() - $this->getDiscountTotal());
-        $feedsTotal = ($this->getShippingTotal() + $this->getShippingTotal());
+        $feedsTotal = ($this->getShippingTotal() + $this->getTaxTotal());
         return ($discountTotal + $feedsTotal);
     }
 
