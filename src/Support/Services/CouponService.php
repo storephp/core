@@ -2,7 +2,7 @@
 
 namespace Basketin\Support\Services;
 
-use Basketin\Services\Exceptions\Coupon\CouponAlreadyExists;
+use Basketin\Support\Exceptions\Coupon\CouponAlreadyExists;
 use Basketin\Support\Exceptions\Coupon\CouponNotFound;
 use Basketin\Support\Repositories\CouponRepository;
 

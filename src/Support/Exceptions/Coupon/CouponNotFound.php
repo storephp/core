@@ -5,7 +5,7 @@ namespace Basketin\Support\Exceptions\Coupon;
 use Exception;
 
 /**
- * The quote reaches the limit
+ * Coupon not found
  */
 class CouponNotFound extends Exception
 {

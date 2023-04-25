@@ -2,8 +2,7 @@
 
 declare (strict_types = 1);
 
-use Basketin\Repositories\CouponRepository;
-use Basketin\Services\CouponService;
+use Basketin\Support\Exceptions\Coupon\CouponAlreadyExists;
 use Basketin\Support\Exceptions\Coupon\CouponNotFound;
 use Basketin\Support\Facades\Coupon;
 
@@ -43,6 +42,24 @@ it('creates a new coupon', function () {
         'discount_value' => 10,
         'is_active' => true,
     ]);
+});
+
+it('creates a new coupon but already exists', function () {
+    Coupon::createNewCoupon([
+        'coupon_name' => 'Test1',
+        'coupon_code' => 'test_1',
+        'discount_type' => 'percentage',
+        'discount_value' => 10,
+        'is_active' => true,
+    ]);
+
+    expect(fn() => Coupon::createNewCoupon([
+        'coupon_name' => 'Test1',
+        'coupon_code' => 'test_1',
+        'discount_type' => 'percentage',
+        'discount_value' => 10,
+        'is_active' => true,
+    ]))->toThrow(CouponAlreadyExists::class, 'Coupon code already exists');
 });
 
 it('gets a coupon by id', function () {
