@@ -21,6 +21,7 @@ class Coupon extends ModelBase
     protected $fillable = [
         'coupon_name',
         'coupon_code',
+        'discount_type',
         'discount_value',
         'condition',
         'condition_data',
