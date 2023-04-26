@@ -14,7 +14,7 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'basket_coupon', function (Blueprint $table) {
+        Schema::create($this->prefix . 'basket_coupons', function (Blueprint $table) {
             $table->id();
             $table->string('coupon_name');
             $table->string('coupon_code')->unique();
@@ -36,6 +36,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'basket_coupon');
+        Schema::dropIfExists($this->prefix . 'basket_coupons');
     }
 };

@@ -11,7 +11,7 @@ class Coupon extends ModelBase
      *
      * @var string
      */
-    protected $table = 'basket_coupon';
+    protected $table = 'basket_coupons';
 
     /**
      * The attributes that are mass assignable.
