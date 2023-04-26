@@ -1,12 +1,12 @@
 <?php
 
-namespace Basketin\Services;
+namespace Basketin\Support\Services;
 
 use Exception;
 use Basketin\Enums\Baskets\Status;
 use Basketin\Models\Order\Status as OrderStatus;
 use Basketin\Repositories\OrderAddressRepository;
-use Basketin\Repositories\OrderRepository;
+use Basketin\Support\Repositories\OrderRepository;
 
 class OrderService
 {
@@ -107,7 +107,10 @@ class OrderService
         if ($order) {
             $order->basket->status = Status::OPENED();
             $order->basket->save();
+            return true;
         }
+
+        return false;
     }
 
     public function updateStatus($statusKey)

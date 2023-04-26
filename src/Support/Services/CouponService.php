@@ -1,9 +1,10 @@
 <?php
 
-namespace Basketin\Services;
+namespace Basketin\Support\Services;
 
-use Basketin\Repositories\CouponRepository;
-use Basketin\Services\Exceptions\Coupon\CouponAlreadyExists;
+use Basketin\Support\Exceptions\Coupon\CouponAlreadyExists;
+use Basketin\Support\Exceptions\Coupon\CouponNotFound;
+use Basketin\Support\Repositories\CouponRepository;
 
 class CouponService
 {
@@ -27,15 +28,20 @@ class CouponService
 
     public function getCouponById($id)
     {
-        if ($this->couponRepository->checkById($id)) {
-            return $this->couponRepository->getById($id);
+        if (!$this->couponRepository->checkById($id)) {
+            throw new CouponNotFound();
         }
+
+        return $this->couponRepository->getById($id);
     }
 
     public function updateCouponById(int $id, array $data)
     {
-        if ($this->couponRepository->checkById($id)) {
-            return $this->couponRepository->updateById($id, $data);
+        if (!$this->couponRepository->checkById($id)) {
+            throw new CouponNotFound();
         }
+
+        $this->couponRepository->updateById($id, $data);
+        return $this->couponRepository->getById($id);
     }
 }

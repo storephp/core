@@ -5,20 +5,18 @@ namespace Basketin;
 use Basketin\Console\FillStateStatusOrders;
 use Basketin\Console\SetupBasketin;
 use Basketin\Core\ConfigtManager;
-use Basketin\Models\Customer;
-use Basketin\Models\Order;
 use Basketin\Models\Order\Address;
-use Basketin\Repositories\BasketRepository;
-use Basketin\Repositories\CouponRepository;
-use Basketin\Repositories\CustomerRepository;
 use Basketin\Repositories\OrderAddressRepository;
-use Basketin\Repositories\OrderRepository;
-use Basketin\Repositories\ProductRepositorie;
-use Basketin\Repositories\QuoteRepository;
-use Basketin\Services\BasketService;
-use Basketin\Services\CouponService;
-use Basketin\Services\CustomerService;
-use Basketin\Services\OrderService;
+use Basketin\Support\Repositories\BasketRepository;
+use Basketin\Support\Repositories\CouponRepository;
+use Basketin\Support\Repositories\CustomerRepository;
+use Basketin\Support\Repositories\OrderRepository;
+use Basketin\Support\Repositories\ProductRepositorie;
+use Basketin\Support\Repositories\QuoteRepository;
+use Basketin\Support\Services\BasketService;
+use Basketin\Support\Services\CouponService;
+use Basketin\Support\Services\CustomerService;
+use Basketin\Support\Services\OrderService;
 use Basketin\Support\Traits\HasSetupBasketin;
 use Illuminate\Support\ServiceProvider;
 
@@ -58,9 +56,7 @@ class BasketinServiceProvider extends ServiceProvider
 
         $this->app->singleton('order', function () {
             return new OrderService(
-                new OrderRepository(
-                    new Order
-                ),
+                new OrderRepository,
                 new OrderAddressRepository(
                     new Address
                 )
@@ -69,9 +65,7 @@ class BasketinServiceProvider extends ServiceProvider
 
         $this->app->singleton('customer', function () {
             return new CustomerService(
-                new CustomerRepository(
-                    new Customer
-                )
+                new CustomerRepository
             );
         });
     }

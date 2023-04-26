@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Repositories;
+namespace Basketin\Support\Repositories;
 
 use Basketin\Models\Basket\Coupon;
 

@@ -167,6 +167,8 @@ trait HasEAV
         }
 
         $this->save();
+
+        return $this;
     }
 
     public function eavModel()

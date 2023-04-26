@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Repositories;
+namespace Basketin\Support\Repositories;
 
 use Basketin\Models\Customer;
 
@@ -8,9 +8,9 @@ class CustomerRepository
 {
     private $model;
 
-    public function __construct(Customer $customer)
+    public function __construct()
     {
-        $this->model = $customer;
+        $this->model = new Customer;
     }
 
     public function getById($id)
