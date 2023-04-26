@@ -174,9 +174,19 @@ class BasketService
         return $this;
     }
 
+    public function getId()
+    {
+        return $this->currentBasket->id;
+    }
+
     public function getUlid()
     {
         return $this->currentBasket->ulid;
+    }
+
+    public function getStatus()
+    {
+        return $this->currentBasket->status;
     }
 
     public function addQuotes($productSku, int $quantity = 1)

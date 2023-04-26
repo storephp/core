@@ -8,9 +8,9 @@ class OrderAddressRepository
 {
     private $model;
 
-    public function __construct(Address $address)
+    public function __construct()
     {
-        $this->model = $address;
+        $this->model = new Address;
     }
 
     public function create($data)

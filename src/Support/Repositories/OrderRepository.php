@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Repositories;
+namespace Basketin\Support\Repositories;
 
 use Basketin\Models\Order;
 
@@ -8,9 +8,9 @@ class OrderRepository
 {
     private $model;
 
-    public function __construct(Order $order)
+    public function __construct()
     {
-        $this->model = $order;
+        $this->model = new Order;
     }
 
     public function getById($id)

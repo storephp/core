@@ -2,9 +2,9 @@
 
 namespace Basketin\Support\Repositories;
 
-use Illuminate\Support\Str;
 use Basketin\Enums\Baskets\Status;
 use Basketin\Models\Basket;
+use Illuminate\Support\Str;
 
 class BasketRepository
 {
@@ -22,9 +22,9 @@ class BasketRepository
 
     /**
      * Create new basket
-     * 
+     *
      * @param string $currency
-     * 
+     *
      * @return \Basketin\Models\Basket
      */
     public function createNewBasket(string $currency)
@@ -32,14 +32,15 @@ class BasketRepository
         return $this->query()->create([
             'ulid' => (string) Str::ulid(),
             'currency' => $currency,
+            'status' => Status::OPENED(),
         ]);
     }
 
     /**
      * get available basket by basket ulid
-     * 
+     *
      * @param string $ulid
-     * 
+     *
      * @return \Basketin\Models\Basket
      */
     public function getAvailableBasket($ulid = null)
