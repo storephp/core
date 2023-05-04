@@ -64,9 +64,9 @@ class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
     //     };
     // }
 
-    protected function fillableEntry()
+    public function fillableEntities()
     {
-        return array_merge($this->fillableEntry, config('basketin.catalog.products.external_fillable_entry'));
+        return array_merge($this->fillableEntities, config('basketin.catalog.products.external_fillable_entry'));
     }
 
     public function getFinalPriceAttribute(): float
