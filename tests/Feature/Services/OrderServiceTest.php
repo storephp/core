@@ -6,7 +6,7 @@ use Basketin\Repositories\OrderAddressRepository;
 use Basketin\Support\Repositories\BasketRepository;
 use Basketin\Support\Repositories\CustomerRepository;
 use Basketin\Support\Repositories\OrderRepository;
-use Basketin\Support\Repositories\ProductRepositorie;
+use Basketin\Support\Repositories\ProductRepository;
 use Basketin\Support\Repositories\QuoteRepository;
 use Basketin\Support\Services\BasketService;
 use Basketin\Support\Services\CustomerService;
@@ -23,9 +23,9 @@ it('places new order', function () {
 
     $basket = $basketService->initBasket();
 
-    $productRepositorie = new ProductRepositorie;
+    $productRepository = new ProductRepository;
 
-    $product = $productRepositorie->create([
+    $product = $productRepository->create([
         'sku' => '123abc',
     ])->setAttributes([
         'name' => 'product top',
@@ -70,9 +70,9 @@ it('places new order with reverts this order', function () {
 
     $basket = $basketService->initBasket();
 
-    $productRepositorie = new ProductRepositorie;
+    $productRepository = new ProductRepository;
 
-    $product = $productRepositorie->create([
+    $product = $productRepository->create([
         'sku' => '123abc',
     ])->setAttributes([
         'name' => 'product top',

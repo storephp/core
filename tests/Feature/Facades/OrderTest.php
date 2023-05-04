@@ -6,15 +6,15 @@ use Basketin\Support\Facades\Basket;
 use Basketin\Support\Facades\Customer;
 use Basketin\Support\Facades\Order;
 use Basketin\Support\Repositories\CustomerRepository;
-use Basketin\Support\Repositories\ProductRepositorie;
+use Basketin\Support\Repositories\ProductRepository;
 
 it('places new order', function () {
     ///
     $basket = Basket::initBasket();
 
-    $productRepositorie = new ProductRepositorie;
+    $productRepository = new ProductRepository;
 
-    $product = $productRepositorie->create([
+    $product = $productRepository->create([
         'sku' => '123abc',
     ])->setAttributes([
         'name' => 'product top',
@@ -51,9 +51,9 @@ it('places new order with reverts this order', function () {
     ///
     $basket = Basket::initBasket();
 
-    $productRepositorie = new ProductRepositorie;
+    $productRepository = new ProductRepository;
 
-    $product = $productRepositorie->create([
+    $product = $productRepository->create([
         'sku' => '123abc',
     ])->setAttributes([
         'name' => 'product top',

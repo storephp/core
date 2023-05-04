@@ -2,18 +2,18 @@
 
 declare (strict_types = 1);
 
-use Basketin\Support\Repositories\ProductRepositorie;
+use Basketin\Support\Repositories\ProductRepository;
 
 it('gets a products list', function () {
-    $productRepositorie = new ProductRepositorie;
+    $productRepository = new ProductRepository;
 
-    $productRepositorie->create([
+    $productRepository->create([
         'sku' => '123abc',
     ])->setAttributes([
         'name' => 'product top',
     ]);
 
-    $products = $productRepositorie->all();
+    $products = $productRepository->all();
 
     expect($products->first())->toMatchArray([
         'sku' => '123abc',
@@ -21,9 +21,9 @@ it('gets a products list', function () {
 });
 
 it('creates a new product', function () {
-    $productRepositorie = new ProductRepositorie;
+    $productRepository = new ProductRepository;
 
-    $product = $productRepositorie->create([
+    $product = $productRepository->create([
         'sku' => '123abc',
     ]);
 
@@ -31,9 +31,9 @@ it('creates a new product', function () {
 });
 
 it('creates a new product with use EAV', function () {
-    $productRepositorie = new ProductRepositorie;
+    $productRepository = new ProductRepository;
 
-    $product = $productRepositorie->create([
+    $product = $productRepository->create([
         'sku' => '123abc',
     ]);
 
@@ -44,9 +44,9 @@ it('creates a new product with use EAV', function () {
 });
 
 it('creates a new product with use EAV by `setAttributes` method', function () {
-    $productRepositorie = new ProductRepositorie;
+    $productRepository = new ProductRepository;
 
-    $product = $productRepositorie->create([
+    $product = $productRepository->create([
         'sku' => '123abc',
     ]);
 
@@ -59,9 +59,9 @@ it('creates a new product with use EAV by `setAttributes` method', function () {
 });
 
 it('creates a new product without use EAV', function () {
-    $productRepositorie = new ProductRepositorie;
+    $productRepository = new ProductRepository;
 
-    $product = $productRepositorie->create([
+    $product = $productRepository->create([
         'sku' => '123abc',
     ]);
 
@@ -69,16 +69,16 @@ it('creates a new product without use EAV', function () {
 });
 
 it('gets a product with have EAV', function () {
-    $productRepositorie = new ProductRepositorie;
+    $productRepository = new ProductRepository;
 
-    $product = $productRepositorie->create([
+    $product = $productRepository->create([
         'sku' => '123abc',
     ]);
 
     $product->name = 'product top';
     $product->save();
 
-    $getProduct = $productRepositorie->getBySku('123abc');
+    $getProduct = $productRepository->getBySku('123abc');
 
     expect($getProduct->name)->toEqual('product top');
 });

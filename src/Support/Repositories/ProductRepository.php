@@ -2,7 +2,7 @@
 
 namespace Basketin\Support\Repositories;
 
-class ProductRepositorie
+class ProductRepository
 {
     private $model;
 

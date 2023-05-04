@@ -11,7 +11,7 @@ use Basketin\Support\Repositories\BasketRepository;
 use Basketin\Support\Repositories\CouponRepository;
 use Basketin\Support\Repositories\CustomerRepository;
 use Basketin\Support\Repositories\OrderRepository;
-use Basketin\Support\Repositories\ProductRepositorie;
+use Basketin\Support\Repositories\ProductRepository;
 use Basketin\Support\Repositories\QuoteRepository;
 use Basketin\Support\Services\BasketService;
 use Basketin\Support\Services\CouponService;
@@ -38,7 +38,7 @@ class BasketinServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('product', function () {
-            return new ProductRepositorie();
+            return new ProductRepository();
         });
 
         $this->app->singleton('basket', function () {
