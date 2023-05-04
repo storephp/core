@@ -17,6 +17,11 @@ class ProductRepositorie
         return $this->model::configurableOnly();
     }
 
+    public function query()
+    {
+        return $this->model::query();
+    }
+
     public function all()
     {
         return $this->model->get();
