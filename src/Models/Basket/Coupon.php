@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Models\Basket;
+namespace Store\Models\Basket;
 
-use Basketin\Base\ModelBase;
+use Store\Base\ModelBase;
 
 class Coupon extends ModelBase
 {
@@ -11,7 +11,7 @@ class Coupon extends ModelBase
      *
      * @var string
      */
-    protected $table = 'basket_coupon';
+    protected $table = 'basket_coupons';
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +21,7 @@ class Coupon extends ModelBase
     protected $fillable = [
         'coupon_name',
         'coupon_code',
+        'discount_type',
         'discount_value',
         'condition',
         'condition_data',

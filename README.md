@@ -10,7 +10,7 @@ You can find the detailed documentation here in [eCommerce Core Documentation](h
 
 ## Contributing
 
-Thank you for considering contributing to this package! Be one of the Basketin team.
+Thank you for considering contributing to this package! Be one of the Store team.
 
 ## License
 

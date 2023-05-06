@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Traits\Customer\Initialize;
+namespace Store\Traits\Customer\Initialize;
 
 trait WithUserData
 {

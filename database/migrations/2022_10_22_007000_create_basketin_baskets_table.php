@@ -1,6 +1,6 @@
 <?php
 
-use Basketin\Base\MigrationBase;
+use Store\Base\MigrationBase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 

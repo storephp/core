@@ -1,12 +1,12 @@
 <?php
 
-namespace Basketin\Models;
+namespace Store\Models;
 
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
-use Basketin\Base\ModelBase;
-use Basketin\Models\Order\State;
-use Basketin\Models\Order\Status;
+use Store\Base\ModelBase;
+use Store\Models\Order\State;
+use Store\Models\Order\Status;
 
 class Order extends ModelBase
 {
@@ -86,7 +86,7 @@ class Order extends ModelBase
 
     public function customer()
     {
-        return $this->hasOne(config('basketin.customers.model'), 'id', 'customer_id');
+        return $this->hasOne(config('store.customers.model'), 'id', 'customer_id');
     }
 
     public function basket()

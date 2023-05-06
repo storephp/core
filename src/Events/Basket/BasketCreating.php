@@ -1,9 +1,9 @@
 <?php
 
-namespace Basketin\Events\Basket;
+namespace Store\Events\Basket;
 
 use Illuminate\Foundation\Events\Dispatchable;
-use Basketin\Models\Basket;
+use Store\Models\Basket;
 
 class BasketCreating
 {

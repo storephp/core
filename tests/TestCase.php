@@ -1,10 +1,10 @@
 <?php
 
-namespace Basketin\Tests;
+namespace Store\Tests;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Basketin\BasketinServiceProvider;
-use Basketin\Tests\Core\TestBasketinServiceProvider;
+use Store\BasketinServiceProvider;
+use Store\Tests\Core\TestBasketinServiceProvider;
 
 class TestCase extends BaseTestCase
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Basketin\Models\Basket;
+namespace Store\Models\Basket;
 
 use Exception;
-use Basketin\Base\ModelBase;
-use Basketin\DataType\ProductSku;
-use Basketin\Events\Basket\Quote\QuoteIncrease;
-use Basketin\Exceptions\Baskets\QuoteExceedingLimitException;
-use Basketin\Exceptions\Baskets\QuoteTheMaxException;
+use Store\Base\ModelBase;
+use Store\DataType\ProductSku;
+use Store\Events\Basket\Quote\QuoteIncrease;
+use Store\Exceptions\Baskets\QuoteExceedingLimitException;
+use Store\Exceptions\Baskets\QuoteTheMaxException;
 
 class Quote extends ModelBase
 {
@@ -45,6 +45,6 @@ class Quote extends ModelBase
      */
     public function product()
     {
-        return $this->hasOne(config('basketin.baskets.product_relation.model'), config('basketin.baskets.product_relation.foreign_key'), 'product_sku');
+        return $this->hasOne(config('store.baskets.product_relation.model'), config('store.baskets.product_relation.foreign_key'), 'product_sku');
     }
 }
