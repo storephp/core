@@ -3,7 +3,7 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Basketin configs
+    | Store configs
     |--------------------------------------------------------------------------
      */
     'database' => [
@@ -20,7 +20,7 @@ return [
 
         'product_relation' => [
             'foreign_key' => 'sku',
-            'model' => \Basketin\Models\Product::class,
+            'model' => \Store\Models\Product::class,
         ],
 
         'observers' => null,
@@ -36,7 +36,7 @@ return [
     |--------------------------------------------------------------------------
      */
     'customers' => [
-        'model' => \Basketin\Models\Customer::class,
+        'model' => \Store\Models\Customer::class,
         'observers' => null,
     ],
 
@@ -58,7 +58,7 @@ return [
      */
     'catalog' => [
         'products' => [
-            'model' => \Basketin\Models\Product::class,
+            'model' => \Store\Models\Product::class,
             'external_fillable_entry' => [],
         ],
     ],

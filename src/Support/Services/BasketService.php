@@ -1,16 +1,16 @@
 <?php
 
-namespace Basketin\Support\Services;
+namespace Store\Support\Services;
 
-use Basketin\Contracts\ICondition;
-use Basketin\Contracts\Model\IFinalPrice;
-use Basketin\Enums\Baskets\Status;
-use Basketin\Exceptions\Baskets\QuoteExceedingLimitException;
-use Basketin\Exceptions\Baskets\QuoteTheMaxException;
-use Basketin\Models\Basket\Coupon;
-use Basketin\Models\Basket\Quote;
-use Basketin\Support\Repositories\BasketRepository;
-use Basketin\Support\Repositories\QuoteRepository;
+use Store\Contracts\ICondition;
+use Store\Contracts\Model\IFinalPrice;
+use Store\Enums\Baskets\Status;
+use Store\Exceptions\Baskets\QuoteExceedingLimitException;
+use Store\Exceptions\Baskets\QuoteTheMaxException;
+use Store\Models\Basket\Coupon;
+use Store\Models\Basket\Quote;
+use Store\Support\Repositories\BasketRepository;
+use Store\Support\Repositories\QuoteRepository;
 use Exception;
 use OutMart\PricingRules\Lay;
 
@@ -35,7 +35,7 @@ class BasketService
      * @param ulid $ulid
      * @param string $currency
      *
-     * @return \Basketin\Support\Services\BasketService
+     * @return \Store\Support\Services\BasketService
      */
     public function initBasket($ulid = null, string $currency = 'EGP')
     {
@@ -211,7 +211,7 @@ class BasketService
 
     public function increase(Quote $quote, int $quantity)
     {
-        if ($quote->quantity >= config('basketin.baskets.max_quote')) {
+        if ($quote->quantity >= config('store.baskets.max_quote')) {
             throw new QuoteTheMaxException();
         }
 
@@ -267,7 +267,7 @@ class BasketService
         if ($quotes) {
             foreach ($quotes as $quote) {
                 if (!$quote->product instanceof IFinalPrice) {
-                    throw new Exception("You must implement `\Basketin\Contracts\Model\IFinalPrice`");
+                    throw new Exception("You must implement `\Store\Contracts\Model\IFinalPrice`");
                 }
 
                 $subTotal += $quote->quantity * $quote->product?->final_price;
@@ -282,7 +282,7 @@ class BasketService
             $lay->rule(function ($attributes) use ($coupon) {
 
                 if ($coupon->condition) {
-                    $conditionObj = config('basketin.coupons.conditions.' . $coupon->condition, null);
+                    $conditionObj = config('store.coupons.conditions.' . $coupon->condition, null);
                     if ($conditionObj) {
                         $condition = new $conditionObj(
                             $attributes['total'],

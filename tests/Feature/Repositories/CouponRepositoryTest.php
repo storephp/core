@@ -2,7 +2,7 @@
 
 declare (strict_types = 1);
 
-use Basketin\Support\Repositories\CouponRepository;
+use Store\Support\Repositories\CouponRepository;
 
 it('creates a new coupon', function () {
     $couponRepository = new CouponRepository;

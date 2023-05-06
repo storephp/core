@@ -2,7 +2,7 @@
 
 declare (strict_types = 1);
 
-use Basketin\Tests\Core\Models\User;
+use Store\Tests\Core\Models\User;
 
 test('Create new customer', function () {
     $user = User::create([

@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Models\EAV\View;
+namespace Store\Models\EAV\View;
 
-use Basketin\Base\ModelBase;
+use Store\Base\ModelBase;
 
 class Attribute extends ModelBase
 {

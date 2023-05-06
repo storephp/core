@@ -1,9 +1,9 @@
 <?php
 
-namespace Basketin\Models\Customer;
+namespace Store\Models\Customer;
 
-use Basketin\Base\ModelBase;
-use Basketin\Models\Customer;
+use Store\Base\ModelBase;
+use Store\Models\Customer;
 
 class Address extends ModelBase
 {

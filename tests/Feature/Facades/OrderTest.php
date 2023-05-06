@@ -2,11 +2,11 @@
 
 declare (strict_types = 1);
 
-use Basketin\Support\Facades\Basket;
-use Basketin\Support\Facades\Customer;
-use Basketin\Support\Facades\Order;
-use Basketin\Support\Repositories\CustomerRepository;
-use Basketin\Support\Repositories\ProductRepository;
+use Store\Support\Facades\Basket;
+use Store\Support\Facades\Customer;
+use Store\Support\Facades\Order;
+use Store\Support\Repositories\CustomerRepository;
+use Store\Support\Repositories\ProductRepository;
 
 it('places new order', function () {
     ///

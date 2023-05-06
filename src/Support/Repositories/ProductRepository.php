@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Support\Repositories;
+namespace Store\Support\Repositories;
 
 class ProductRepository
 {
@@ -8,7 +8,7 @@ class ProductRepository
 
     public function __construct()
     {
-        $productModel = config('basketin.catalog.products.model');
+        $productModel = config('store.catalog.products.model');
         $this->model = new $productModel;
     }
 

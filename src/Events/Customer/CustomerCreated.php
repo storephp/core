@@ -1,9 +1,9 @@
 <?php
 
-namespace Basketin\Events\Customer;
+namespace Store\Events\Customer;
 
 use Illuminate\Foundation\Events\Dispatchable;
-use Basketin\Models\Customer;
+use Store\Models\Customer;
 
 class CustomerCreated
 {

@@ -2,10 +2,10 @@
 
 declare (strict_types = 1);
 
-use Basketin\Models\Product;
-use Basketin\Support\Repositories\BasketRepository;
-use Basketin\Support\Repositories\QuoteRepository;
-use Basketin\Support\Services\BasketService;
+use Store\Models\Product;
+use Store\Support\Repositories\BasketRepository;
+use Store\Support\Repositories\QuoteRepository;
+use Store\Support\Services\BasketService;
 
 it('creates a new basket', function () {
     $basketService = new BasketService(

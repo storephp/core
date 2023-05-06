@@ -1,14 +1,14 @@
 <?php
 
-namespace Basketin\Models;
+namespace Store\Models;
 
-use Basketin\Base\ModelBase;
-use Basketin\Events\Basket\BasketCreated;
-use Basketin\Events\Basket\BasketCreating;
-use Basketin\Events\Basket\BasketUpdated;
-use Basketin\Events\Basket\BasketUpdating;
-use Basketin\Models\Basket\Coupon;
-use Basketin\Models\Basket\Quote;
+use Store\Base\ModelBase;
+use Store\Events\Basket\BasketCreated;
+use Store\Events\Basket\BasketCreating;
+use Store\Events\Basket\BasketUpdated;
+use Store\Events\Basket\BasketUpdating;
+use Store\Models\Basket\Coupon;
+use Store\Models\Basket\Quote;
 
 class Basket extends ModelBase
 {

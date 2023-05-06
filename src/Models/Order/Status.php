@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Models\Order;
+namespace Store\Models\Order;
 
-use Basketin\Base\ModelBase;
+use Store\Base\ModelBase;
 
 class Status extends ModelBase
 {

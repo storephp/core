@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Basketin\Enums\Catalog\ProductType;
+use Store\Enums\Catalog\ProductType;
 
 test('test type configurable', function () {
     $this->assertEquals(ProductType::CONFIGURABLE(), 1);

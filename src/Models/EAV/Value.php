@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Models\EAV;
+namespace Store\Models\EAV;
 
-use Basketin\Base\ModelBase;
+use Store\Base\ModelBase;
 
 class Value extends ModelBase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Basketin\Support\Services;
+namespace Store\Support\Services;
 
-use Basketin\Support\Exceptions\Coupon\CouponAlreadyExists;
-use Basketin\Support\Exceptions\Coupon\CouponNotFound;
-use Basketin\Support\Repositories\CouponRepository;
+use Store\Support\Exceptions\Coupon\CouponAlreadyExists;
+use Store\Support\Exceptions\Coupon\CouponNotFound;
+use Store\Support\Repositories\CouponRepository;
 
 class CouponService
 {

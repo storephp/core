@@ -2,7 +2,7 @@
 
 declare (strict_types = 1);
 
-use Basketin\Support\Repositories\BasketRepository;
+use Store\Support\Repositories\BasketRepository;
 
 it('creates a new basket', function () {
     $basketRepository = new BasketRepository;

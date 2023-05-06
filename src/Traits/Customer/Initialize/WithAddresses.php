@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Traits\Customer\Initialize;
+namespace Store\Traits\Customer\Initialize;
 
-use Basketin\Models\Customer\Address;
+use Store\Models\Customer\Address;
 
 trait WithAddresses
 {

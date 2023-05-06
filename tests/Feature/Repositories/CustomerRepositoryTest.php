@@ -2,7 +2,7 @@
 
 declare (strict_types = 1);
 
-use Basketin\Support\Repositories\CustomerRepository;
+use Store\Support\Repositories\CustomerRepository;
 
 it('creates a new customer', function () {
     $customerRepository = new CustomerRepository;

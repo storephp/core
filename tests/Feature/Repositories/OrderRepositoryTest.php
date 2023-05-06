@@ -2,7 +2,7 @@
 
 declare (strict_types = 1);
 
-use Basketin\Support\Repositories\OrderRepository;
+use Store\Support\Repositories\OrderRepository;
 
 it('creates a new order', function () {
     $orderRepository = new OrderRepository;

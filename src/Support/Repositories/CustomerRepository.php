@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Support\Repositories;
+namespace Store\Support\Repositories;
 
-use Basketin\Models\Customer;
+use Store\Models\Customer;
 
 class CustomerRepository
 {

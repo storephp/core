@@ -1,12 +1,12 @@
 <?php
 
-namespace Basketin\Support\Services;
+namespace Store\Support\Services;
 
 use Exception;
-use Basketin\Enums\Baskets\Status;
-use Basketin\Models\Order\Status as OrderStatus;
-use Basketin\Repositories\OrderAddressRepository;
-use Basketin\Support\Repositories\OrderRepository;
+use Store\Enums\Baskets\Status;
+use Store\Models\Order\Status as OrderStatus;
+use Store\Repositories\OrderAddressRepository;
+use Store\Support\Repositories\OrderRepository;
 
 class OrderService
 {

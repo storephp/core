@@ -2,9 +2,9 @@
 
 declare (strict_types = 1);
 
-use Basketin\Support\Exceptions\Coupon\CouponAlreadyExists;
-use Basketin\Support\Exceptions\Coupon\CouponNotFound;
-use Basketin\Support\Facades\Coupon;
+use Store\Support\Exceptions\Coupon\CouponAlreadyExists;
+use Store\Support\Exceptions\Coupon\CouponNotFound;
+use Store\Support\Facades\Coupon;
 
 it('gets a coupons list', function () {
     Coupon::createNewCoupon([

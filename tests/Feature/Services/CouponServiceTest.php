@@ -2,10 +2,10 @@
 
 declare (strict_types = 1);
 
-use Basketin\Support\Exceptions\Coupon\CouponAlreadyExists;
-use Basketin\Support\Exceptions\Coupon\CouponNotFound;
-use Basketin\Support\Repositories\CouponRepository;
-use Basketin\Support\Services\CouponService;
+use Store\Support\Exceptions\Coupon\CouponAlreadyExists;
+use Store\Support\Exceptions\Coupon\CouponNotFound;
+use Store\Support\Repositories\CouponRepository;
+use Store\Support\Services\CouponService;
 
 it('gets a coupons list', function () {
     $couponService = new CouponService(new CouponRepository);

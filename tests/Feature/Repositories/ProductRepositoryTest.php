@@ -2,7 +2,7 @@
 
 declare (strict_types = 1);
 
-use Basketin\Support\Repositories\ProductRepository;
+use Store\Support\Repositories\ProductRepository;
 
 it('gets a products list', function () {
     $productRepository = new ProductRepository;

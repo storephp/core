@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Tests\Core;
+namespace Store\Tests\Core;
 
 use Illuminate\Support\ServiceProvider;
 
