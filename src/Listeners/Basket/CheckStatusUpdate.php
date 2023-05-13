@@ -1,9 +1,9 @@
 <?php
 
-namespace Basketin\Listeners\Basket;
+namespace Store\Listeners\Basket;
 
 use Exception;
-use Basketin\Enums\Baskets\Status;
+use Store\Enums\Baskets\Status;
 
 class CheckStatusUpdate 
 {

@@ -1,8 +1,8 @@
 <?php
 
-use Basketin\Base\MigrationBase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Store\Base\MigrationBase;
 
 return new class extends MigrationBase
 {
@@ -13,10 +13,10 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'eav_attributes', function (Blueprint $table) {
+        Schema::create($this->prefix . 'catalog_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('model_id')->constrained($this->prefix . 'eav_models')->cascadeOnDelete();
-            $table->foreignId('entity_id')->constrained($this->prefix . 'eav_entities')->cascadeOnDelete();
+            $table->foreignId('parent_id')->nullable()->constrained($this->prefix . 'catalog_categories')->cascadeOnDelete();
+            $table->string('slug')->index();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'eav_attributes');
+        Schema::dropIfExists($this->prefix . 'catalog_categories');
     }
 };

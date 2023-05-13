@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Basketin\Base\MigrationBase;
+use Store\Base\MigrationBase;
 
 return new class extends MigrationBase
 {
@@ -13,11 +13,11 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'order_statuses', function (Blueprint $table) {
+        Schema::create($this->prefix . 'store_views', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('state_id')->nullable()->constrained($this->prefix . 'order_states')->nullOnDelete();
-            $table->string('status_key')->unique()->index();
-            $table->string('status_label')->unique();
+            $table->foreignId('store_id')->nullable()->constrained($this->prefix . 'stores')->cascadeOnDelete();
+            $table->string('name')->unique();
+            $table->string('slug')->unique()->index();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'order_statuses');
+        Schema::dropIfExists($this->prefix . 'store_views');
     }
 };

@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\EAV\Traits;
+namespace Store\EAV\Traits;
 
 trait HasStoreView
 {

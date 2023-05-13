@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Support\Exceptions\Coupon;
+namespace Store\Support\Exceptions\Coupon;
 
 use Exception;
 

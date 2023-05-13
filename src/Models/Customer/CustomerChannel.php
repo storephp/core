@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Models\Customer;
+namespace Store\Models\Customer;
 
-use Basketin\Base\ModelBase;
+use Store\Base\ModelBase;
 
 class CustomerChannel extends ModelBase
 {

@@ -1,28 +1,28 @@
 <?php
 
-namespace Basketin;
+namespace Store;
 
-use Basketin\Console\FillStateStatusOrders;
-use Basketin\Console\SetupBasketin;
-use Basketin\Core\ConfigtManager;
-use Basketin\Models\Order\Address;
-use Basketin\Repositories\OrderAddressRepository;
-use Basketin\Support\Repositories\BasketRepository;
-use Basketin\Support\Repositories\CouponRepository;
-use Basketin\Support\Repositories\CustomerRepository;
-use Basketin\Support\Repositories\OrderRepository;
-use Basketin\Support\Repositories\ProductRepository;
-use Basketin\Support\Repositories\QuoteRepository;
-use Basketin\Support\Services\BasketService;
-use Basketin\Support\Services\CouponService;
-use Basketin\Support\Services\CustomerService;
-use Basketin\Support\Services\OrderService;
-use Basketin\Support\Traits\HasSetupBasketin;
+use Store\Console\FillStateStatusOrders;
+use Store\Console\SetupStore;
+use Store\Core\ConfigtManager;
+use Store\Models\Order\Address;
+use Store\Repositories\OrderAddressRepository;
+use Store\Support\Repositories\BasketRepository;
+use Store\Support\Repositories\CouponRepository;
+use Store\Support\Repositories\CustomerRepository;
+use Store\Support\Repositories\OrderRepository;
+use Store\Support\Repositories\ProductRepository;
+use Store\Support\Repositories\QuoteRepository;
+use Store\Support\Services\BasketService;
+use Store\Support\Services\CouponService;
+use Store\Support\Services\CustomerService;
+use Store\Support\Services\OrderService;
+use Store\Support\Traits\HasSetupStore;
 use Illuminate\Support\ServiceProvider;
 
-class BasketinServiceProvider extends ServiceProvider
+class StoreServiceProvider extends ServiceProvider
 {
-    use HasSetupBasketin;
+    use HasSetupStore;
 
     /**
      * Register services.
@@ -31,7 +31,7 @@ class BasketinServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/basketin.php', 'basketin');
+        $this->mergeConfigFrom(__DIR__ . '/../config/store.php', 'store');
 
         $this->app->singleton('configuration', function () {
             return new ConfigtManager();
@@ -84,11 +84,11 @@ class BasketinServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
             $this->publishes([
-                __DIR__ . '/../config/basketin.php' => config_path('basketin.php'),
-            ], ['basketin', 'basketin-config']);
+                __DIR__ . '/../config/store.php' => config_path('store.php'),
+            ], ['store', 'store-config']);
 
             $this->commands([
-                SetupBasketin::class,
+                SetupStore::class,
             ]);
         }
     }

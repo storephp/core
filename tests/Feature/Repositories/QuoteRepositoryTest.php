@@ -2,9 +2,9 @@
 
 declare (strict_types = 1);
 
-use Basketin\Models\Basket\Quote;
-use Basketin\Support\Repositories\BasketRepository;
-use Basketin\Support\Repositories\QuoteRepository;
+use Store\Models\Basket\Quote;
+use Store\Support\Repositories\BasketRepository;
+use Store\Support\Repositories\QuoteRepository;
 
 it('creates a new basket', function () {
     $basketRepository = new BasketRepository;

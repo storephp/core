@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Support\Repositories;
+namespace Store\Support\Repositories;
 
-use Basketin\Models\Basket\Coupon;
+use Store\Models\Basket\Coupon;
 
 class CouponRepository
 {

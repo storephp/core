@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Enums\Catalog;
+namespace Store\Enums\Catalog;
 
 use Exception;
 

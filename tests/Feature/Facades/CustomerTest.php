@@ -2,8 +2,8 @@
 
 declare (strict_types = 1);
 
-use Basketin\Support\Facades\Customer;
-use Basketin\Support\Repositories\CustomerRepository;
+use Store\Support\Facades\Customer;
+use Store\Support\Repositories\CustomerRepository;
 
 it('gets a customer data', function () {
     $customerRepository = new CustomerRepository;

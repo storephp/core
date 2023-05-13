@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Console;
+namespace Store\Console;
 
-use Basketin\Models\Order\State;
+use Store\Models\Order\State;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 

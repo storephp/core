@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\EAV\Contracts;
+namespace Store\EAV\Contracts;
 
 interface MultipleStoreViews
 {

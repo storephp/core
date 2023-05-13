@@ -1,9 +1,9 @@
 <?php
 
-namespace Basketin\Support\Repositories;
+namespace Store\Support\Repositories;
 
-use Basketin\Enums\Baskets\Status;
-use Basketin\Models\Basket;
+use Store\Enums\Baskets\Status;
+use Store\Models\Basket;
 use Illuminate\Support\Str;
 
 class BasketRepository
@@ -25,7 +25,7 @@ class BasketRepository
      *
      * @param string $currency
      *
-     * @return \Basketin\Models\Basket
+     * @return \Store\Models\Basket
      */
     public function createNewBasket(string $currency)
     {
@@ -41,7 +41,7 @@ class BasketRepository
      *
      * @param string $ulid
      *
-     * @return \Basketin\Models\Basket
+     * @return \Store\Models\Basket
      */
     public function getAvailableBasket($ulid = null)
     {

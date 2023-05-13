@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Base;
+namespace Store\Base;
 
 use Illuminate\Database\Migrations\Migration;
 
@@ -18,6 +18,6 @@ abstract class MigrationBase extends Migration
      */
     public function __construct()
     {
-        $this->prefix = config('basketin.database.table_prefix');
+        $this->prefix = config('store.database.table_prefix');
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Basketin\Providers;
+namespace Store\Providers;
 
-use Basketin\Models\Basket;
-use Basketin\Models\Customer;
+use Store\Models\Basket;
+use Store\Models\Customer;
 class EventServiceProvider extends \Illuminate\Foundation\Support\Providers\EventServiceProvider
 {
     /**
@@ -12,8 +12,8 @@ class EventServiceProvider extends \Illuminate\Foundation\Support\Providers\Even
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        \Basketin\Events\Basket\BasketUpdating::class => [
-            \Basketin\Listeners\Basket\CheckStatusUpdate::class,
+        \Store\Events\Basket\BasketUpdating::class => [
+            \Store\Listeners\Basket\CheckStatusUpdate::class,
         ],
     ];
 
@@ -25,13 +25,13 @@ class EventServiceProvider extends \Illuminate\Foundation\Support\Providers\Even
     public function boot()
     {
         // Customer observer
-        if ($observerCustomer = config('basketin.customers.observers')) {
-            $customer = config('basketin.customers.model', Customer::class);
+        if ($observerCustomer = config('store.customers.observers')) {
+            $customer = config('store.customers.model', Customer::class);
             $customer::observe($observerCustomer);
         }
 
         // Customer observer
-        if ($observerBasket = config('basketin.baskets.observers')) {
+        if ($observerBasket = config('store.baskets.observers')) {
             Basket::observe($observerBasket);
         }
     }

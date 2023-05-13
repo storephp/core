@@ -1,10 +1,10 @@
 <?php
 
-namespace Basketin\EAV\Traits;
+namespace Store\EAV\Traits;
 
-use Basketin\EAV\Contracts\MultipleStoreViews;
-use Basketin\Models\EAV\Entity;
-use Basketin\Models\EAV\Model;
+use Store\EAV\Contracts\MultipleStoreViews;
+use Store\Models\EAV\Entity;
+use Store\Models\EAV\Model;
 
 trait HasEAV
 {

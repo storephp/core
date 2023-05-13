@@ -3,20 +3,20 @@
 /**
  * This command usless for now.
  */
-namespace Basketin\Console;
+namespace Store\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
 class CreateEAVTableView extends Command
 {
-    protected $signature = 'basketin:eav:tableview';
+    protected $signature = 'store:eav:tableview';
 
-    protected $description = 'Setup the basketin system';
+    protected $description = 'Setup the store system';
 
     public function handle()
     {
-        $prefix = config('basketin.database.table_prefix');
+        $prefix = config('store.database.table_prefix');
         $name = $prefix . 'view_eav_attributes';
 
         DB::statement($this->dropView($name));

@@ -1,13 +1,13 @@
 <?php
 
-namespace Basketin\Models;
+namespace Store\Models;
 
-use Basketin\Base\ModelBase;
-use Basketin\Contracts\Model\IFinalPrice;
-use Basketin\EAV\Contracts\MultipleStoreViews;
-use Basketin\EAV\Traits\HasEAV;
-use Basketin\EAV\Traits\HasStoreView;
-use Basketin\Models\Product\Category;
+use Store\Base\ModelBase;
+use Store\Contracts\Model\IFinalPrice;
+use Store\EAV\Contracts\MultipleStoreViews;
+use Store\EAV\Traits\HasEAV;
+use Store\EAV\Traits\HasStoreView;
+use Store\Models\Product\Category;
 
 class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
 {
@@ -66,7 +66,7 @@ class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
 
     public function fillableEntities()
     {
-        return array_merge($this->fillableEntities, config('basketin.catalog.products.external_fillable_entry'));
+        return array_merge($this->fillableEntities, config('store.catalog.products.external_fillable_entry'));
     }
 
     public function getFinalPriceAttribute(): float

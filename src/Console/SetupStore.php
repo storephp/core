@@ -1,18 +1,18 @@
 <?php
 
-namespace Basketin\Console;
+namespace Store\Console;
 
 use Illuminate\Console\Command;
 
-class SetupBasketin extends Command
+class SetupStore extends Command
 {
-    protected $signature = 'basketin:setup';
+    protected $signature = 'store:setup';
 
-    protected $description = 'Setup the basketin system';
+    protected $description = 'Setup the store system';
 
     public function handle()
     {
-        $installingCommands = config('basketin.core.commands.installing', []);
+        $installingCommands = config('store.core.commands.installing', []);
 
         $i = 1;
         $commandCount = count($installingCommands);

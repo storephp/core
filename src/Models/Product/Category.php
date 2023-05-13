@@ -1,11 +1,11 @@
 <?php
 
-namespace Basketin\Models\Product;
+namespace Store\Models\Product;
 
-use Basketin\Base\ModelBase;
-use Basketin\EAV\Contracts\MultipleStoreViews;
-use Basketin\EAV\Traits\HasEAV;
-use Basketin\EAV\Traits\HasStoreView;
+use Store\Base\ModelBase;
+use Store\EAV\Contracts\MultipleStoreViews;
+use Store\EAV\Traits\HasEAV;
+use Store\EAV\Traits\HasStoreView;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 

@@ -2,8 +2,8 @@
 
 declare (strict_types = 1);
 
-use Basketin\Models\Product;
-use Basketin\Support\Facades\Basket;
+use Store\Models\Product;
+use Store\Support\Facades\Basket;
 
 it('creates a new basket', function () {
     $basket = Basket::initBasket();

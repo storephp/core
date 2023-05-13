@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Basketin\Base\MigrationBase;
+use Store\Base\MigrationBase;
 
 return new class extends MigrationBase
 {
@@ -13,11 +13,10 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'store_views', function (Blueprint $table) {
+        Schema::create($this->prefix . 'catalog_products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id')->nullable()->constrained($this->prefix . 'stores')->cascadeOnDelete();
-            $table->string('name')->unique();
-            $table->string('slug')->unique()->index();
+            $table->string('sku')->unique();
+            $table->unsignedTinyInteger('product_type')->default(1); // Configurable product = 1
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'store_views');
+        Schema::dropIfExists($this->prefix . 'catalog_products');
     }
 };

@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Exceptions\Baskets;
+namespace Store\Exceptions\Baskets;
 
 use Exception;
 

@@ -1,8 +1,8 @@
 <?php
 
-use Basketin\Base\MigrationBase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Store\Base\MigrationBase;
 
 return new class extends MigrationBase
 {
@@ -13,11 +13,12 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'eav_values', function (Blueprint $table) {
+        Schema::create($this->prefix . 'core_configs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_view_id')->nullable()->constrained($this->prefix . 'store_views')->cascadeOnDelete();
-            $table->foreignId('attribute_id')->constrained($this->prefix . 'eav_attributes')->cascadeOnDelete();
-            $table->json('attribute_value');
+            $table->string('path')->index();
+            $table->string('value');
+            $table->unique(['store_view_id', 'path']);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'eav_values');
+        Schema::dropIfExists($this->prefix . 'core_configs');
     }
 };

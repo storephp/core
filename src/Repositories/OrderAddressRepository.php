@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Repositories;
+namespace Store\Repositories;
 
-use Basketin\Models\Order\Address;
+use Store\Models\Order\Address;
 
 class OrderAddressRepository
 {

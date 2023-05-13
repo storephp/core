@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Basketin\Base\MigrationBase;
+use Store\Base\MigrationBase;
 
 return new class extends MigrationBase
 {
@@ -13,10 +13,10 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'catalog_products', function (Blueprint $table) {
+        Schema::create($this->prefix . 'eav_entities', function (Blueprint $table) {
             $table->id();
-            $table->string('sku')->unique();
-            $table->unsignedTinyInteger('product_type')->default(1); // Configurable product = 1
+            $table->string('model_type');
+            $table->string('entity_key');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'catalog_products');
+        Schema::dropIfExists($this->prefix . 'eav_entities');
     }
 };

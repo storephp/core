@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Basketin\Base\MigrationBase;
+use Store\Base\MigrationBase;
 
 return new class extends MigrationBase
 {
@@ -13,11 +13,9 @@ return new class extends MigrationBase
      */
     public function up()
     {
-        Schema::create($this->prefix . 'stores', function (Blueprint $table) {
+        Schema::create($this->prefix . 'eav_models', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique()->index();
-            $table->string('currency', 3)->default('USD');
+            $table->morphs('model');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends MigrationBase
      */
     public function down()
     {
-        Schema::dropIfExists($this->prefix . 'stores');
+        Schema::dropIfExists($this->prefix . 'eav_models');
     }
 };

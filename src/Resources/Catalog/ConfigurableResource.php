@@ -1,6 +1,6 @@
 <?php
 
-namespace Basketin\Resources\Catalog;
+namespace Store\Resources\Catalog;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

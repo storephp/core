@@ -1,8 +1,8 @@
 <?php
 
-namespace Basketin\Models;
+namespace Store\Models;
 
-use Basketin\Base\ModelBase;
+use Store\Base\ModelBase;
 
 class Config extends ModelBase
 {
