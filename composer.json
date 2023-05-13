@@ -1,5 +1,5 @@
 {
-    "name": "store/core",
+    "name": "basketin/core",
     "description": "eCommerce Core to help you build your eCommerce based on laravel.",
     "type": "library",
     "license": "MIT",
@@ -29,12 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Store\\": "src/"
+            "Basketin\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Store\\Tests\\": "tests/"
+            "Basketin\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -46,8 +46,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Store\\BasketinServiceProvider",
-                "Store\\Providers\\EventServiceProvider"
+                "Basketin\\BasketinServiceProvider",
+                "Basketin\\Providers\\EventServiceProvider"
             ]
         }
     },

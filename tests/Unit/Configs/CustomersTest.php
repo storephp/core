@@ -3,6 +3,6 @@
 declare (strict_types = 1);
 
 test('testCustomersModelValue', function () {
-    $config = config('store.customers.model');
-    $this->assertEquals($config, \Store\Models\Customer::class);
+    $config = config('basketin.customers.model');
+    $this->assertEquals($config, \Basketin\Models\Customer::class);
 });

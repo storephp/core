@@ -1,9 +1,9 @@
 <?php
 
-namespace Store\Tests\Core\Models;
+namespace Basketin\Tests\Core\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Store\Traits\User\IsCustomer;
+use Basketin\Traits\User\IsCustomer;
 
 class User extends Authenticatable
 {

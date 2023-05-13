@@ -1,12 +1,12 @@
 <?php
 
-namespace Store\Traits\Customer;
+namespace Basketin\Traits\Customer;
 
 use Exception;
 use Illuminate\Support\Str;
-use Store\Models\Basket;
-use Store\Enums\Baskets\Status;
-use Store\Models\Customer;
+use Basketin\Models\Basket;
+use Basketin\Enums\Baskets\Status;
+use Basketin\Models\Customer;
 
 trait WithBasket
 {
@@ -31,7 +31,7 @@ trait WithBasket
             ->first();
 
         if ($assignBasket) {
-            $assignBasket->customer_type = config('store.customers.model', Customer::class);
+            $assignBasket->customer_type = config('basketin.customers.model', Customer::class);
             $assignBasket->customer_id = $this->id;
             $assignBasket->save();
             return $assignBasket;

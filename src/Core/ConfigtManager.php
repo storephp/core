@@ -1,8 +1,8 @@
 <?php
 
-namespace Store\Core;
+namespace Basketin\Core;
 
-use Store\Models\Config as ModelConfig;
+use Basketin\Models\Config as ModelConfig;
 
 class ConfigtManager
 {
@@ -97,6 +97,6 @@ class ConfigtManager
 
     private function overwrite($path)
     {
-        return config('store.core.config.' . $path);
+        return config('basketin.core.config.' . $path);
     }
 }

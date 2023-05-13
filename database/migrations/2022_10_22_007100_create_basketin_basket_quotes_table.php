@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Store\Base\MigrationBase;
+use Basketin\Base\MigrationBase;
 
 return new class extends MigrationBase
 
@@ -17,9 +17,8 @@ return new class extends MigrationBase
         Schema::create($this->prefix . 'basket_quotes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('basket_id')->constrained($this->prefix . 'baskets')->cascadeOnDelete();
-            $table->string('product_sku')->index();
+            $table->foreignId('product_sku');
             $table->unsignedInteger('quantity')->default(1);
-            $table->unique(['basket_id', 'product_sku']);
             $table->timestamps();
         });
     }

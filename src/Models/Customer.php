@@ -1,10 +1,10 @@
 <?php
 
-namespace Store\Models;
+namespace Basketin\Models;
 
-use Store\Base\ModelBase;
-use Store\Models\Customer\Address;
-use Store\Models\Customer\CustomerChannel;
+use Basketin\Base\ModelBase;
+use Basketin\Models\Customer\Address;
+use Basketin\Models\Customer\CustomerChannel;
 
 class Customer extends ModelBase
 {

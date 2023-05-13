@@ -1,16 +1,16 @@
 <?php
 
-namespace Store\Repositories;
+namespace Basketin\Repositories;
 
-use Store\Models\Order\Address;
+use Basketin\Models\Order\Address;
 
 class OrderAddressRepository
 {
     private $model;
 
-    public function __construct()
+    public function __construct(Address $address)
     {
-        $this->model = new Address;
+        $this->model = $address;
     }
 
     public function create($data)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Store\Contracts;
+namespace Basketin\Contracts;
 
 interface ICondition
 {

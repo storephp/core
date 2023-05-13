@@ -1,19 +1,19 @@
 <?php
 
-namespace Store\Traits\User;
+namespace Basketin\Traits\User;
 
-use Store\Models\Customer;
+use Basketin\Models\Customer;
 
 trait IsCustomer
 {
     public function customers()
     {
-        return $this->morphMany(config('store.customers.model', Customer::class), 'customerable');
+        return $this->morphMany(config('basketin.customers.model', Customer::class), 'customerable');
     }
 
     public function customer()
     {
-        return $this->morphOne(config('store.customers.model', Customer::class), 'customerable');
+        return $this->morphOne(config('basketin.customers.model', Customer::class), 'customerable');
     }
 
     public function signCustomer(array $metadata = null)

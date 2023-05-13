@@ -1,17 +1,15 @@
 <?php
 
-namespace Store\Models\Product;
+namespace Basketin\Models\Product;
 
-use Store\Base\ModelBase;
-use Store\EAV\Contracts\MultipleStoreViews;
-use Store\EAV\Traits\HasEAV;
-use Store\EAV\Traits\HasStoreView;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
+use Basketin\Base\ModelBase;
+use Basketin\Models\Traits\HasEntry;
 
-class Category extends ModelBase implements MultipleStoreViews
+class Category extends ModelBase
 {
-    use HasEAV, HasStoreView;
+    use HasEntry;
 
     /**
      * The table associated with the model.
@@ -30,7 +28,7 @@ class Category extends ModelBase implements MultipleStoreViews
         'slug',
     ];
 
-    protected $fillableEntities = [
+    protected $fillableEntry = [
         'name',
     ];
 
@@ -69,5 +67,10 @@ class Category extends ModelBase implements MultipleStoreViews
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
+    }
+
+    public function entries()
+    {
+        return $this->hasMany(CategoryEntry::class, 'category_id', 'id');
     }
 }

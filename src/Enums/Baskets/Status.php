@@ -1,13 +1,13 @@
 <?php
 
-namespace Store\Enums\Baskets;
+namespace Basketin\Enums\Baskets;
 
 use Exception;
 
 /**
  * This statuses list for baskets
  * 
- * You can add more statuses from config file at path `config/store/baskets.php`
+ * You can add more statuses from config file at path `config/basketin/baskets.php`
  * 
  * 'statuses' => [
  *    'DONE' => 7,
@@ -25,7 +25,7 @@ enum Status: int
     {
         $name = strtoupper($name);
 
-        if ($statuses = config('store.baskets.statuses')) {
+        if ($statuses = config('basketin.baskets.statuses')) {
             // DETECT DUPLICATE STATUSES ON CONFIG
             $detectDuplicate = array_count_values($statuses);
             $detectDuplicate = array_walk($detectDuplicate, function ($key, $value) {

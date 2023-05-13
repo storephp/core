@@ -1,9 +1,9 @@
 <?php
 
-namespace Store\Events\Basket\Quote;
+namespace Basketin\Events\Basket\Quote;
 
 use Illuminate\Foundation\Events\Dispatchable;
-use Store\Models\Basket\Quote;
+use Basketin\Models\Basket\Quote;
 
 class QuoteIncrease
 {

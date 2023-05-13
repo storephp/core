@@ -1,18 +1,16 @@
 <?php
 
-namespace Store\Models;
+namespace Basketin\Models;
 
-use Store\Base\ModelBase;
-use Store\Contracts\Model\IFinalPrice;
-use Store\EAV\Contracts\MultipleStoreViews;
-use Store\EAV\Traits\HasEAV;
-use Store\EAV\Traits\HasStoreView;
-use Store\Models\Product\Category;
+use Basketin\Base\ModelBase;
+use Basketin\Contracts\Model\IFinalPrice;
+use Basketin\Models\Product\Category;
+use Basketin\Models\Product\Entry;
+use Basketin\Models\Traits\HasEntry;
 
-class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
+class Product extends ModelBase implements IFinalPrice
 {
-    // use HasEntry;
-    use HasEAV, HasStoreView;
+    use HasEntry;
 
     /**
      * The table associated with the model.
@@ -30,7 +28,7 @@ class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
         'sku',
     ];
 
-    protected $fillableEntities = [
+    protected $fillableEntry = [
         'categories',
         'name',
         'slug',
@@ -64,9 +62,9 @@ class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
     //     };
     // }
 
-    public function fillableEntities()
+    protected function fillableEntry()
     {
-        return array_merge($this->fillableEntities, config('store.catalog.products.external_fillable_entry'));
+        return array_merge($this->fillableEntry, config('basketin.catalog.products.external_fillable_entry'));
     }
 
     public function getFinalPriceAttribute(): float
@@ -95,6 +93,10 @@ class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
         return $this->hasMany(Product::class, 'configurable_id', 'id');
     }
 
+    public function entries()
+    {
+        return $this->hasMany(Entry::class, 'product_id', 'id');
+    }
     public function getCategories()
     {
         if (!$this->categories) {

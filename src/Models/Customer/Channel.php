@@ -1,9 +1,9 @@
 <?php
 
-namespace Store\Models\Customer;
+namespace Basketin\Models\Customer;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Store\Base\ModelBase;
+use Basketin\Base\ModelBase;
 
 class Channel extends ModelBase
 {

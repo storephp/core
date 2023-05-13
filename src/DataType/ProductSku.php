@@ -1,6 +1,6 @@
 <?php
 
-namespace Store\DataType;
+namespace Basketin\DataType;
 
 class ProductSku
 {

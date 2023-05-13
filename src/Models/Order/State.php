@@ -1,8 +1,8 @@
 <?php
 
-namespace Store\Models\Order;
+namespace Basketin\Models\Order;
 
-use Store\Base\ModelBase;
+use Basketin\Base\ModelBase;
 
 class State extends ModelBase
 {

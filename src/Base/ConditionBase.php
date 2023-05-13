@@ -1,6 +1,6 @@
 <?php
 
-namespace Store\Base;
+namespace Basketin\Base;
 
 abstract class ConditionBase
 {

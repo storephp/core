@@ -1,15 +1,15 @@
 <?php
 
-namespace Store\Support\Traits;
+namespace Basketin\Support\Traits;
 
 trait HasSetupBasketin
 {
     public function appendCommandToSetup($command)
     {
         config([
-            'store.core.commands.installing' => array_merge([
+            'basketin.core.commands.installing' => array_merge([
                 $command,
-            ], config('store.core.commands.installing', [])),
+            ], config('basketin.core.commands.installing', [])),
         ]);
     }
 }

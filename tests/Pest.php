@@ -11,7 +11,7 @@
 |
 */
 
-uses(Store\Tests\TestCase::class)->in(__DIR__);
+uses(Basketin\Tests\TestCase::class)->in(__DIR__);
 
 /*
 |--------------------------------------------------------------------------
