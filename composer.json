@@ -1,5 +1,5 @@
 {
-    "name": "storephp/core",
+    "name": "store/core",
     "description": "eCommerce Core to help you build your eCommerce based on laravel.",
     "type": "library",
     "license": "MIT",
