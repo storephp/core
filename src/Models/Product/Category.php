@@ -34,6 +34,11 @@ class Category extends ModelBase implements MultipleStoreViews
         'name',
     ];
 
+    public function fillableEntities()
+    {
+        return array_merge($this->fillableEntities, config('store.catalog.categories.external_fillable_entry'));
+    }
+
     public function hasChildren()
     {
         return $this->children()->exists();
