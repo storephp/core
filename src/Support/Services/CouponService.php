@@ -17,6 +17,11 @@ class CouponService
         return $this->couponRepository->getByPaginate($limit);
     }
 
+    public function getListWithSearch($search = null, $limit = null)
+    {
+        return $this->couponRepository->getBySearchWithPaginate($limit, $search);
+    }
+
     public function createNewCoupon($data)
     {
         if ($this->couponRepository->checkByCode($data['coupon_code'])) {

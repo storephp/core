@@ -28,6 +28,16 @@ class CouponRepository
         return $this->query()->paginate($limit);
     }
 
+    public function getBySearchWithPaginate($limit = 15, $search = null)
+    {
+        return $this->query()->where(function ($q) use ($search) {
+            if ($search) {
+                $q->where('coupon_name', 'like', '%' . $search . '%')
+                    ->orWhere('coupon_code', 'like', '%' . $search . '%');
+            }
+        })->paginate($limit);
+    }
+
     public function getById($id)
     {
         return $this->query()->find($id);
