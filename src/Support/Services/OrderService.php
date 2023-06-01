@@ -52,6 +52,15 @@ class OrderService
         return $this;
     }
 
+    public function placeOrder()
+    {
+        $this->orderDataCreated = $this->orderRepository->create($this->orderData);
+        $this->basket->prefaceOrder('basket')->status = Status::ORDERED();
+        $this->basket->prefaceOrder('basket')->save();
+
+        return $this;
+    }
+
     public function assignAddress(
         string $label,
         string $first_name,
@@ -66,7 +75,7 @@ class OrderService
         string $street_line_2 = null,
     ) {
         $address = [
-            'order_id' => $this->orderData->id,
+            'order_id' => $this->orderDataCreated->id,
             'label' => $label,
             'first_name' => $first_name,
             'last_name' => $last_name,
@@ -81,15 +90,6 @@ class OrderService
         ];
 
         return $this->orderAddressRepository->create($address);
-    }
-
-    public function placeOrder()
-    {
-        $this->orderDataCreated = $this->orderRepository->create($this->orderData);
-        $this->basket->prefaceOrder('basket')->status = Status::ORDERED();
-        $this->basket->prefaceOrder('basket')->save();
-
-        return $this;
     }
 
     /**
