@@ -2,6 +2,7 @@
 
 namespace Store\EAV\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
 use Store\EAV\Contracts\MultipleStoreViews;
 use Store\Models\EAV\Entity;
 use Store\Models\EAV\Model;
@@ -137,7 +138,7 @@ trait HasEAV
     public function getAttribute($key)
     {
         if (isset($this->_getAttributes[$key])) {
-            return \call_user_func_array([$this, $this->_getAttributes[$key]], [$key]);
+            return \call_user_func_array ([$this, $this->_getAttributes[$key]], [$key]);
         }
 
         return parent::getAttribute($key);
@@ -149,7 +150,7 @@ trait HasEAV
     public function setAttribute($key, $value)
     {
         if (isset($this->_setAttributes[$key])) {
-            return \call_user_func_array([$this, $this->_setAttributes[$key]], [$key, $value]);
+            return \call_user_func_array ([$this, $this->_setAttributes[$key]], [$key, $value]);
         }
 
         return parent::setAttribute($key, $value);
