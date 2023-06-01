@@ -2,6 +2,7 @@
 
 namespace Store;
 
+use Illuminate\Support\ServiceProvider;
 use Store\Console\FillStateStatusOrders;
 use Store\Console\SetupStore;
 use Store\Core\ConfigtManager;
@@ -18,7 +19,6 @@ use Store\Support\Services\CouponService;
 use Store\Support\Services\CustomerService;
 use Store\Support\Services\OrderService;
 use Store\Support\Traits\HasSetupStore;
-use Illuminate\Support\ServiceProvider;
 
 class StoreServiceProvider extends ServiceProvider
 {
@@ -81,7 +81,9 @@ class StoreServiceProvider extends ServiceProvider
 
             $this->appendCommandToSetup(FillStateStatusOrders::class);
 
-            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+            if (config('store.setup.auto_migration', true)) {
+                $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+            }
 
             $this->publishes([
                 __DIR__ . '/../config/store.php' => config_path('store.php'),
