@@ -176,4 +176,19 @@ trait HasEAV
     {
         return $this->morphOne(Model::class, 'model');
     }
+
+    public function scopeByAttribute(Builder $query, $key = null, $operator, $value): void
+    {
+        $query->whereHas('eavModel', function ($query) use ($key, $operator, $value) {
+            $query->whereHas('attributes', function ($query) use ($key, $operator, $value) {
+                $query->join('store_eav_entities', function ($entity) use ($key) {
+                    $entity->on('store_eav_entities.id', '=', 'store_eav_attributes.entity_id')
+                        ->where('store_eav_entities.entity_key', $key);
+                })->join('store_eav_values', function ($qvalue) use ($operator, $value) {
+                    $qvalue->on('store_eav_values.attribute_id', '=', 'store_eav_attributes.id')
+                        ->where('store_eav_values.attribute_value', $operator, $value);
+                });
+            });
+        });
+    }
 }
