@@ -2,14 +2,14 @@
 
 namespace Store\Support\Services;
 
-use Store\Support\Repositories\CustomerRepository;
+use Store\Support\Interfaces\CustomerRepositoryInterface;
 
 class CustomerService
 {
     public $customer = null;
 
     public function __construct(
-        private CustomerRepository $customerRepository,
+        private CustomerRepositoryInterface $customerRepository,
     ) {}
 
     public function setCustomerId($customerId)

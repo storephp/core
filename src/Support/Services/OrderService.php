@@ -6,17 +6,19 @@ use Exception;
 use Store\Enums\Baskets\Status;
 use Store\Models\Order\Status as OrderStatus;
 use Store\Repositories\OrderAddressRepository;
-use Store\Support\Repositories\OrderRepository;
+use Store\Support\Interfaces\OrderRepositoryInterface;
 
 class OrderService
 {
+    private $basket;
     private $orderData;
     private $orderDataCreated;
 
     public function __construct(
-        private OrderRepository $orderRepository,
+        private OrderRepositoryInterface $orderRepository,
         private OrderAddressRepository $orderAddressRepository,
-    ) {}
+    ) {
+    }
 
     public function initOrder(BasketService $basket, CustomerService $customer)
     {
@@ -31,7 +33,6 @@ class OrderService
                 'discount_type' => 'coupon',
                 'coupon' => [
                     'coupon_code' => $coupon->coupon_code,
-                    'discount_value' => $coupon->discount_value,
                     'discount_value' => $coupon->discount_value,
                     'condition' => $coupon->condition,
                     'condition_data' => $coupon->condition_data,
