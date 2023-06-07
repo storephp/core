@@ -4,12 +4,12 @@ namespace Store\Support\Services;
 
 use Store\Support\Exceptions\Coupon\CouponAlreadyExists;
 use Store\Support\Exceptions\Coupon\CouponNotFound;
-use Store\Support\Repositories\CouponRepository;
+use Store\Support\Interfaces\CouponRepositoryInterface;
 
 class CouponService
 {
     public function __construct(
-        public CouponRepository $couponRepository
+        public CouponRepositoryInterface $couponRepository
     ) {}
 
     public function getList($limit = null)

@@ -2,6 +2,8 @@
 
 namespace Store\Support\Services;
 
+use Exception;
+use OutMart\PricingRules\Lay;
 use Store\Contracts\ICondition;
 use Store\Contracts\Model\IFinalPrice;
 use Store\Enums\Baskets\Status;
@@ -9,10 +11,8 @@ use Store\Exceptions\Baskets\QuoteExceedingLimitException;
 use Store\Exceptions\Baskets\QuoteTheMaxException;
 use Store\Models\Basket\Coupon;
 use Store\Models\Basket\Quote;
-use Store\Support\Repositories\BasketRepository;
-use Store\Support\Repositories\QuoteRepository;
-use Exception;
-use OutMart\PricingRules\Lay;
+use Store\Support\Interfaces\BasketRepositoryInterface;
+use Store\Support\Interfaces\QuoteRepositoryInterface;
 
 class BasketService
 {
@@ -25,14 +25,15 @@ class BasketService
     private $discountTotal = null;
 
     public function __construct(
-        private BasketRepository $basketRepository,
-        private QuoteRepository $quoteRepository,
-    ) {}
+        private BasketRepositoryInterface $basketRepository,
+        private QuoteRepositoryInterface $quoteRepository,
+    ) {
+    }
 
     /**
      * Basket init for enabled the use
      *
-     * @param ulid $ulid
+     * @param string $ulid
      * @param string $currency
      *
      * @return \Store\Support\Services\BasketService
@@ -286,7 +287,7 @@ class BasketService
                     if ($conditionObj) {
                         $condition = new $conditionObj(
                             $attributes['total'],
-                            $this->quotes()->pluck('product_sku')->toArray(),
+                            $this->currentBasket->quotes()->pluck('product_sku')->toArray(),
                             $coupon->condition_data,
                         );
 

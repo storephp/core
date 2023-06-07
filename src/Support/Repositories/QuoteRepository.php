@@ -4,8 +4,9 @@ namespace Store\Support\Repositories;
 
 use Store\Models\Basket;
 use Store\Models\Basket\Quote;
+use Store\Support\Interfaces\QuoteRepositoryInterface;
 
-class QuoteRepository
+class QuoteRepository implements QuoteRepositoryInterface
 {
     private $basket;
 
@@ -24,7 +25,7 @@ class QuoteRepository
      *
      * @param array $data
      *
-     * @return \Store\Models\Basket\Quote
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function create(array $data)
     {
@@ -65,7 +66,7 @@ class QuoteRepository
      *
      * @return \Store\Models\Basket\Quote
      */
-    public function increase(Quote $quote, int $quantity): Quote
+    public function increase(Quote $quote, int $quantity) : Quote
     {
         $quote->increment('quantity', $quantity);
         return $quote;
@@ -79,7 +80,7 @@ class QuoteRepository
      *
      * @return \Store\Models\Basket\Quote
      */
-    public function decrease(Quote $quote, int $quantity): bool | Quote
+    public function decrease(Quote $quote, int $quantity) : bool|Quote
     {
         $quote->decrement('quantity', $quantity);
         return $quote;
@@ -100,6 +101,9 @@ class QuoteRepository
         return false;
     }
 
+    /**
+     * Check whether this basket has quote or not
+     */
     public function basketHasQuote()
     {
         return $this->basket->quotes()->exists();

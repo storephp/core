@@ -5,6 +5,7 @@ namespace Store\Models;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Store\Base\ModelBase;
+use Store\Models\Order\Address;
 use Store\Models\Order\State;
 use Store\Models\Order\Status;
 
@@ -87,6 +88,11 @@ class Order extends ModelBase
     public function customer()
     {
         return $this->hasOne(config('store.customers.model'), 'id', 'customer_id');
+    }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class, 'order_id', 'id');
     }
 
     public function basket()
