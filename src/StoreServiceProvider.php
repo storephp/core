@@ -31,6 +31,20 @@ class StoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        config([
+            'auth.guards.customer' => array_merge([
+                'driver' => 'session',
+                'provider' => 'customer',
+            ], config('auth.guards.customer', [])),
+        ]);
+
+        config([
+            'auth.providers.customer' => array_merge([
+                'driver' => 'eloquent',
+                'model' => \Store\Models\Customer::class,
+            ], config('auth.providers.customer', [])),
+        ]);
+
         $this->mergeConfigFrom(__DIR__ . '/../config/store.php', 'store');
 
         $this->app->singleton('configuration', function () {
