@@ -19,6 +19,7 @@
     "require": {
         "php": ">=8.0",
         "laravel/framework": ">=9.0",
+        "laravel/sanctum": "^3.2",
         "outmart/php-pricing-rules": "^0.1.0",
         "pharaonic/laravel-helpers": "^2.4"
     },

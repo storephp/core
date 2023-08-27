@@ -2,6 +2,7 @@
 
 namespace Store\Support\Services;
 
+use Illuminate\Support\Facades\Auth;
 use Store\Support\Repositories\CustomerRepository;
 
 class CustomerService
@@ -10,7 +11,24 @@ class CustomerService
 
     public function __construct(
         private CustomerRepository $customerRepository,
-    ) {}
+    ) {
+    }
+
+    public function create($data)
+    {
+        return $this->customerRepository->create($data);
+    }
+
+    public function attempt(array $credentials = [], $remember = false)
+    {
+        $attempt = Auth::guard('customer')->attempt($credentials, $remember);
+
+        if ($attempt) {
+            return Auth::guard('customer')->user();
+        }
+
+        return false;
+    }
 
     public function setCustomerId($customerId)
     {
