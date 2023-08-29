@@ -66,6 +66,11 @@ return [
     |--------------------------------------------------------------------------
      */
     'catalog' => [
+        'categories' => [
+            'model' => \Store\Models\Product\Category::class,
+            'external_fillable_entry' => [],
+        ],
+        
         'products' => [
             'model' => \Store\Models\Product::class,
             'external_fillable_entry' => [],
