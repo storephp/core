@@ -4,12 +4,11 @@ namespace Store\Support\Repositories;
 
 class ProductRepository
 {
-    private $model;
+    private $productModel;
 
     public function __construct()
     {
-        $productModel = config('store.catalog.products.model');
-        $this->model = new $productModel;
+        $this->productModel = config('store.catalog.products.model');
     }
 
     public function configurableOnly()
@@ -34,11 +33,19 @@ class ProductRepository
 
     public function getBySku($sku)
     {
-        return $this->model->where('sku', $sku)->first();
+        return $this->productModel::whereSku($sku)->first();
     }
 
-    public function create($data)
+    public function create(array $data = [], array $eavData = [])
     {
-        return $this->model->create($data);
+        $created = $this->productModel::create($data);
+
+        foreach ($eavData as $key => $value) {
+            $created->{$key} = $value;
+        }
+
+        $created->save();
+
+        return $created;
     }
 }

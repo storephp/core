@@ -18,6 +18,7 @@ use Store\Support\Services\BasketService;
 use Store\Support\Services\CouponService;
 use Store\Support\Services\CustomerService;
 use Store\Support\Services\OrderService;
+use Store\Support\Services\ProductService;
 use Store\Support\Traits\HasSetupStore;
 
 class StoreServiceProvider extends ServiceProvider
@@ -52,7 +53,9 @@ class StoreServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('product', function () {
-            return new ProductRepository();
+            return new ProductService(
+                new ProductRepository
+            );
         });
 
         $this->app->singleton('basket', function () {
