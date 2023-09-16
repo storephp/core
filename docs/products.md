@@ -12,6 +12,34 @@ use Store\Support\Facades\Product;
 
 ## Methods
 
+### Get all products
+
+```php
+$product = Product::list(function ($query) {
+    $query->where('id', 1);
+});
+```
+
+### Get product by id
+
+```php
+$product = Product::getBySku(1);
+```
+
+#### Exceptions
+
+- `\Store\Exceptions\Products\ProductAlreadyNotException` product not exists.
+
+### Get product by SKU
+
+```php
+$product = Product::getBySku('iphone-14');
+```
+
+#### Exceptions
+
+- `\Store\Exceptions\Products\ProductAlreadyNotException` product not exists.
+
 ### Create new product
 
 ```php
@@ -29,4 +57,4 @@ $product = Product::create([
 
 #### Events
 
-- Product created `\Store\Support\Events\Products\ProductCreatedEvent`
+- Product created `\Store\Events\Products\ProductCreatedEvent`

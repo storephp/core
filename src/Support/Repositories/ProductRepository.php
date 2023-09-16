@@ -11,24 +11,24 @@ class ProductRepository
         $this->productModel = config('store.catalog.products.model');
     }
 
-    public function configurableOnly()
-    {
-        return $this->model::configurableOnly();
-    }
+    // public function configurableOnly()
+    // {
+    //     return $this->model::configurableOnly();
+    // }
 
     public function query()
     {
-        return $this->model::query();
+        return $this->productModel::query();
     }
 
-    public function all()
+    public function all($where = null)
     {
-        return $this->model->get();
+        return $this->productModel::where($where)->get();
     }
 
     public function getById($id)
     {
-        return $this->model->find($id);
+        return $this->productModel::find($id);
     }
 
     public function getBySku($sku)

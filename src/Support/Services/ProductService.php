@@ -4,6 +4,7 @@ namespace Store\Support\Services;
 
 use Store\Exceptions\Products\ProductAlreadyExistsException;
 use Store\Events\Products\ProductCreatedEvent;
+use Store\Exceptions\Products\ProductAlreadyNotException;
 use Store\Support\Repositories\ProductRepository;
 
 class ProductService
@@ -38,5 +39,29 @@ class ProductService
         ProductCreatedEvent::dispatch($productCreated, array_merge($fillable, $fillableEntities));
 
         return $productCreated;
+    }
+
+    public function getById($value)
+    {
+        if (!$product = $this->productRepository->getById($value)) {
+            throw new ProductAlreadyNotException;
+        }
+
+        return $product;
+    }
+
+    public function getBySku($value)
+    {
+        if (!$product = $this->productRepository->getBySku($value)) {
+            throw new ProductAlreadyNotException;
+        }
+
+        return $product;
+    }
+
+
+    public function list($where = null)
+    {
+        return $this->productRepository->all($where);
     }
 }
