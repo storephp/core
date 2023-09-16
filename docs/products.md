@@ -26,3 +26,7 @@ $product = Product::create([
 #### Exceptions
 
 - `\Store\Exceptions\Products\ProductAlreadyExistsException` if SKU is exists.
+
+#### Events
+
+- Product created `\Store\Support\Events\Products\ProductCreatedEvent`

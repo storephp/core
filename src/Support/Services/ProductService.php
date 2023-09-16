@@ -3,6 +3,7 @@
 namespace Store\Support\Services;
 
 use Store\Exceptions\Products\ProductAlreadyExistsException;
+use Store\Events\Products\ProductCreatedEvent;
 use Store\Support\Repositories\ProductRepository;
 
 class ProductService
@@ -32,6 +33,10 @@ class ProductService
         $fillable = $collection->only($model->getFillable())->all();
         $fillableEntities = $collection->only($model->fillableEntities())->all();
 
-        return $this->productRepository->create($fillable, $fillableEntities);
+        $productCreated = $this->productRepository->create($fillable, $fillableEntities);
+
+        ProductCreatedEvent::dispatch($productCreated, array_merge($fillable, $fillableEntities));
+
+        return $productCreated;
     }
 }
