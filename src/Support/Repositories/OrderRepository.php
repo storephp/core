@@ -3,8 +3,9 @@
 namespace Store\Support\Repositories;
 
 use Store\Models\Order;
+use Store\Support\Interfaces\OrderRepositoryInterface;
 
-class OrderRepository
+class OrderRepository implements OrderRepositoryInterface
 {
     private $model;
 
@@ -13,12 +14,26 @@ class OrderRepository
         $this->model = new Order;
     }
 
-    public function getById($id)
+    /**
+     * Get order by id
+     *
+     * @param int $id
+     *
+     * @return \Store\Models\Order
+     */
+    public function getById($id) : Order
     {
         return $this->model->find($id);
     }
 
-    public function create($data)
+    /**
+     * Create new order
+     *
+     * @param array $data
+     *
+     * @return \Store\Models\Order
+     */
+    public function create($data) : Order
     {
         return $this->model->create($data);
     }

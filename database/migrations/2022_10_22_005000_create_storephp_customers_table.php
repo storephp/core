@@ -15,11 +15,13 @@ return new class extends MigrationBase
     {
         Schema::create($this->prefix . 'customers', function (Blueprint $table) {
             $table->id();
-            $table->nullablemorphs('customerable');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password')->nullable();
             $table->json('metadata')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

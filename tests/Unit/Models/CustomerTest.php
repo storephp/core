@@ -2,16 +2,14 @@
 
 declare (strict_types = 1);
 
-use Store\Tests\Core\Models\User;
+use Store\Models\Customer;
 
 test('Create new customer', function () {
-    $user = User::create([
+    $customer = Customer::create([
         'name' => 'Karim Mohamed',
         'email' => 'komicho1996@gmail.com',
         'password' => 'password',
     ]);
 
-    $customer = $user->signCustomer();
-
-    $this->assertEquals($customer->customerable_id, 1);
+    $this->assertEquals($customer->id, 1);
 });

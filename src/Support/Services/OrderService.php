@@ -6,17 +6,19 @@ use Exception;
 use Store\Enums\Baskets\Status;
 use Store\Models\Order\Status as OrderStatus;
 use Store\Repositories\OrderAddressRepository;
-use Store\Support\Repositories\OrderRepository;
+use Store\Support\Interfaces\OrderRepositoryInterface;
 
 class OrderService
 {
+    private $basket;
     private $orderData;
     private $orderDataCreated;
 
     public function __construct(
-        private OrderRepository $orderRepository,
+        private OrderRepositoryInterface $orderRepository,
         private OrderAddressRepository $orderAddressRepository,
-    ) {}
+    ) {
+    }
 
     public function initOrder(BasketService $basket, CustomerService $customer)
     {
@@ -31,7 +33,6 @@ class OrderService
                 'discount_type' => 'coupon',
                 'coupon' => [
                     'coupon_code' => $coupon->coupon_code,
-                    'discount_value' => $coupon->discount_value,
                     'discount_value' => $coupon->discount_value,
                     'condition' => $coupon->condition,
                     'condition_data' => $coupon->condition_data,
@@ -52,6 +53,15 @@ class OrderService
         return $this;
     }
 
+    public function placeOrder()
+    {
+        $this->orderDataCreated = $this->orderRepository->create($this->orderData);
+        $this->basket->prefaceOrder('basket')->status = Status::ORDERED();
+        $this->basket->prefaceOrder('basket')->save();
+
+        return $this;
+    }
+
     public function assignAddress(
         string $label,
         string $first_name,
@@ -66,7 +76,7 @@ class OrderService
         string $street_line_2 = null,
     ) {
         $address = [
-            'order_id' => $this->orderData->id,
+            'order_id' => $this->orderDataCreated->id,
             'label' => $label,
             'first_name' => $first_name,
             'last_name' => $last_name,
@@ -81,15 +91,6 @@ class OrderService
         ];
 
         return $this->orderAddressRepository->create($address);
-    }
-
-    public function placeOrder()
-    {
-        $this->orderDataCreated = $this->orderRepository->create($this->orderData);
-        $this->basket->prefaceOrder('basket')->status = Status::ORDERED();
-        $this->basket->prefaceOrder('basket')->save();
-
-        return $this;
     }
 
     /**

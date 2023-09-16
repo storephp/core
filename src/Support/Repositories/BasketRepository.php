@@ -2,11 +2,12 @@
 
 namespace Store\Support\Repositories;
 
+use Illuminate\Support\Str;
 use Store\Enums\Baskets\Status;
 use Store\Models\Basket;
-use Illuminate\Support\Str;
+use Store\Support\Interfaces\BasketRepositoryInterface;
 
-class BasketRepository
+class BasketRepository implements BasketRepositoryInterface
 {
     private $model;
 
@@ -27,7 +28,7 @@ class BasketRepository
      *
      * @return \Store\Models\Basket
      */
-    public function createNewBasket(string $currency)
+    public function createNewBasket(string $currency): Basket
     {
         return $this->query()->create([
             'ulid' => (string) Str::ulid(),
@@ -43,10 +44,10 @@ class BasketRepository
      *
      * @return \Store\Models\Basket
      */
-    public function getAvailableBasket($ulid = null)
+    public function getAvailableBasket($ulid = null): Null|Basket
     {
         if (!$ulid) {
-            return $ulid;
+            return null;
         }
 
         return $this->query()->whereUlid($ulid)

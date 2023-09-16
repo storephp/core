@@ -66,7 +66,12 @@ class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
 
     public function fillableEntities()
     {
-        return array_merge($this->fillableEntities, config('store.catalog.products.external_fillable_entry'));
+        return array_unique(
+            array_merge(
+                $this->fillableEntities,
+                config('store.catalog.products.external_fillable_entry')
+            )
+        );
     }
 
     public function getFinalPriceAttribute(): float
@@ -109,7 +114,6 @@ class Product extends ModelBase implements IFinalPrice, MultipleStoreViews
             if ($category) {
                 return $category;
             }
-
         });
     }
 }
